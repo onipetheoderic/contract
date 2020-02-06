@@ -1,0 +1,280 @@
+ <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">Form Wizard</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                            <li class="breadcrumb-item active">Form Wizard</li>
+                                        </ol>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Contract Information</h4>
+                                        <p class="card-title-desc">Follow this step to create a Contract</p>
+
+                                        <form id="form-horizontal" class="form-horizontal form-wizard-wrapper" action="/create_contract" method="POST" enctype="multipart/form-data">
+                                            <h3>Project Information</h3>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                                   
+                                                            <label for="projectTitle" class="col-lg-3 col-form-label">Project Title</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="projectTitle" name="projectTitle" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="state" class="col-lg-3 col-form-label">State</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="state" name="state" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="lga" class="col-lg-3 col-form-label">LGA.</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="lga" name="lga" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                     
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="zone" class="col-lg-3 col-form-label">Zone</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="zone" name="zone" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+        
+                                                
+                                            </fieldset>
+                                            <h3>Contract Info</h3>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="mtb" class="col-lg-3 col-form-label">MTB</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="mtb" name="mtb" type="text" class="form-control">                                                             
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="bpp" class="col-lg-3 col-form-label">BPP</label>
+                                                            <div class="col-lg-9">                                                              
+                                                                 <input id="bpp" name="bpp" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="contractSum" class="col-lg-3 col-form-label">Company Type</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="contractSum" type="number" name="contractSum" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="contractType" class="col-lg-3 col-form-label">Contract Type</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="contractType" name="contractType" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="roadLength" class="col-lg-3 col-form-label">Road Length(km)</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="roadLength" name="roadLength" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="bridgeLength" class="col-lg-3 col-form-label">Bride Length(km)</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="bridgeLength" name="bridgeLength" type="number" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="projectLength" class="col-lg-3 col-form-label">project Length(km)</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="projectLength" name="projectLength" type="number" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+        
+                                               
+        
+                                            </fieldset>
+                                            <h3>Date Of Contract</h3>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                         
+                                                        <div class="form-group row">
+                                                            <label for="dateAwarded" class="col-lg-3 col-form-label">Date Awarded</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="dateAwarded" name="dateAwarded" type="date" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="dateCommencement" class="col-lg-3 col-form-label">Date Commencement</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="dateCommencement" name="dateCommencement" type="date" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{!-- <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="ddlCreditCardType" class="col-lg-3 col-form-label">Credit Card Type</label>
+                                                            <div class="col-lg-9">
+                                                                <select id="ddlCreditCardType" name="ddlCreditCardType" class="form-control">
+                                                                    <option value="">--Please Select--</option>
+                                                                    <option value="AE">American Express</option>
+                                                                    <option value="VI">Visa</option>
+                                                                    <option value="MC">MasterCard</option>
+                                                                    <option value="DI">Discover</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="dateCompletion" class="col-lg-3 col-form-label">Date Completion</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="dateCompletion" name="dateCompletion" type="date" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                     <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="extendedDateOfCompletion" class="col-lg-3 col-form-label">Extended Date Of Completion</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="extendedDateOfCompletion" name="extendedDateOfCompletion" type="date" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="appropriationAct" class="col-lg-3 col-form-label">Appropriation Act</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="appropriationAct" name="appropriationAct" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="amountCertifiedToDate" class="col-lg-3 col-form-label">Amount CertifiedToDate</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="amountCertifiedToDate" name="amountCertifiedToDate" type="number" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="amountPaidToDate" class="col-lg-3 col-form-label">Appropriation Paid To Date</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="amountPaidToDate" name="amountPaidToDate" type="number" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="outStandingCostPayment" class="col-lg-3 col-form-label">OutStanding Cost of Payment</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="outStandingCostPayment" name="outStandingCostPayment" type="number" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label for="amountOfOutstandingCost" class="col-lg-3 col-form-label">Amount Of Outstanding Cost</label>
+                                                            <div class="col-lg-9">
+                                                                <input id="amountOfOutstandingCost" name="amountOfOutstandingCost" type="number" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                               
+                                            </fieldset>
+                                            <h3>Confirm Details</h3>
+                                            <fieldset>
+                                                <div class="p-3">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                        <label class="custom-control-label" for="customCheck1">I agree with the Terms and Conditions.</label>
+                                                    </div>
+                                                </div>
+                                                <button type="submit">Submit </button>
+                                            </fieldset>
+                                            
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+               
+            <!-- end main content-->
