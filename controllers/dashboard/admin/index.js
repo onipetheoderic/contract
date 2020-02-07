@@ -34,6 +34,7 @@ exports.home = function(req, res) {
     })
      
 }
+
 exports.login = function(req, res) {
     res.render('Admin/dashboard/login-register', {layout: "layout/login-register", })
 }

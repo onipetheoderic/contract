@@ -2,13 +2,12 @@ import express from 'express';
 
 
 import AdminDashboardController from '../controllers/dashboard/admin'
-import ClientDashboardController from '../controllers/dashboard/client'
+import ContractController from '../controllers/contract/contract';
 import AuthDashboard from '../controllers/auth';
 
 const router = express.Router();
 
-router.route('/client_dashboard')
-    .get(ClientDashboardController.home)
+
 
 router.route('/')
     .get(AdminDashboardController.home)
@@ -45,6 +44,23 @@ router.route('/create_consultant')
     .get(AuthDashboard.create_consultant)
     .post(AuthDashboard.create_consultant_post)
 
+router.route('/all_contracts')
+    .get(ContractController.get_all_contracts)
+
+router.route('/assign_highway_to_contract')
+    .post(ContractController.assign_highway_to_contract)
+
+router.route('/modify_percentage_of_highway_contract')
+    .post(ContractController.modify_percentage_of_highway_contract)
+
+router.route('/user_contract/:id')
+    .get(ContractController.user_contracts)
+
+router.route('/update_contract_payment/:id')
+    .post(ContractController.update_contract_payment)
+
+router.route('/make_contract_priority/:id')
+    .get(ContractController.make_contract_priority)
 //all_inspections //inspection_page
 
 export default router;

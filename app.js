@@ -19,7 +19,7 @@ const app = express();
 app.use(fileUpload());
 var debug = require('debug');
 var http = require('http').Server(app);
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '4000';
 
 
 // export locals ato template
@@ -282,8 +282,12 @@ hbs.registerHelper('link', function(text, options) {
 
 
 
-http.listen(port, function(){//this takes a callback, that is if we want to run something when we start listening to the port
-	console.log("Listening on Port:", port);
+http.listen(port, function(err){//this takes a callback, that is if we want to run something when we start listening to the port
+  if(err){
+    console.log("this is the error")
+  }
+  console.log("Listening on Port:", port);
+ 
 });
 
 module.exports = app;

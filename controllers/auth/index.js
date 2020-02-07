@@ -1,5 +1,4 @@
 import User from '../../models/User/user';
-import Contractor from '../../models/Contractor/contractor';
 import Consultant from '../../models/Consultant/consultant';
 import {encrypt, decrypt} from '../../utility/encryptor'
 import {redirector, admin_checker_redirector} from '../../utility/redirector'
@@ -33,10 +32,18 @@ exports.register_user = function(req, res) {
     res.render('Admin/dashboard/register_user', {layout: "layout/admin"})
 }
 
-exports.create_contractor = function(req, res) {
+exports.create_highway_inspector = function(req, res) {
     res.render('Admin/dashboard/create_contractor', {layout: "layout/admin"})
 }
 exports.create_consultant= function(req, res) {
+    res.render('Admin/dashboard/create_consultant', {layout: "layout/admin"})
+}
+
+exports.assign_highway_contracts = function(req, res){
+    res.render('Admin/dashboard/create_consultant', {layout: "layout/admin"})
+}
+
+exports.assign_highway_contracts_post = function(req, res){
     res.render('Admin/dashboard/create_consultant', {layout: "layout/admin"})
 }
 
@@ -56,14 +63,15 @@ companyEmail" : "bhills_9848@mailinator.com", "gender" : "male", "fullName" : "H
  "updatedAt" : ISODate("2020-02-06T05:13:48.438Z"), "__v" : 0 }   })
 }
 */ 
-// exports.create_contractor= function(req, res) {
-//     res.render('Admin/dashboard/create_contractor', {layout: "layout/stepper"})
-// }
+exports.create_contractor= function(req, res) {
+    res.render('Admin/dashboard/create_contractor', {layout: "layout/stepper"})
+}
 
 
 exports.login = function(req, res) {
     res.render('Admin/dashboard/login', {layout: "layout/admin"})
 }
+
 
 
 
@@ -146,8 +154,7 @@ exports.create_contractor_post = function(req, res) {
 } 
 
 exports.register_post = function(req, res) {
-    console.log("registerpost url", req.body)
-    
+    console.log("registerpost url", req.body)    
     const randomPassword = randomstring.generate(7);
     console.log("this is the random password",randomPassword)
     User.findOne({email: req.body.email}, function(err, vals){
