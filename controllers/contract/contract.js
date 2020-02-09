@@ -1,6 +1,8 @@
 import Contractor from '../../models/Contractor/contractor';
 import Contract from '../../models/Contract/contract';
-import {encrypt, decrypt} from '../../utility/encryptor'
+import {encrypt, decrypt} from '../../utility/encryptor';
+import AmountPaid from '../../models/AmountPaid/amountPaid';
+import AmountCertified from '../../models/AmountCertified/amountCertified';
 
 exports.get_all_contracts = function(req, res) {
     Contract.find({}, function(err, users) {
@@ -9,12 +11,16 @@ exports.get_all_contracts = function(req, res) {
     });
 }
 
+
 exports.user_contracts = function(req, res) {
     Contract.find({highwayInspectorId: req.params.id}, function(err, contracts){
         console.log("this are the list of contracts belonging",contracts)
         res.json(contracts)
     })
 }
+
+
+
 
 exports.assign_highway_to_contract = function(req, res) {
     console.log("this is the current id the project want to be assigned to", req.body)
@@ -97,10 +103,27 @@ exports.modify_percentage_of_highway_contract = function(req, res) {
 exports.make_contract_priority = function(req, res) {
 
 }
-
+/*
+contract_id: String,
+   amount: Number,
+   status: {type:Boolean, default:false},
+   amountCertifiedId: String,
+*/ 
 exports.update_contract_payment = function(req, res) {
     let currentId = req.params.id;
     let amount = req.body.amount;
     let contract_id = req.body.contract_id
     console.log(currentId, amount, contract_id)
+    let amountCertified = new AmountCertified();
+    amountCertified.contract_id = contract_id;
+    amountCertified.amount = amount; 
+    
+    amountCertified.save(function(err, auth_details){       
+        if(err){
+            res.render('Admin/dashboard/view_all_contracts', {layout: "layout/admin", message:{error: "Error occured during user registration"} })
+            return;
+        } else {                    
+            res.redirect("/view_all_contract")
+        }
+    });
 }

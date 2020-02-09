@@ -53,6 +53,9 @@ router.route('/assign_highway_to_contract')
 router.route('/modify_percentage_of_highway_contract')
     .post(ContractController.modify_percentage_of_highway_contract)
 
+router.route('/single_contract_page/:id')
+    .get(AdminDashboardController.get_single_contract)
+
 router.route('/user_contract/:id')
     .get(ContractController.user_contracts)
 

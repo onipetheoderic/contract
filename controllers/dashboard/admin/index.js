@@ -1,11 +1,14 @@
-import {encrypt, decrypt} from '../../../utility/encryptor'
+import {encrypt, decrypt, BASEURL} from '../../../utility/encryptor'
 import {redirector, admin_checker_redirector} from '../../../utility/redirector'
 const fs = require("fs");
 import Contract from '../../../models/Contract/contract';
 import User from '../../../models/User/user';
 import Contractor from '../../../models/Contractor/contractor';
-import Consultant from '../../../models/Consultant/consultant';
 
+import Consultant from '../../../models/Consultant/consultant';
+import AmountPaid from '../../../models/AmountPaid/amountPaid';
+import AmountCertified from '../../../models/AmountCertified/amountCertified';
+var Request = require("request");
 // TypeError: (0 , _index.AlexanderTheGreat) is not a function
 
 
@@ -35,6 +38,27 @@ exports.home = function(req, res) {
      
 }
 
+
+exports.get_single_contract = function(req, res) {
+    const myUrl =` ${BASEURL}/get_contract_datas/${req.params.id}`
+    Contract.findOne({_id:req.params.id}).exec(function(err, single_contract){
+        Request.get({url: myUrl}, (error, response, body) => {
+            if(error || body=="null") {
+                res.render('Admin/dashboard/single_contract_page', {layout:false, data:single_contract, name:"null"})
+            }
+            else {
+                console.log('this is thte body of the request', JSON.parse(body))
+                // console.log(JSON.parse(body));
+                let databody = body
+                res.render('Admin/dashboard/single_contract_page', {layout:false, data:single_contract, name:databody})
+    
+            }
+           
+        })    
+    })
+}
+
+
 exports.login = function(req, res) {
     res.render('Admin/dashboard/login-register', {layout: "layout/login-register", })
 }
@@ -42,12 +66,14 @@ exports.register = function(req, res) {
     res.render('Admin/dashboard/register', {layout: "layout/login-register", })
 }
 
-exports.view_all_contract = function(req, res) {
+
+exports.view_all_contract = function(req, res) {   
     Contract.find({}).exec(function(err, all_records){
-        let allKeys = Object.keys(all_records)
         res.render('Admin/dashboard/view_all_contracts', {layout:false, datas:{contracts:all_records}})
     })
 }
+
+
 exports.inspection_page = function(req, res) {
     res.render('Admin/dashboard/inspection_page', {layout: "layout/admin"})
 }
@@ -65,11 +91,10 @@ exports.create_contract_post = function(req, res) {
        state: req.body.state,
        lga: req.body.lga, 
        zone: req.body.zone,
+       contractType: req.body.contract_type,
        mtb: req.body.mtb, 
        bpp: req.body.bpp,
        contractSum: req.body.contractSum, 
-       contractType: req.body.contractType,
-
        roadLength: req.body.roadLength, 
        bridgeLength: req.body.bridgeLength,
        projectLength: req.body.projectLength, 

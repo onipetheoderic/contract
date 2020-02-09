@@ -264,7 +264,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Apex charts</h4>
+                                    <h4 class="mb-0 font-size-18">{{data.projectTitle}}</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
@@ -276,11 +276,9 @@
                                 </div>
                             </div>
                         </div>     
-                        <!-- end page title -->
 
-                        
+                       
 
-                     
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="card">
@@ -301,9 +299,56 @@
                                 </div><!--end card-->
                             </div>
                         </div>  
-                        <!-- end row -->
 
-                        
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2>Construction Construct </h2>
+                                         <p>Started {{{formatDate dateCommencement}}} Ends {{{formatDate dateCompletion}}}</p>
+                                         <p style="font-weight:bold">Department of Construction</p>
+<br>
+<br>
+                                         <p style="font-weight:bold">About the Contract</p>
+                                         <p>Contractor to provide remodelling in accordance with the plans and specification provided in the scope of work</p>
+                        <div class="row">
+                            <div class="col-lg-4"><strong>Contract Type</strong></div><div class="col-lg-4"><strong>Date Awarded</strong></div> <div class="col-lg-4"><strong>Contract No</strong></div>
+                                <div class="col-lg-4">{{data.contractType}}</div><div class="col-lg-4">{{{formatDate data.dateAwarded}}}</div> <div class="col-lg-4">{{{data.contractNo}}}</div>
+                        </div>
+                        <div class="row" style="margin-top:30px">
+                            <div class="col-lg-4"><strong>State</strong></div><div class="col-lg-4"><strong>LGA</strong></div> <div class="col-lg-4"><strong>Zone</strong></div>
+                                <div class="col-lg-4">{{data.state}}</div><div class="col-lg-4">{{data.lga}}</div> <div class="col-lg-4">{{data.zone}}</div>
+                        </div>
+
+                        <div class="row" style="margin-top:30px">
+                            <div class="col-lg-4"><strong>Current Percentage</strong></div><div class="col-lg-4"><strong>Road Length/Bridge Length</strong></div> <div class="col-lg-4"><strong>Name of Contractor</strong></div>
+                                <div class="col-lg-4">{{data.currentPercentage}}</div><div class="col-lg-4">{{data.roadLength}}/{{data.bridgeLength}}</div> <div class="col-lg-4">{{data.contractor}}</div>
+                        </div>
+  <h4 style="margin-top:60px">Stages of Construction Achieved So far</h4>
+                         <div class="row">
+                         
+                            <div class="col-lg-4 col-md-4 col-sm-12" id="datacontainer"></div>
+                           
+                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2>₦{{{currency data.contractSum}}}</h2>                                      
+                                        <p>Contract Sum</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="row">
                             <div class="col-lg-6">
@@ -320,7 +365,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title mb-4">Donut Chart</h4>
                                         
-                                        <div id="donut_chart" class="apex-charts"  dir="ltr"></div>
+                                       <div id="donut_chart" class="apex-charts"  dir="ltr"></div>
                                     </div>
                                 </div>
                             </div>
@@ -336,11 +381,11 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-6">
-                                2020 © Skote.
+                                {{!-- 2020 © Skote. --}}
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-right d-none d-sm-block">
-                                    Design & Develop by Themesbrand
+                                    {{!-- Design & Develop by Themesbrand --}}
                                 </div>
                             </div>
                         </div>
@@ -401,7 +446,32 @@
 
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
+  <input type="hidden" value="{{name}}" id="myInput">
+<script>
+    setTimeout(function () { location.reload(1); }, 10000);
+    var inputVal = document.getElementById("myInput").value;
+    var parsedValue = JSON.parse(inputVal)
+    
+    var list = "<ul>";
 
+    console.log(parsedValue.datas)
+    var loopedDatas = parsedValue.datas
+    let mySet = new Set()
+      var myArray = new Array();
+
+        for(var i in loopedDatas){
+            console.log(loopedDatas[i].component_name)
+            console.log(loopedDatas[i].component_score)
+            list +="<li>"  +loopedDatas[i].component_name+ " " + "(" +loopedDatas[i].component_score+ "%)"+ "</li>";
+             document.getElementById("datacontainer").innerHTML = list;
+              
+        }
+
+    list +="</ul>";
+
+
+
+    </script>
         <!-- JAVASCRIPT -->
         <script src="/assets/libs/jquery/jquery.min.js"></script>
         <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

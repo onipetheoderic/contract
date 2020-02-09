@@ -56,7 +56,7 @@ app.use(function(req, res, next){
     next();
   });
 app.use(express.static(path.join(__dirname, 'Views/public')));//this is for the css and js files in the template folder
-
+app.use(express.static(__dirname + '/public/'));
 
 // Express-validator MiddleWare copied from https://github.com/ctavan/express-validator/issues/238
 app.use(expressValidator({
@@ -203,6 +203,11 @@ hbs.registerHelper('fives', function(val){
     return "-"
   }
 });
+hbs.registerHelper('currency', function(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+)
+
 
 hbs.registerHelper('fours', function(val){
   if(val && val == 4){

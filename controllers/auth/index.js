@@ -49,7 +49,7 @@ exports.assign_highway_contracts_post = function(req, res){
 
 exports.view_all_contractors = function(req, res) {
     Contractor.find({}).exec(function(err, all_records){
-        let allKeys = Object.keys(all_records)
+        
         res.render('Admin/dashboard/view_all_contractors', {layout:false, datas:{contractors:all_records}})
     })
 }
