@@ -3,6 +3,7 @@ import Contract from '../../models/Contract/contract';
 import {encrypt, decrypt} from '../../utility/encryptor';
 import AmountPaid from '../../models/AmountPaid/amountPaid';
 import AmountCertified from '../../models/AmountCertified/amountCertified';
+import Priority from '../../models/Priority/priority';
 
 exports.get_all_contracts = function(req, res) {
     Contract.find({}, function(err, users) {
@@ -100,8 +101,16 @@ exports.modify_percentage_of_highway_contract = function(req, res) {
 
 
 
-exports.make_contract_priority = function(req, res) {
-
+exports.make_contract_priority= function(req, res) {
+    Contract.findByIdAndUpdate(req.params.id, {prioritize:true})
+        .exec(function(err, updatedContract){
+            if(err){
+                console.log("error")
+            }
+            else {
+                res.redirect('/')
+            }
+    })
 }
 /*
 contract_id: String,
@@ -123,7 +132,7 @@ exports.update_contract_payment = function(req, res) {
             res.render('Admin/dashboard/view_all_contracts', {layout: "layout/admin", message:{error: "Error occured during user registration"} })
             return;
         } else {                    
-            res.redirect("/view_all_contract")
+            res.redirect("/")
         }
     });
 }

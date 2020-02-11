@@ -68,7 +68,7 @@ router.route('/make_payment_contract/:id')
     .post(ContractController.make_payment_contract)
 
 router.route('/make_contract_priority/:id')
-    .get(ContractController.make_contract_priority)
+    .post(ContractController.make_contract_priority)
 //all_inspections //inspection_page
 
 export default router;

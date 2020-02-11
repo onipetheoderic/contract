@@ -16,7 +16,7 @@ var ContractSchema = new mongoose.Schema({
     dateAwarded: String,
     dateCommencement:String,
     dateCompletion: String,
-    
+    prioritize: {type:Boolean, default:false},
     extendedDateOfCompletion: String,
     appropriationAct: String,
     amountCertifiedToDate:Number,

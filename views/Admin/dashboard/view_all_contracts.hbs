@@ -330,7 +330,8 @@
                                                     <button id={{this.bpp}} type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#{{this.bpp}}">Create Amount Certified</button>
                                                      <button id={{this.mtb}} type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#{{this.mtb}}">Make Payment</button>
                                                 </div></td>
-                                                <td><a href="make_contract_priority/{{this.id}}">Prioritize Contract</a></td>
+                                                <td>
+                                                     <form class="form-horizontal" action="/make_contract_priority/{{this._id}}" method="POST" ><button type="submit">Prioritize Contract</button></form></td>
                                             </tr>
                                              <div id={{this.bpp}} class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">

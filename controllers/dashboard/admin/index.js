@@ -4,6 +4,8 @@ const fs = require("fs");
 import Contract from '../../../models/Contract/contract';
 import User from '../../../models/User/user';
 import Contractor from '../../../models/Contractor/contractor';
+import Priority from '../../../models/Priority/priority';
+
 import moment from 'moment';
 
 
@@ -47,7 +49,10 @@ function add(accumulator, a) {
 exports.home = function(req, res) {
 
     Contractor.find({}).exec(function(err, all_contractor){
-        User.find({}).exec(function(err, all_user){       
+        User.find({}).exec(function(err, all_user){     
+            Contract.find({prioritize:true}, function(err, prioritizedContracts){
+
+           
             Contract.find({})
             .populate('contractor')
             .populate('consultant')
@@ -81,14 +86,21 @@ exports.home = function(req, res) {
                     obj["internal_default"] = internal_default;
                     console.log("default status",obj.default)
                 }
+                console.log("all prioriti", prioritizedContracts)
+
+               
                 res.render('Admin/dashboard/index', {layout: "layout/admin", 
+                defaults_count: prioritizedContracts.length,
+                priority:prioritizedContracts,
                 datas:{
+                    prioritizedContracts: prioritizedContracts,
                     contract_count:all_contract.length,
                     user_count:all_user.length,
                     all_contract: all_contract,
                     contractor_count:all_contractor.length}
                 })
             })
+        })  
         })
     })
      

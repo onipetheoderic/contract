@@ -1,5 +1,4 @@
 <div class="main-content">
-
                 <div class="page-content">
                     <div class="container-fluid">
 
@@ -270,8 +269,53 @@
                         </tr>
                     </thead>
                     <tbody>
-                            {{#each datas.all_contract}}                                                      
+
+
+
+
+
+
+
+                            {{#each datas.all_contract}}
+            {{#if this.prioritize}}                                                      
                         <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.id}}</td>
+                    <td><strong>{{this.projectTitle}}</strong></td>
+                    <td>{{this.state}}</td>
+                    <td>{{{jsonp this.contractor}}}</td>
+                    <td>{{{jsonp this.consultant}}}</td>
+                    <td>{{this.mtb}}</td>
+                    <td><a href="/single_contract_page/{{this.id}}">{{this.bpp}}</a></td>
+                    <td>
+                        {{#if this.default}}
+                        <span class="badge badge-pill badge-soft-danger font-size-12">Contractors Default</span>
+                        {{else}}
+                        <span class="badge badge-pill badge-soft-success font-size-12">No Default</span>
+                        {{/if}}
+                    </td>
+                     <td>
+                        {{#if this.internal_default}}
+                        <span class="badge badge-pill badge-soft-danger font-size-12">Internal Default</span>
+                        {{else}}
+                        <span class="badge badge-pill badge-soft-success font-size-12">No Default</span>
+                        {{/if}}
+                    </td>
+                    {{!--  <td>
+                            <span class="badge badge-pill badge-soft-danger font-size-12">Contractors Default</span>
+                        </td> --}}
+                    <td>
+                        <!-- Button trigger modal -->
+                        <a href="/single_contract_page/{{this.id}}">
+                        <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">
+                            View Details
+                        </button>
+                        </a>
+                    </td>
+                
+                        </tr>
+                        {{else}}
+           <tr>
                     <td>{{this.id}}</td>
                     <td>{{this.id}}</td>
                     <td>{{this.projectTitle}}</td>
@@ -305,8 +349,8 @@
                         </button>
                         </a>
                     </td>
-                
-                        </tr>
+                        {{/if}}
+
                         {{/each}}
                         
                     </tbody>
