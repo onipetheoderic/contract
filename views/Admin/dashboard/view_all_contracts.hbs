@@ -2,13 +2,13 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesbrand.com/skote/layouts/horizontal/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:22 GMT -->
+<!-- Mirrored from Contract compliance and Payment management system.com/skote/layouts/horizontal/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:22 GMT -->
 <head>
         <meta charset="utf-8" />
      <title>Contract Complaince and Payment Management System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesbrand" name="author" />
+        <meta content="Contract compliance and Payment management system" name="description" />
+        <meta content="Contract compliance and Payment management system" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
@@ -348,7 +348,36 @@
                                                                    
                                                                     <div class="form-group">
                                                                         <label for="amount">Current Work Percentage is {{this.currentPercentage}}% for this Project: {{this.projectTitle}}</label>
-                                                                        <input type="text" id="amount" name="amount" class="form-control" id="amount" placeholder="Enter Amount">
+                                                                        <input type="number" id="amount" name="amount" class="form-control" id="amount" placeholder="Enter Amount">
+                                                                         <input type="hidden" name="contract_id" value={{this._id}}>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save Amount</button>
+                                                            </div>
+                                                             </form>
+                                                        </div><!-- /.modal-content -->
+                                                    </div><!-- /.modal-dialog -->
+                                                </div><!-- /.modal -->
+
+                                                <div id={{this.mtb}} class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form class="form-horizontal" action="/make_payment_contract/{{this._id}}" method="POST" enctype="multipart/form-data">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title mt-0" id="myModalLabel">Record Payment for this project</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                           
+                                                            <div class="modal-body">
+                                                                <h5>Record Payment</h5>                                                               
+                                                                   
+                                                                    <div class="form-group">
+                                                                        <label for="amount">Current Work Percentage is {{this.currentPercentage}}% for this Project: {{this.projectTitle}}</label>
+                                                                        <input type="number" id="amount" name="amount" class="form-control" id="amount" placeholder="Enter Amount">
                                                                          <input type="hidden" name="contract_id" value={{this._id}}>
                                                                     </div>
                                                             </div>
@@ -420,7 +449,7 @@ window.onload = function() {
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-right d-none d-sm-block">
-                                    Design & Develop by Themesbrand
+                                    Design & Develop by Contract compliance and Payment management system
                                 </div>
                             </div>
                         </div>
@@ -512,5 +541,5 @@ window.onload = function() {
 
     </body>
 
-<!-- Mirrored from themesbrand.com/skote/layouts/horizontal/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:30 GMT -->
+<!-- Mirrored from Contract compliance and Payment management system.com/skote/layouts/horizontal/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:30 GMT -->
 </html>

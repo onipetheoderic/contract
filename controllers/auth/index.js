@@ -1,5 +1,6 @@
 import User from '../../models/User/user';
 import Consultant from '../../models/Consultant/consultant';
+import Contractor from '../../models/Contractor/contractor';
 import {encrypt, decrypt} from '../../utility/encryptor'
 import {redirector, admin_checker_redirector} from '../../utility/redirector'
 const fs = require("fs");

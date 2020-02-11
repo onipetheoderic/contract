@@ -2,13 +2,12 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesbrand.com/skote/layouts/horizontal/layouts-boxed-width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:56 GMT -->
 <head>
         <meta charset="utf-8" />
         <title>Contract Complaince and Payment Management System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesbrand" name="author" />
+        <meta content="Contract compliance and Payment management system" name="description" />
+        <meta content="Contract compliance and Payment management system" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
@@ -32,7 +31,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="/" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="/assets/images/logo.png" alt="" height="22">
                                 </span>
@@ -41,7 +40,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="/" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="/assets/images/logo.png" alt="" height="22">
                                 </span>
@@ -219,22 +218,22 @@
                         <div class="collapse navbar-collapse" id="topnav-menu-content">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">
+                                    <a class="nav-link" href="/">
                                         <i class="bx bx-home-circle mr-2"></i>All Contracts
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">
+                                    <a class="nav-link" href="/">
                                         <i class="bx bx-home-circle mr-2"></i>All Contractors
                                     </a>
                                 </li>
                                   <li class="nav-item">
-                                    <a class="nav-link" href="index.html">
+                                    <a class="nav-link" href="/">
                                         <i class="bx bx-home-circle mr-2"></i>All Department
                                     </a>
                                 </li>
                                  <li class="nav-item">
-                                    <a class="nav-link" href="index.html">
+                                    <a class="nav-link" href="/">
                                         <i class="bx bx-home-circle mr-2"></i>All State
                                     </a>
                                 </li>
@@ -346,7 +345,59 @@
                                         <p>Contract Sum</p>
                                     </div>
                                 </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4>{{{approximator supposed_percentage}}}</h4>                                      
+                                        <p>Supposed Percentage</p>
+                                    
+                                        <h4>{{data.currentPercentage}}</h4>                                      
+                                        <p>Current Percentage</p>
+                                        {{#if data.default}}                               
+                                    <h4>Contractors Default</h4>                                      
+                                    <p class="badge badge-pill badge-soft-danger font-size-12">Default Status</p>
+                               
+                            {{else}}
+                               
+                                    <h4>No Default</h4>                                      
+                                   <p class="badge badge-pill badge-soft-success font-size-12">No Default</p>
+                             
+                            {{/if}}
+                                    </div>
+                            
+                                    
+                                </div>
+
+
+                                {{!-- internal Default --}}
+                                
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4>{{{approximator moneyPaidSoFar}}}</h4>                                      
+                                        <p>Money Paid So Far</p>                                    
+                                        <h4>{{{approximator dailyBudget}}}</h4>                                      
+                                        <p>Daily Contract Budget</p>
+                                        <h4>{{{approximator total_money_supposed_to_be_spent}}}</h4>                                      
+                                        <p>Accumulated Daily Contract Budget</p>
+                                        {{#if data.internalDefualt}}                               
+                                    <h4>Internal Default</h4>                                      
+                                    <p class="badge badge-pill badge-soft-danger font-size-12">Default Status</p>
+                               
+                            {{else}}
+                          
+                                    <h4>No Internal Default</h4>                                      
+                                   <p class="badge badge-pill badge-soft-success font-size-12">No Internal Default</p>
+                             
+                            {{/if}}
+                                    </div>
+                            
+                                    
+                                </div>
                             </div>
+
+                            
+
+
+                            
                         </div>
 
 
@@ -385,7 +436,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-right d-none d-sm-block">
-                                    {{!-- Design & Develop by Themesbrand --}}
+                                    {{!-- Design & Develop by Contract compliance and Payment management system --}}
                                 </div>
                             </div>
                         </div>
@@ -488,6 +539,4 @@
         <script src="/assets/js/app.js"></script>
 
     </body>
-
-<!-- Mirrored from themesbrand.com/skote/layouts/horizontal/charts-apex.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:33 GMT -->
 </html>

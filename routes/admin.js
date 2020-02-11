@@ -64,6 +64,9 @@ router.route('/user_contract/:id')
 router.route('/update_contract_payment/:id')
     .post(ContractController.update_contract_payment)
 
+router.route('/make_payment_contract/:id')
+    .post(ContractController.make_payment_contract)
+
 router.route('/make_contract_priority/:id')
     .get(ContractController.make_contract_priority)
 //all_inspections //inspection_page

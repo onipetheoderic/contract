@@ -127,3 +127,26 @@ exports.update_contract_payment = function(req, res) {
         }
     });
 }
+
+exports.make_payment_contract = function(req, res) {
+
+    Contract.findOne({_id:req.body.contract_id}, function(err, contract){
+        var previous_contracts = [];
+        previous_contracts.push(contract.amount_paid)
+        let currentamount = req.body.amount;
+        let newArray = contract.amount_paid.concat(currentamount);
+        console.log(newArray)
+        Contract.findByIdAndUpdate(req.body.contract_id, {amount_paid:newArray})
+        .exec(function(err, updatedContract){
+            if(err){
+                console.log("error")
+            }
+            else {
+                res.render('Admin/dashboard/successpage', {layout: false, message:{successMessage: "Contract Successfully Updated", successDescription: "The Contract Was successfully Updated"} })
+            }
+        })
+        
+    })
+}
+
+

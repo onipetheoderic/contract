@@ -114,6 +114,37 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label for="ddlCreditCardType" class="col-lg-3 col-form-label">Select Contractor</label>
+                                                        <div class="col-lg-9">
+                                                            
+                                                            <select id="ddlCreditCardType" name="contractor_id" class="form-control"> 
+                                                                {{#each data.contractors}}
+                                                                <option value="{{this._id}}">{{this.companyName}}</option>
+                                                                {{/each}}
+                                                            </select>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+                                                     <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label for="ddlCreditCardType" class="col-lg-3 col-form-label">Select Consultant</label>
+                                                        <div class="col-lg-9">
+                                                            
+                                                            <select id="ddlCreditCardType" name="consultant_id" class="form-control"> 
+                                                                {{#each data.consultants}}
+                                                                <option value="{{this._id}}">{{this.companyName}}</option>
+                                                                {{/each}}
+                                                            </select>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+
                                                 </div>
                                                
                                                 <div class="row">
@@ -246,9 +277,10 @@
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="customCheck1">
                                                         <label class="custom-control-label" for="customCheck1">I agree with the Terms and Conditions.</label>
+                                                          <button type="submit">Submit </button>
                                                     </div>
                                                 </div>
-                                                <button type="submit">Submit </button>
+                                              
                                             </fieldset>
                                             
                                         </form>

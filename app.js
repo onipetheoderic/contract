@@ -119,6 +119,16 @@ hbs.registerHelper('json', function (content) {
     return JSON.stringify(content);
 });
 
+hbs.registerHelper('jsonp', function(cont){
+  let content = JSON.parse(JSON.stringify(cont))
+  if(content[0]!==undefined){
+   let companyName = content[0].companyName
+    return companyName
+  }
+  else return;
+  
+})
+
 hbs.registerHelper('uppercase', function (str) {
   if(str && typeof str === "string") {
     return str.toUpperCase();
@@ -253,6 +263,12 @@ hbs.registerHelper('away_name_splitter', function(game){
   let new_name = game.split(' vs ')
   return new_name[1]
 })
+
+hbs.registerHelper('approximator', function(num){
+ let newNum = num.toFixed(2)
+ return newNum
+})
+
 
 hbs.registerHelper('odds_verifier', function(val, homeGS, homeGC){
   if(homeGC<=12 && val<=2 && homeGS>=homeGC*2){

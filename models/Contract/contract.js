@@ -24,21 +24,20 @@ var ContractSchema = new mongoose.Schema({
     outStandingCostPayment:Number,
     amountOfOutstandingCost:Number,
     role: {type: Array, default: [1,2,3]},
-    contractor: String,
-    consultant: String,
     assigned: {type: Boolean, default: false},
     status: String,
     currentPercentage: {type: Number, default: 0},
     highwayInspectorId: String,
+    amount_paid:{type: Array, default:[0]},
     highwayInspectorDetails: String,
-    // contractor: [{//this is the user that created the Contract
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Contractor'
-    //   }],
-    // consultant: [{//this is the user that created the Contract
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Consultant'
-    // }],
+    contractor: [{//this is the user that created the Contract
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Contractor'
+      }],
+    consultant: [{//this is the user that created the Contract
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Consultant'
+    }],
     // user: [{
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'User'

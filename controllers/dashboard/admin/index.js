@@ -4,6 +4,8 @@ const fs = require("fs");
 import Contract from '../../../models/Contract/contract';
 import User from '../../../models/User/user';
 import Contractor from '../../../models/Contractor/contractor';
+import moment from 'moment';
+
 
 import Consultant from '../../../models/Consultant/consultant';
 import AmountPaid from '../../../models/AmountPaid/amountPaid';
@@ -21,10 +23,64 @@ const filePlacerAndNamer = (req, res, the_file) => {
     return file_name
 }
 
+const get_diff_start_current_date = (dateAwarded, dateCompletion) => {
+    var a = moment(dateAwarded,'YYYY/M/D');
+	var b = moment(dateCompletion,'YYYY/M/D');
+    var duration = b.diff(a, 'days');
+    return duration
+}
+
+const get_days_elapsed = (dateAwarded) =>{
+    let new_date = new Date()
+    let days_elapsed = moment(dateAwarded, 'YYYY/M/D')
+    var today = moment(new_date,'M/D/YYYY')
+    var duration = today.diff(days_elapsed, 'days');
+    return duration
+}
+
+function add(accumulator, a) {
+    return parseInt(accumulator) + parseInt(a);
+}
+
+
+
 exports.home = function(req, res) {
+
     Contractor.find({}).exec(function(err, all_contractor){
         User.find({}).exec(function(err, all_user){       
-            Contract.find({}).exec(function(err, all_contract){
+            Contract.find({})
+            .populate('contractor')
+            .populate('consultant')
+            .exec(function(err, all_contract){
+                console.log('%j', all_contract);
+                console.log(all_contract.contractor)
+
+                for(var i in all_contract){
+                    console.log("this are all the contracts",all_contract[i])
+                  
+                    const total_duration = get_diff_start_current_date(all_contract[i].dateAwarded, all_contract[i].dateCompletion)
+                    console.log(total_duration)
+                    const days_elapsed = get_days_elapsed(all_contract[i].dateAwarded)
+                    
+                    
+                    const moneyPaidSoFar = all_contract[i].amount_paid.reduce(add,0)
+                    const contractSum = all_contract[i].contractSum;
+                    const dailyBudget = contractSum/total_duration;
+                    const total_money_supposed_to_be_spent = dailyBudget*days_elapsed;
+                    
+                    //let calculate internal Default now
+                    const internal_default_strict = total_money_supposed_to_be_spent > moneyPaidSoFar?true:false
+                    const internal_default_const = total_money_supposed_to_be_spent - moneyPaidSoFar;
+                    const internal_default_calc = internal_default_const*100/total_money_supposed_to_be_spent
+                    const internal_default = internal_default_calc>70?true:false
+                    console.log("this is the elapsed day",days_elapsed)
+                    let supposed_percentage = days_elapsed/total_duration*100
+                    let contractors_default = all_contract[i].currentPercentage < supposed_percentage-5
+                    let obj = all_contract[i];
+                    obj["default"] = contractors_default;
+                    obj["internal_default"] = internal_default;
+                    console.log("default status",obj.default)
+                }
                 res.render('Admin/dashboard/index', {layout: "layout/admin", 
                 datas:{
                     contract_count:all_contract.length,
@@ -42,6 +98,30 @@ exports.home = function(req, res) {
 exports.get_single_contract = function(req, res) {
     const myUrl =` ${BASEURL}/get_contract_datas/${req.params.id}`
     Contract.findOne({_id:req.params.id}).exec(function(err, single_contract){
+        const total_duration = get_diff_start_current_date(single_contract.dateAwarded, single_contract.dateCompletion)
+        const days_elapsed = get_days_elapsed(single_contract.dateAwarded)
+        console.log("jjjfjfj",total_duration, days_elapsed)
+        let supposed_percentage = days_elapsed/total_duration*100
+        let contractors_default = single_contract.currentPercentage < supposed_percentage-5
+        let obj = single_contract;
+       
+        obj["default"] = contractors_default;
+        console.log(single_contract.default)
+
+        const moneyPaidSoFar = single_contract.amount_paid.reduce(add,0)
+        const contractSum = single_contract.contractSum;
+        const dailyBudget = contractSum/total_duration;
+        const total_money_supposed_to_be_spent = dailyBudget*days_elapsed;
+        
+        //let calculate internal Default now
+        const internal_default_strict = total_money_supposed_to_be_spent > moneyPaidSoFar?true:false
+        const internal_default_const = total_money_supposed_to_be_spent - moneyPaidSoFar;
+        const internal_default_calc = internal_default_const*100/total_money_supposed_to_be_spent
+        const internal_default = internal_default_calc>70?true:false
+
+        console.log("this is the elapsed day",days_elapsed)
+        obj["internal_default"] = internal_default;
+
         Request.get({url: myUrl}, (error, response, body) => {
             if(error || body=="null") {
                 res.render('Admin/dashboard/single_contract_page', {layout:false, data:single_contract, name:"null"})
@@ -50,7 +130,17 @@ exports.get_single_contract = function(req, res) {
                 console.log('this is thte body of the request', JSON.parse(body))
                 // console.log(JSON.parse(body));
                 let databody = body
-                res.render('Admin/dashboard/single_contract_page', {layout:false, data:single_contract, name:databody})
+                res.render('Admin/dashboard/single_contract_page', {layout:false, 
+                    data:single_contract, 
+                    name:databody, 
+                    supposed_percentage: supposed_percentage,
+                    
+                    moneyPaidSoFar:moneyPaidSoFar,
+                    dailyBudget: dailyBudget,
+                    total_money_supposed_to_be_spent: total_money_supposed_to_be_spent,
+                    
+
+                })
     
             }
            
@@ -78,7 +168,15 @@ exports.inspection_page = function(req, res) {
     res.render('Admin/dashboard/inspection_page', {layout: "layout/admin"})
 }
 exports.create_contract= function(req, res) {
-    res.render('Admin/dashboard/create_contract', {layout: "layout/stepper"})
+    Contractor.find({}, function(err, contractors){
+        console.log("this are the contr",contractors)
+        Consultant.find({}, function(err, consultants){
+            res.render('Admin/dashboard/create_contract', {layout: "layout/stepper", data:{consultants:consultants, contractors:contractors}})
+
+        })
+       
+    })
+    
 }
 
 
@@ -100,6 +198,8 @@ exports.create_contract_post = function(req, res) {
        projectLength: req.body.projectLength, 
        dateAwarded: req.body.dateAwarded,
        dateCommencement: req.body.dateCommencement, 
+       consultant: req.body.consultant_id,
+       contractor: req.body.contractor_id,
        dateCompletion: req.body.dateCompletion,
        extendedDateOfCompletion: req.body.extendedDateOfCompletion, 
        appropriationAct: req.body.appropriationAct,
