@@ -47,7 +47,7 @@ function add(accumulator, a) {
 
 
 exports.home = function(req, res) {
-
+    
     Contractor.find({}).exec(function(err, all_contractor){
         User.find({}).exec(function(err, all_user){     
             Contract.find({prioritize:true}, function(err, prioritizedContracts){
