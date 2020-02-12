@@ -302,11 +302,11 @@
                                             <thead>
                                             <tr>
                                                 <th>S/No</th>
-                                                <th>Contract No</th>
-                                                <th>Project Title</th>
-                                                <th>Current Percentage</th>
-                                                <th>Name of Contractor</th>
-                                                <th>Name of Consultant</th>
+                                                <th>Project Title</th>                                                
+                                                <th>State</th>
+                                                <th>LGA</th>
+                                                <th>Current Percentage(%)</th>
+                                                <th>Contract Sum(₦)</th>
                                                 <th>MTB</th>
                                                 <th>BPP</th>
                                                 <th>Update Record</th>
@@ -318,12 +318,12 @@
                                             <tbody>
                                                 {{#each datas.contracts}}
                                             <tr>
-                                                <td>{{this.id}}</td>
-                                                <td>{{this.id}}</td>
-                                                <td>{{this.projectTitle}}</td>
+                                                <td>{{this.serialNo}}</td>                                                
+                                                <td>{{this.projectTitle}}</td>                                                
+                                                <td>{{this.state}}</td>
+                                                <td>{{this.lga}}</td>
                                                 <td>{{this.currentPercentage}}</td>
-                                                <td>{{this.contractor}}</td>
-                                                <td>{{this.consultant}}</td>
+                                                <td>{{{currency this.contractSum}}}</td>
                                                 <td>{{this.mtb}}</td>
                                                 <td>{{this.bpp}}<input type="hidden" id="myInput" value={{{json this}}} > </td>
                                                 <td><div class="my-4 text-center">

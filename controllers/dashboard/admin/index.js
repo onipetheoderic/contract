@@ -5,6 +5,7 @@ import Contract from '../../../models/Contract/contract';
 import User from '../../../models/User/user';
 import Contractor from '../../../models/Contractor/contractor';
 import Priority from '../../../models/Priority/priority';
+const state = require('../../../models/state.json');
 
 import moment from 'moment';
 
@@ -183,8 +184,8 @@ exports.create_contract= function(req, res) {
     Contractor.find({}, function(err, contractors){
         console.log("this are the contr",contractors)
         Consultant.find({}, function(err, consultants){
-            res.render('Admin/dashboard/create_contract', {layout: "layout/stepper", data:{consultants:consultants, contractors:contractors}})
-
+            console.log("this is the state", state)
+            res.render('Admin/dashboard/create_contract', {layout: "layout/stepper", data:{state:state, consultants:consultants, contractors:contractors}})
         })
        
     })

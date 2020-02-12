@@ -237,11 +237,11 @@
                     <thead class="thead-light">
                         <tr>
                             
-                            <th>S/No</th>
-                            <th>Contract No</th>
+                           
+                            
                             <th>Project Title</th>
                             <th>State</th>
-                            <th>Name of Contractor</th>
+                            <th>L.G.A</th>
                             <th>Name of Consultant</th>
                             <th>MTB</th>
                             <th>BPP</th>
@@ -261,11 +261,11 @@
                             {{#each datas.all_contract}}
             {{#if this.prioritize}}                                                      
                         <tr>
-                    <td>{{this.id}}</td>
-                    <td>{{this.id}}</td>
+                  
+                   
                     <td><strong>{{this.projectTitle}}</strong></td>
                     <td>{{this.state}}</td>
-                    <td>{{{jsonp this.contractor}}}</td>
+                   <td>{{this.lga}}</td>
                     <td>{{{jsonp this.consultant}}}</td>
                     <td>{{this.mtb}}</td>
                     <td><a href="/single_contract_page/{{this.id}}">{{this.bpp}}</a></td>
@@ -298,11 +298,11 @@
                         </tr>
                         {{else}}
            <tr>
-                    <td>{{this.id}}</td>
-                    <td>{{this.id}}</td>
+                   
+                   
                     <td>{{this.projectTitle}}</td>
                     <td>{{this.state}}</td>
-                    <td>{{{jsonp this.contractor}}}</td>
+                    <td>{{{this.lga}}}</td>
                     <td>{{{jsonp this.consultant}}}</td>
                     <td>{{this.mtb}}</td>
                     <td><a href="/single_contract_page/{{this.id}}">{{this.bpp}}</a></td>
