@@ -94,6 +94,7 @@ exports.home = function(req, res) {
                 defaults_count: prioritizedContracts.length,
                 priority:prioritizedContracts,
                 datas:{
+                    BASEURL:BASEURL,
                     prioritizedContracts: prioritizedContracts,
                     contract_count:all_contract.length,
                     user_count:all_user.length,
