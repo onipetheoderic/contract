@@ -49,6 +49,9 @@ router.route('/create_consultant')
 router.route('/all_contracts')
     .get(ContractController.get_all_contracts)
 
+router.route('/edit_user_details')
+    .get(AuthDashboard.edit_user_details)
+
 router.route('/assign_highway_to_contract')
     .post(ContractController.assign_highway_to_contract)
 

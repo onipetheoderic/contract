@@ -74,6 +74,9 @@ exports.login = function(req, res) {
 }
 
 
+exports.edit_user_details = function(req, res) {
+    res.render('Admin/dashboard/edit_user_details', {layout: "layout/admin"})
+}
 
 
 exports.login_post = function(req, res) {
