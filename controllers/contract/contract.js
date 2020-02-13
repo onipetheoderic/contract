@@ -13,10 +13,14 @@ exports.get_all_contracts = function(req, res) {
 }
 
 
+
 exports.user_contracts = function(req, res) {
     Contract.find({highwayInspectorId: req.params.id}, function(err, contracts){
-        console.log("this are the list of contracts belonging",contracts)
-        res.json(contracts)
+       const result = contracts.map(({_id, projectTitle, state, lga, currentPercentage }) => ({
+        _id, projectTitle, state, lga, currentPercentage
+        }));
+        console.log("results I want", result)
+        res.json({data:result})
     })
 }
 

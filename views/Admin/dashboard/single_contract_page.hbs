@@ -227,24 +227,6 @@
                                         <i class="bx bx-home-circle mr-2"></i>All Contractors
                                     </a>
                                 </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="/">
-                                        <i class="bx bx-home-circle mr-2"></i>All Department
-                                    </a>
-                                </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="/">
-                                        <i class="bx bx-home-circle mr-2"></i>All State
-                                    </a>
-                                </li>
-
-
-                               
-
-                                
-
-                    
-
 
                             </ul>
                         </div>
@@ -347,7 +329,7 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4>{{{approximator supposed_percentage}}}</h4>                                      
+                                        <h4>{{{supposed_percentage}}}</h4>                                      
                                         <p>Supposed Percentage</p>
                                     
                                         <h4>{{data.currentPercentage}}</h4>                                      
@@ -372,11 +354,11 @@
                                 
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4>{{{approximator moneyPaidSoFar}}}</h4>                                      
+                                        <h4>{{{ moneyPaidSoFar}}}</h4>                                      
                                         <p>Money Paid So Far</p>                                    
-                                        <h4>{{{approximator dailyBudget}}}</h4>                                      
+                                        <h4>{{{ dailyBudget}}}</h4>                                      
                                         <p>Daily Contract Budget</p>
-                                        <h4>{{{approximator total_money_supposed_to_be_spent}}}</h4>                                      
+                                        <h4>{{{ total_money_supposed_to_be_spent}}}</h4>                                      
                                         <p>Accumulated Daily Contract Budget</p>
                                         {{#if data.internalDefualt}}                               
                                     <h4>Internal Default</h4>                                      

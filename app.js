@@ -40,14 +40,16 @@ app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'AdminBSBMaterialDesign-master')));
 app.use('/bower_components', express.static(`${__dirname}/bower_components`));
+var session = require('express-session');
 
 
-
-app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(session({
+  name: 'contract',
+  secret: 'keyboard cat', 
+  resave: false,
+  saveUninitialized: false,
+cookie: {secure:false},
+}))
 
 app.use(function(req, res, next){
   // if there's a flash message in the session request, make it available  
