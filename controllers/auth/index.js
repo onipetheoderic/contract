@@ -29,9 +29,56 @@ const dashboardMsg = (type, msg) => {
     }
 }
 
-exports.register_user = function(req, res) {
-    res.render('Admin/dashboard/register_user', {layout: "layout/admin"})
+exports.changePassword_get = function(req, res){
+    if(!req.session.hasOwnProperty("user_id")){
+        console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        res.render('Admin/dashboard/change_password', {layout: "layout/login-register"})
+    }
+    
 }
+
+
+
+
+exports.changePassword_post = function(req, res){
+   const previousPassword = req.body.previous_password;
+   const newPassword = req.body.new_password;
+
+    if(!req.session.hasOwnProperty("user_id")){
+        console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        User.findOne({_id:decrypted_user_id}, function(err, user){           
+            if(user.password === previousPassword){
+                User.findByIdAndUpdate(decrypted_user_id, {password:newPassword})
+                .exec(function(err, updated_staff){
+                    if(err){
+                        console.log(err)
+                    }else {
+                        res.redirect('/login')
+                    }
+                })
+                
+            }
+            else {
+                res.render('Admin/dashboard/change_password', {layout: "layout/login-register", message:{error:'You Entered the Wrong Password'}})
+            }
+        })
+    }
+
+}
+
+
+exports.register_user = function(req, res) {
+    res.render('Admin/dashboard/register_user', {layout: "layout/login-register", })
+}
+
 
 exports.create_highway_inspector = function(req, res) {
     res.render('Admin/dashboard/create_contractor', {layout: "layout/admin"})
@@ -70,7 +117,7 @@ exports.create_contractor= function(req, res) {
 
 
 exports.login = function(req, res) {
-    res.render('Admin/dashboard/login', {layout: "layout/admin"})
+    res.render('Admin/dashboard/login', {layout: "layout/admin-login"})
 }
 
 
@@ -86,7 +133,7 @@ exports.login_post = function(req, res) {
     User.findOne({email: email}, function(err, user) {
        if(user == null)
         {
-           res.render('Admin/dashboard/login', {layout: false, message:{error: "Email not registered"}})
+           res.render('Admin/dashboard/login', {layout: "layout/admin-login", message:{error: "Email not registered"}})
         }
         else{
             let user_id = user.id
@@ -105,7 +152,7 @@ exports.login_post = function(req, res) {
                   
             }else{
                   // res.status(401).send('Invalid Password Key');
-                  res.render('Admin/dashboard/login', {layout: false, message:{error: "invalid Phone Number or password"}})
+                  res.render('Admin/dashboard/login', {layout: "layout/admin-login", message:{error: "invalid Phone Number or password"}})
             }
         }
 
@@ -120,6 +167,52 @@ exports.logout = function(req, res){
 }
 
 
+exports.changePassword_get = function(req, res){
+    if(!req.session.hasOwnProperty("user_id")){
+        console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        res.render('Admin/dashboard/change_password', {layout: "layout/login-register"})
+    }
+    
+}
+
+
+
+
+exports.changePassword_post = function(req, res){
+   const previousPassword = req.body.previous_password;
+   const newPassword = req.body.new_password;
+
+    if(!req.session.hasOwnProperty("user_id")){
+        console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        User.findOne({_id:decrypted_user_id}, function(err, user){           
+            if(user.password === previousPassword){
+                User.findByIdAndUpdate(decrypted_user_id, {password:newPassword})
+                .exec(function(err, updated_staff){
+                    if(err){
+                        console.log(err)
+                    }else {
+                        res.redirect('/login')
+                    }
+                })
+                
+            }
+            else {
+                res.render('Admin/dashboard/change_password', {layout: "layout/login-register", message:{error:'You Entered the Wrong Password'}})
+            }
+        })
+    }
+
+
+    
+}
 
 exports.create_consultant_post = function(req, res) {
     console.log("contractor body",req.body)
@@ -173,6 +266,7 @@ exports.register_post = function(req, res) {
                 user.email = req.body.email;
                 user.firstName = req.body.first_name;
                 user.lastName = req.body.last_name;
+                user.phoneNumber = req.body.phone_number;
                 user.password = randomPassword;
                 user.userType = req.body.user_type;
                 user.isAdmin = false;   

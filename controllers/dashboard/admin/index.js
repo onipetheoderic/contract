@@ -48,6 +48,13 @@ function add(accumulator, a) {
 
 
 exports.home = function(req, res) {
+    if(!req.session.hasOwnProperty("user_id")){
+        console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+    let decrypted_user_id = decrypt(req.session.user_id, req, res)
+    console.log("this is the decrypted user", decrypted_user_id)
     
     Contractor.find({}).exec(function(err, all_contractor){
         User.find({}).exec(function(err, all_user){     
@@ -89,22 +96,94 @@ exports.home = function(req, res) {
                 }
                 console.log("all prioriti", prioritizedContracts)
 
-               
-                res.render('Admin/dashboard/index', {layout: "layout/admin", 
-                defaults_count: prioritizedContracts.length,
-                priority:prioritizedContracts,
-                datas:{
-                    BASEURL:BASEURL,
-                    prioritizedContracts: prioritizedContracts,
-                    contract_count:all_contract.length,
-                    user_count:all_user.length,
-                    all_contract: all_contract,
-                    contractor_count:all_contractor.length}
-                })
+                User.findOne({_id:decrypted_user_id}, function(err, user){
+                    console.log(user.userType)
+                    const superAdmin = user.userType ==="superAdmin"?true:false;
+                    const siteEngineer = user.userType==="siteEngineer"?true:false;
+                    const permanentSecretary = user.userType ==="permanentSecretary"?true:false;
+                    const minister = user.userType === "minister"?true:false;
+                    const director = user.userType === "director"?true:false;
+                    if(superAdmin){
+                        res.render('Admin/dashboard/index_superadmin', {layout: "layout/admin", 
+                        defaults_count: prioritizedContracts.length,
+                        firstName:user.firstName,
+                        priority:prioritizedContracts,
+                        datas:{
+                            BASEURL:BASEURL,
+                            prioritizedContracts: prioritizedContracts,
+                            contract_count:all_contract.length,
+                            user_count:all_user.length,
+                            all_contract: all_contract,
+                            contractor_count:all_contractor.length}
+                        })
+                    }
+                    else if(siteEngineer){
+                        res.render('Admin/dashboard/index_site_engineer', {layout: "layout/admin", 
+                        defaults_count: prioritizedContracts.length,
+                        firstName:user.firstName,
+                        priority:prioritizedContracts,
+                        datas:{
+                          
+                            BASEURL:BASEURL,
+                            prioritizedContracts: prioritizedContracts,
+                            contract_count:all_contract.length,
+                            user_count:all_user.length,
+                            all_contract: all_contract,
+                            contractor_count:all_contractor.length}
+                        })
+                    }
+                    else if(permanentSecretary){
+                        res.render('Admin/dashboard/index_permanent_secretary', {layout: "layout/admin", 
+                        defaults_count: prioritizedContracts.length,
+                        firstName:user.firstName,
+                        priority:prioritizedContracts,
+                        datas:{
+                            BASEURL:BASEURL,
+                            
+                            prioritizedContracts: prioritizedContracts,
+                            contract_count:all_contract.length,
+                            user_count:all_user.length,
+                            all_contract: all_contract,
+                            contractor_count:all_contractor.length}
+                        })
+                    }
+                    else if(minister){
+                        res.render('Admin/dashboard/index_minister', {layout: "layout/admin", 
+                        defaults_count: prioritizedContracts.length,
+                        firstName:user.firstName,
+                        priority:prioritizedContracts,
+                        datas:{
+                            BASEURL:BASEURL,
+                        
+                            prioritizedContracts: prioritizedContracts,
+                            contract_count:all_contract.length,
+                            user_count:all_user.length,
+                            all_contract: all_contract,
+                            contractor_count:all_contractor.length}
+                        })
+                    }
+                    else if(director){
+                        res.render('Admin/dashboard/index_director', {layout: "layout/admin", 
+                        defaults_count: prioritizedContracts.length,
+                        firstName:user.firstName,
+                        priority:prioritizedContracts,
+                        datas:{
+                            BASEURL:BASEURL,
+                            
+                            prioritizedContracts: prioritizedContracts,
+                            contract_count:all_contract.length,
+                            user_count:all_user.length,
+                            all_contract: all_contract,
+                            contractor_count:all_contractor.length}
+                        })
+                    }
+                       
             })
         })  
         })
     })
+});
+}
      
 }
 
@@ -170,6 +249,50 @@ exports.register = function(req, res) {
     res.render('Admin/dashboard/register', {layout: "layout/login-register", })
 }
 
+exports.register_super = function(req, res) {
+    console.log("registerpost url", req.body)    
+    User.findOne({email: req.body.email}, function(err, vals){
+        if (vals==null) { 
+            console.log("username not taken")
+            User.findOne({email: req.body.email}, function(err, valss){
+                if (valss==null) { 
+                    console.log("email address not taken")//
+                    let user = new User();
+                        user.email = req.body.email;
+                        user.firstName = req.body.first_name;
+                        user.lastName = req.body.last_name;
+                        user.phoneNumber = req.body.phone_number;
+                        user.password = req.body.password;
+                        user.userType = "superAdmin";
+                        user.isAdmin = true;   
+                        user.phoneNumber = req.body.phone_number;     
+                        user.save(function(err, auth_details){       
+                            if(err){
+                                console.log(err)
+                                res.render('Admin/dashboard/register', {layout: "layout/login-register", message:{error: "Error occured during user registration"} })
+                                return;
+                            } else {                    
+                                res.render('Admin/dashboard/successpage', {layout: false, message:{successMessage: "User Successfully Registered", successDescription: `The Username is ${req.body.email}, `} })
+                            }
+                        });
+
+
+                }
+        else if(valss !=null){
+              // console.log("Phone number taken")
+            res.render('Admin/dashboard/register_user', {layout: false, message:{error: "Phone Number has already been taken"} })
+
+        }
+
+        else if(vals !=null){            
+            // console.log("username taken")
+            res.render('Admin/dashboard/register_user', {layout: false, message:{error: "Email has already been taken"} })
+            }
+        })
+        }
+     })   
+
+}
 
 exports.view_all_contract = function(req, res) {   
     Contract.find({}).exec(function(err, all_records){

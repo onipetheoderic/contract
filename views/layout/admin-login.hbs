@@ -2,27 +2,27 @@
 <html lang="en">
 
     
-<!-- Mirrored from Contract compliance and Payment management system.com/skote/layouts/horizontal/form-wizard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:20 GMT -->
+<!-- Mirrored from Contract compliance and Payment management system.com/skote/layouts/horizontal/layouts-boxed-width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:56 GMT -->
 <head>
         <meta charset="utf-8" />
-        <title>Create a Contract</title>
+        <title>Contract Complaince and Payment Management System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Contract compliance and Payment management system" name="description" />
         <meta content="Contract compliance and Payment management system" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico">
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
         <!-- Bootstrap Css -->
         <link href="/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
         <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
+        <link href="/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <script src="/assets/libs/select2/js/select2.min.js"></script>
     </head>
 
-    <body data-topbar="dark" data-layout="horizontal">
-
+    <body data-topbar="dark" data-layout="horizontal" data-layout-size="boxed">
         <!-- Begin page -->
         <div id="layout-wrapper">
 <script src="/assets/libs/jquery/jquery.min.js"></script>
@@ -94,10 +94,8 @@ border-color: #4099D5;
 
 </style>
 
-
-
-      <header id="page-topbar">   
-          <div class="notice_wrapper">		  	
+            <header id="page-topbar">
+                <div class="notice_wrapper">		  	
 	<p class="alert">{{{message.error}}}{{{message.success}}}</p>				
 	</div>
                 <div class="navbar-header">
@@ -168,127 +166,34 @@ border-color: #4099D5;
                             </button>
                         </div>
 
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bx bx-bell bx-tada"></i>
-                                <span class="badge badge-danger badge-pill">{{{defaults_count}}}</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
-                                aria-labelledby="page-header-notifications-dropdown">
-                                <div class="p-3">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="m-0"> Notifications </h6>
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="#!" class="small"> View All</a>
-                                        </div>
-                                    </div>
-                                </div>
-               
-                
-              
-                                <div data-simplebar style="max-height: 230px;">
-                                     {{#each priority}}
-                                    <a href="#" class="text-reset notification-item">
-                                        <div class="media">
-                                            <div class="avatar-xs mr-3">
-                                                <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                    <i class="bx bx-user"></i>
-                                                </span>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="mt-0 mb-1">{{this.projectTitle}}</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">{{this.projectTitle}} {{this.state}} {{this.lga}}</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> {{this.contractType}}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    {{/each}}
-                                    
+                       
 
-                                   
-                                </div>
-                                <div class="p-2 border-top">
-                                    <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
-                                        <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="/assets/images/users/avatar-1.jpg"
-                                    alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ml-1">{{{firstName}}}</span>
-                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <!-- item-->
-                              
-                                <a class="dropdown-item text-danger" href="/logout"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
-                                <a class="dropdown-item text-danger" href="/edit_user_details"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Edit Your Details</a>
-                        <a class="dropdown-item text-danger" href="/change_password"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Change Password</a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                                <i class="bx bx-cog bx-spin"></i>
-                            </button>
-                        </div>
+                       
             
                     </div>
                 </div>
-            </header>                
-      <div class="topnav">
-                <div class="container-fluid">
-                    <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
-
-                        <div class="collapse navbar-collapse" id="topnav-menu-content">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/view_all_contract">
-                                        <i class="bx bx-home-circle mr-2"></i>All Contracts
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/view_all_contractors">
-                                        <i class="bx bx-home-circle mr-2"></i>All Contractors
-                                    </a>
-                                </li>
-                                
-
-                               
-
-                                
-
-                    
-
-
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+            </header>
+    
+            <div class="topnav">
+                
             </div>
 
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            {{{body}}}
 
-{{{body}}}
-
-                
                 <footer class="footer">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-6">
-                                2020 © Contract Compliance and Payment Management System
+                              
+                                2020 © Contract Compliance and Management System.
                             </div>
                             <div class="col-sm-6">
-                                
+                                {{!-- <div class="text-sm-right d-none d-sm-block">
+                                    Design & Develop by Contract compliance and Payment management system
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -356,14 +261,14 @@ border-color: #4099D5;
         <script src="/assets/libs/simplebar/simplebar.min.js"></script>
         <script src="/assets/libs/node-waves/waves.min.js"></script>
 
-        <!-- form wizard -->
-        <script src="/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+        <!-- apexcharts -->
+        <script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
 
-        <!-- form wizard init -->
-        <script src="/assets/js/pages/form-wizard.init.js"></script>
+        <script src="/assets/js/pages/dashboard.init.js"></script>
 
-    
+        <script src="/assets/js/app.js"></script>
     </body>
 
-<!-- Mirrored from Contract compliance and Payment management system.com/skote/layouts/horizontal/form-wizard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:21 GMT -->
+
+<!-- Mirrored from Contract compliance and Payment management system.com/skote/layouts/horizontal/layouts-boxed-width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2020 18:08:57 GMT -->
 </html>

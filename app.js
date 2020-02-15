@@ -283,7 +283,10 @@ hbs.registerHelper('odds_verifier', function(val, homeGS, homeGC){
   }
 });
 hbs.registerHelper('formatDate', function(dateString) {
-    return moment(dateString).format("MMM Do YY"); 
+    if(dateString!=undefined){
+      return moment(dateString).format("MMM Do YY"); 
+    }
+    
 });
 
 hbs.registerHelper('underscore_formatter', function(str){

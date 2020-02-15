@@ -153,15 +153,16 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="/assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ml-1">Theoderic</span>
+                                <span class="d-none d-xl-inline-block ml-1">{{{firstName}}}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
                               {{!-- edit_user_details --}}
-                                <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
+                                <a class="dropdown-item text-danger" href="/logout"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
                                 <a class="dropdown-item text-danger" href="/edit_user_details"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Edit Your Details</a>
-
+                                <a class="dropdown-item text-danger" href="/change_password"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Change Password</a>
+                        
                             </div>
                         </div>
 

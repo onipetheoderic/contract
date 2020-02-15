@@ -44,37 +44,6 @@ exports.assign_highway_to_contract = function(req, res) {
             }
         }
     );
-    
-
-    // Contract.updateOne({ _id: contractId }, { 
-    //     highwayInspectorId: highwayId,
-    //     assigned: true }, { new: true }).exec(function(err, updated_result){
-    //     if(err) {
-    //         console.log(err)
-    //         res.json({status:"error", data:err})
-           
-    //     } else {
-    //         console.log(updated_result)
-    //         res.json({status:"success", data:updated_result})
-    //     }
-    //     });
-        
-    // Contract.findByIdAndUpdate(contractId,
-    //     {
-    //         "highwayInspectorId": highwayId,
-    //         "assigned": true
-    //     }).exec(function(err, updated_result){
-    // if(err) {
-    //     console.log(err)
-    //     res.json({status:"error", data:err})
-       
-    // } else {
-    //     console.log(updated_result) 
-    //     res.json({status:"success", data:updated_result})
-    // }
-    // });
-    
-  
 }
 
 exports.modify_percentage_of_contract = function(req, res) {
@@ -116,12 +85,11 @@ exports.make_contract_priority= function(req, res) {
             }
     })
 }
-/*
-contract_id: String,
-   amount: Number,
-   status: {type:Boolean, default:false},
-   amountCertifiedId: String,
-*/ 
+exports.login_to_highway = function(req, res){
+    //trigger login point from here
+}
+
+
 exports.update_contract_payment = function(req, res) {
     let currentId = req.params.id;
     let amount = req.body.amount;
