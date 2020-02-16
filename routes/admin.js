@@ -17,6 +17,9 @@ router.route('/login')
     .get(AuthDashboard.login)
     .post(AuthDashboard.login_post)
 
+router.route('/chat')
+    .get(AuthDashboard.chat)
+
 router.route('/register_super')
     .get(AdminDashboardController.register)
     .post(AdminDashboardController.register_super)

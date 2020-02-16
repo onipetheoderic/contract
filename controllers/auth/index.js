@@ -94,6 +94,9 @@ exports.assign_highway_contracts = function(req, res){
 exports.assign_highway_contracts_post = function(req, res){
     res.render('Admin/dashboard/create_consultant', {layout: "layout/admin"})
 }
+exports.chat = function(req, res){
+    res.render('Admin/dashboard/chat', {layout: false})
+}
 
 exports.view_all_contractors = function(req, res) {
     Contractor.find({}).exec(function(err, all_records){

@@ -41,7 +41,7 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'AdminBSBMaterialDesign-master')));
 app.use('/bower_components', express.static(`${__dirname}/bower_components`));
 var session = require('express-session');
-var simpleSocketModule = require('node-simple-socket');
+
 
 app.use(session({
   name: 'contract',
