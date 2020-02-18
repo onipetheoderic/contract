@@ -217,6 +217,8 @@ hbs.registerHelper('fives', function(val){
     return "-"
   }
 });
+
+
 hbs.registerHelper('currency', function(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

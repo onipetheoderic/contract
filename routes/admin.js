@@ -17,8 +17,16 @@ router.route('/login')
     .get(AuthDashboard.login)
     .post(AuthDashboard.login_post)
 
+router.route('/get_all_highway_contracts_by_highway_id/:id')
+    .get(ContractController.get_all_highway_contracts_by_highway_id)
+    
 router.route('/chat')
     .get(AuthDashboard.chat)
+
+router.route('/get_contract_datasheet/:id')
+    .get(AdminDashboardController.get_contract_datasheet)
+router.route('/get_contract_percentage/:id')
+    .get(ContractController.get_contract_percentage)
 
 router.route('/register_super')
     .get(AdminDashboardController.register)

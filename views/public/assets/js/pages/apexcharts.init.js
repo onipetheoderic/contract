@@ -1,8 +1,5 @@
 function truncator(str, max){
-    
-    
-   
-    
+
     if(str.length>=max){
        return str.substr(0, max)+"..."
     
@@ -14,12 +11,21 @@ function truncator(str, max){
 var options;
 var names = []
 var values = []
+var states = []
+var currentPercents = []
 console.log("from Apex graph", loopedDatas)
-for(var i in loopedDatas){
-    names.push(loopedDatas[i].component_name);
-    values.push(loopedDatas[i].component_score);
+let parsedCont = JSON.parse(allCont)
+// console.log("from Apex graph222", dataArray.length)
+for(var v in parsedCont){
+    console.log("eachVals",parsedCont[v])
+    states.push(parsedCont[v].state)
+    currentPercents.push(parsedCont[v].currentPercentage)
+   
 }
-console.log("this are the names and the vals", names, values)
+
+
+
+console.log(states, currentPercents)
 // for(i=0; i<5; i++){
 //     names.push(loopedDatas[i].component_name);
 //     values.push(loopedDatas[i].component_score);
@@ -28,7 +34,59 @@ console.log("this are the names and the vals", names, values)
 // const firstFive = names.slice(0,5)
 
 // console.log("5", firstFive)
-var myHorizonalBarArrays = ["Abia","Adamawa","Akwa-Ibom","Anambra","Bauchi","Benue","Borno","Cross-River","Delta","Edo","Enugu","Jigawa"]
+
+
+
+
+// start
+
+// console.log("this is the apex id", _id,url)
+var list = "<ul>";
+
+
+function checkQueue(){
+    console.log("Runinnggg")
+   
+var xhttp = new XMLHttpRequest();
+var dataArray = []
+
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready:
+      // document.getElementById("demo").innerHTML = xhttp.responseText;
+    const parsedDatas = JSON.parse(xhttp.responseText)
+    //console.log(parsedData)
+  
+    var loopedDatas2 = parsedValue.datas
+    names.splice(0, names.length);
+    values.splice(0, values.length);
+    // console.log("lllll",loopedDatas2)
+    for(var i in loopedDatas2){
+         dataArray.push(loopedDatas2[i])
+            console.log(loopedDatas2[i].component_name)
+            // console.log(loopedDatas2[i].component_score)
+            names.push(loopedDatas2[i].component_name);
+            values.push(loopedDatas2[i].component_score);
+            list +="<li>"  +loopedDatas2[i].component_name+ " " + "(" +loopedDatas2[i].component_score+ "%)"+ "</li>";
+             document.getElementById("datacontainer").innerHTML = list;
+              
+        }
+      
+
+    list +="</ul>";
+
+  
+    }
+};
+xhttp.open("GET", url, true);
+xhttp.send();
+
+}
+//end
+// checkQueue()
+setInterval(checkQueue(),2000);
+console.log("this are the names and the vals", names, values)
+var myHorizonalBarArrays = states
 
 options={chart:
     {height:350,
@@ -37,7 +95,7 @@ options={chart:
 plotOptions:{bar:{dataLabels:{position:"top"}}},
 dataLabels:{enabled:!0,formatter:function(e){return e+"%"},offsetY:-20,
 style:{fontSize:"12px",colors:["#304758"]}},
-series:[{name:"Inflation",data:[2.5,3.2,5,10.1,4.2,3.8,3,2.4,4,1.2,3.5,.8]}],
+series:[{name:"Inflation",data:currentPercents}],
 colors:["#299a4a"],
 grid:{borderColor:"#f1f1f1"},
 xaxis:{categories: myHorizonalBarArrays.map((eachVal)=>truncator(eachVal, 3)),
@@ -50,7 +108,7 @@ opacityFrom:.4,opacityTo:.5}}},
 tooltip:{enabled:!0,offsetY:-35}},
 fill:{gradient:{shade:"light",type:"horizontal",shadeIntensity:.25,gradientToColors:void 0,inverseColors:!0,opacityFrom:1,opacityTo:1,stops:[50,0,100,100]}},
 yaxis:{axisBorder:{show:!1},axisTicks:{show:!1},labels:{show:!1,formatter:function(e){return e+"%"}}},
-title:{text:"Monthly Inflation in Argentina, 2002",floating:!0,offsetY:320,align:"center",style:{color:"#444"}}};
+title:{text:"Contractors performance Across all States",floating:!0,offsetY:320,align:"center",style:{color:"#444"}}};
 (chart=new ApexCharts(document.querySelector("#column_chart_datalabel"),options)).render();
 
 
@@ -90,7 +148,7 @@ colors:["#299a4a","#34c38f","#f46a6a","#f1b44c"]};
 
 
 options={chart:{height:320,type:"pie"},
-series:values.slice(0,6),labels:names.slice(0,6),
+series:values,labels:names,
 colors:["#34c38f","#299a4a","#f46a6a","#50a5f1","#f1b44c"],
 legend:{show:!0,position:"bottom",horizontalAlign:"center",verticalAlign:"middle",floating:!1,fontSize:"14px",offsetX:0,offsetY:-10},
 responsive:[{breakpoint:600,options:{chart:{height:240},legend:{show:!1}}}]};
@@ -99,8 +157,8 @@ responsive:[{breakpoint:600,options:{chart:{height:240},legend:{show:!1}}}]};
 
 var chart;
 options={chart:{height:320,type:"donut"},
-series:values.slice(6,names.length),
-labels:names.slice(6,names.length),
+series:values,
+labels:names,
 colors:["#34c38f","#299a4a","#f46a6a","#50a5f1","#f1b44c"],
 legend:{show:!0,position:"bottom",horizontalAlign:"center",
 verticalAlign:"middle",floating:!1,fontSize:"14px",offsetX:0,offsetY:-10},

@@ -12,6 +12,8 @@ var ContractSchema = new mongoose.Schema({
     contractType: String,
     roadLength: String,
     bridgeLength:String,
+    latitude:String,
+    longitude:String,
     projectLength: String,
     dateAwarded: String,
     dateCommencement:String,

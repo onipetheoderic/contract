@@ -86,7 +86,7 @@ exports.home = function(req, res) {
                     const internal_default_const = total_money_supposed_to_be_spent - moneyPaidSoFar;
                     const internal_default_calc = internal_default_const*100/total_money_supposed_to_be_spent
                     const internal_default = internal_default_calc>70?true:false
-                    console.log("this is the elapsed day",days_elapsed)
+                    console.log("this is the elapsed day",days_elapsed, internal_default)
                     let supposed_percentage = days_elapsed/total_duration*100
                     let contractors_default = all_contract[i].currentPercentage < supposed_percentage-5
                     let obj = all_contract[i];
@@ -187,19 +187,48 @@ exports.home = function(req, res) {
      
 }
 
+exports.get_contract_datasheet = function(req, res) {
+    const myUrl =` ${BASEURL}/get_contract_datas/${req.params.id}`
+    Request.get({url: myUrl}, (error, response, body) => {
+        if(error || body=="null") {
+            res.json({data:"error"})
+        }
+        else {
+            // console.log('this is thte body of the request', JSON.parse(body))
+            // console.log(JSON.parse(body));
+            let databody = body
+            res.json({data:databody})
+
+        }
+       
+    })   
+}
 
 exports.get_single_contract = function(req, res) {
     const myUrl =` ${BASEURL}/get_contract_datas/${req.params.id}`
-    Contract.findOne({_id:req.params.id}).exec(function(err, single_contract){
+    Contract.findOne({_id:req.params.id})
+    .populate('contractor')
+    .exec(function(err, single_contract){
+//lets get all Contractors contract
+console.log("this are the single details",single_contract)
+        let contractorDetails = single_contract.contractor[0]
+        let contractorsID = single_contract.contractor[0]._id;
+
+        
+        Contract.find({contractor:contractorsID}, function(err, allContracts){
+            console.log("this are all the contractors contracts", allContracts)
+            let allContr = JSON.stringify(allContracts)
+            let allContractorsContractCount = allContracts.length;
+      
         const total_duration = get_diff_start_current_date(single_contract.dateAwarded, single_contract.dateCompletion)
         const days_elapsed = get_days_elapsed(single_contract.dateAwarded)
-        console.log("jjjfjfj",total_duration, days_elapsed)
+        // console.log("jjjfjfj",total_duration, days_elapsed)
         let supposed_percentage = days_elapsed/total_duration*100
         let contractors_default = single_contract.currentPercentage < supposed_percentage-5
         let obj = single_contract;
        
         obj["default"] = contractors_default;
-        console.log(single_contract.default)
+        // console.log(single_contract.default)
 
         const moneyPaidSoFar = single_contract.amount_paid.reduce(add,0)
         const contractSum = single_contract.contractSum;
@@ -212,7 +241,7 @@ exports.get_single_contract = function(req, res) {
         const internal_default_calc = internal_default_const*100/total_money_supposed_to_be_spent
         const internal_default = internal_default_calc>70?true:false
 
-        console.log("this is the elapsed day",days_elapsed)
+      
         obj["internal_default"] = internal_default;
 
         Request.get({url: myUrl}, (error, response, body) => {
@@ -220,24 +249,27 @@ exports.get_single_contract = function(req, res) {
                 res.render('Admin/dashboard/single_contract_page', {layout:false, data:single_contract, name:"null"})
             }
             else {
-                console.log('this is thte body of the request', JSON.parse(body))
+             //   console.log('this is thte body of the request', JSON.parse(body))
+                console.log("from single contract page",days_elapsed, internal_default)
                 // console.log(JSON.parse(body));
                 let databody = body
                 res.render('Admin/dashboard/single_contract_page', {layout:false, 
                     data:single_contract, 
                     name:databody, 
-                    supposed_percentage: supposed_percentage,
-                    
+                    contractorDetails:contractorDetails,
+                    supposed_percentage: supposed_percentage.toFixed(2),
+                    allContractorsContractCount:allContractorsContractCount,
                     moneyPaidSoFar:moneyPaidSoFar,
-                    dailyBudget: dailyBudget,
-                    total_money_supposed_to_be_spent: total_money_supposed_to_be_spent,
-                    
+                    dailyBudget: dailyBudget.toFixed(2),
+                    allContracts:allContr,                    
+                    total_money_supposed_to_be_spent: total_money_supposed_to_be_spent.toFixed(2),                    
 
                 })
     
             }
            
         })    
+    })
     })
 }
 

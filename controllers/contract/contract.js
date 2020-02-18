@@ -24,6 +24,13 @@ exports.user_contracts = function(req, res) {
     })
 }
 
+exports.get_contract_percentage = function(req, res) {
+    console.log("this is the contract id",req.params.id)
+    Contract.findOne({_id: req.params.id}, function(err, contract){
+        console.log("contract",contract)
+        res.json({data:contract.projectLength})
+    })
+}
 
 
 
@@ -87,6 +94,22 @@ exports.make_contract_priority= function(req, res) {
 }
 exports.login_to_highway = function(req, res){
     //trigger login point from here
+}
+
+exports.get_all_highway_contracts_by_highway_id = function(req, res){
+    let highwayInspectorId = req.params.id
+    Contract.find({highwayInspectorId})
+    .populate('contractor')
+    .populate('consultant')
+    .exec(function(err, all_contracts){
+        if(err){
+            console.log("error")
+        }
+        else {
+            console.log(all_contracts)
+            res.json({data:all_contracts})
+        }
+    })
 }
 
 

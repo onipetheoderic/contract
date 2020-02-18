@@ -90,13 +90,13 @@
 
                         
                       
-                        <div class="dropdown d-none d-lg-inline-block ml-1">
+                        <div data-toggle="tooltip" data-placement="left" title="Full Screen" class="dropdown d-none d-lg-inline-block ml-1">
                             <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                                 <i class="bx bx-fullscreen"></i>
                             </button>
                         </div>
 
-                        <div class="dropdown d-inline-block">
+                        <div data-toggle="tooltip" data-placement="left" title="Selected Priorities" class="dropdown d-inline-block">
                             <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="bx bx-bell bx-tada"></i>
@@ -156,7 +156,7 @@
                                 <span class="d-none d-xl-inline-block ml-1">{{{firstName}}}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-menu dropdown-menu-right" >
                                 <!-- item-->
                               {{!-- edit_user_details --}}
                                 <a class="dropdown-item text-danger" href="/logout"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>

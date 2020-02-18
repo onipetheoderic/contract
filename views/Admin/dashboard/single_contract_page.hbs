@@ -227,7 +227,7 @@
                             <div class="col-lg-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-4">Column with Data Labels</h4>
+                                        <h4 class="card-title mb-4">{{contractorDetails.companyName}} Projects Performance Across State In Nigeria</h4>
                                         
                                         <div id="column_chart_datalabel" class="apex-charts" dir="ltr"></div>
                                     </div>
@@ -250,14 +250,18 @@
                                     <div class="card-body">
                                         <h2>Construction Construct </h2>
                                          <p>Started {{{formatDate dateCommencement}}} Ends {{{formatDate dateCompletion}}}</p>
-                                         <p style="font-weight:bold">Department of Construction</p>
+                                     
 <br>
 <br>
                                          <p style="font-weight:bold">About the Contract</p>
                                          <p>Contractor to provide remodelling in accordance with the plans and specification provided in the scope of work</p>
                         <div class="row">
-                            <div class="col-lg-4"><strong>Contract Type</strong></div><div class="col-lg-4"><strong>Date Awarded</strong></div> <div class="col-lg-4"><strong>Contract No</strong></div>
-                                <div class="col-lg-4">{{data.contractType}}</div><div class="col-lg-4">{{{formatDate data.dateAwarded}}}</div> <div class="col-lg-4">{{{data.contractNo}}}</div>
+                            <div class="col-lg-4"><strong>Contract Type</strong></div><div class="col-lg-4">
+                                <strong>Date Awarded</strong></div> <div class="col-lg-4">
+                                    <strong>Contracts Handled by Contractor</strong></div>
+                                <div class="col-lg-4">{{data.contractType}}</div>
+                                <div class="col-lg-4">{{{formatDate data.dateAwarded}}}</div> 
+                                <div class="col-lg-4">{{allContractorsContractCount}} Contracts</div>
                         </div>
                         <div class="row" style="margin-top:30px">
                             <div class="col-lg-4"><strong>State</strong></div><div class="col-lg-4"><strong>LGA</strong></div> <div class="col-lg-4"><strong>Zone</strong></div>
@@ -265,8 +269,9 @@
                         </div>
 
                         <div class="row" style="margin-top:30px">
-                            <div class="col-lg-4"><strong>Current Percentage</strong></div><div class="col-lg-4"><strong>Road Length/Bridge Length</strong></div> <div class="col-lg-4"><strong>Name of Contractor</strong></div>
-                                <div class="col-lg-4">{{data.currentPercentage}}</div><div class="col-lg-4">{{data.roadLength}}/{{data.bridgeLength}}</div> <div class="col-lg-4">{{data.contractor}}</div>
+                            <div class="col-lg-4"><strong>Current Percentage</strong></div><div class="col-lg-4"><strong>Road Length/Bridge Length</strong></div> <div class="col-lg-4">
+                                <strong>Name of Contractor</strong></div>
+                                <div class="col-lg-4">{{data.currentPercentage}}</div><div class="col-lg-4">{{data.roadLength}}/{{data.bridgeLength}}</div> <div class="col-lg-4">{{contractorDetails.companyName}}</div>
                         </div>
                             <h4 style="margin-top:60px">Stages of Construction Achieved So far</h4>
                          <div class="row">
@@ -298,7 +303,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4>{{{supposed_percentage}}}</h4>                                      
-                                        <p>Supposed Percentage</p>
+                                        <p>Expected Percentage Delivery (EPD)</p>
                                     
                                         <h4>{{data.currentPercentage}}</h4>                                      
                                         <p>Current Percentage</p>
@@ -308,7 +313,7 @@
                                
                             {{else}}
                                
-                                    <h4>No Default</h4>                                      
+                                    <h4>No Contractors Default</h4>                                      
                                    <p class="badge badge-pill badge-soft-success font-size-12">No Default</p>
                              
                             {{/if}}
@@ -323,12 +328,12 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4>{{{ moneyPaidSoFar}}}</h4>                                      
-                                        <p>Money Paid So Far</p>                                    
+                                        <p>Amount Paid So Far</p>                                    
                                         <h4>{{{ dailyBudget}}}</h4>                                      
                                         <p>Daily Contract Budget</p>
                                         <h4>{{{ total_money_supposed_to_be_spent}}}</h4>                                      
                                         <p>Accumulated Daily Contract Budget</p>
-                                        {{#if data.internalDefualt}}                               
+                                        {{#if data.internal_default}}                               
                                     <h4>Internal Default</h4>                                      
                                     <p class="badge badge-pill badge-soft-danger font-size-12">Default Status</p>
                                
@@ -448,10 +453,19 @@
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
   <input type="hidden" value="{{name}}" id="myInput">
+  <input type="hidden" value="{{allContracts}}" id="allContractors">
+
 <script>
-    setTimeout(function () { location.reload(1); }, 10000);
+
+
+    setTimeout(function () { location.reload(1); }, 30000);
     var inputVal = document.getElementById("myInput").value;
+    var allCont = document.getElementById("allContractors").value;
+    
+    
+    
     var parsedValue = JSON.parse(inputVal)
+   
     
     var list = "<ul>";
 
@@ -463,22 +477,16 @@
     let mySet = new Set()
       var myArray = new Array();
 
-        for(var i in loopedDatas){
-            console.log(loopedDatas[i].component_name)
-            console.log(loopedDatas[i].component_score)
-            list +="<li>"  +loopedDatas[i].component_name+ " " + "(" +loopedDatas[i].component_score+ "%)"+ "</li>";
-             document.getElementById("datacontainer").innerHTML = list;
-              
-        }
-      
-
-    list +="</ul>";
-
+     
 let datasheet_comment = "<p>" +parsedValue.datasheet_details.datasheet_comment + "</p>"
 document.getElementById("datasheet_comment").innerHTML = datasheet_comment
-
+var _id = window.location.pathname.split('/')[2]
+var url = "http://localhost:4000/get_contract_datasheet/"+_id
+console.log("the url",url)
     </script>
-        <!-- JAVASCRIPT -->
+
+
+       <!-- JAVASCRIPT -->
         <script src="/assets/libs/jquery/jquery.min.js"></script>
         <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="/assets/libs/metismenu/metisMenu.min.js"></script>
