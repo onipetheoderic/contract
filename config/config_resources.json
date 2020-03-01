@@ -1,0 +1,22 @@
+[
+    {"resource_id":"1", "title": "update_about_us_page"},
+    {"resource_id":"2", "title": "update_stages_home_page"},
+    {"resource_id":"3", "title": "update_our_department_text"},
+    {"resource_id":"4", "title": "write_testimony"},
+    {"resource_id":"5", "title": "upload_course_material"},
+    {"resource_id":"6", "title": "create_a_user"},
+    {"resource_id":"7", "title": "upload_test"},
+    {"resource_id":"8", "title": "upload_candidate_status"},
+    {"resource_id":"9", "title": "upload_profile_questions"},
+    {"resource_id":"10", "title": "view_shortlisted_candidate"},
+    {"resource_id":"11", "title": "make_remark_on_candidate"},
+    {"resource_id":"12", "title": "broadcast_message_to_staff"},
+    {"resource_id":"13", "title": "broadcast_message_to_candidate"},
+    {"resource_id":"14", "title": "broadcast_message_to_non_candidate"},
+    {"resource_id":"15", "title": "ability_to_post_in_blog"},
+    {"resource_id":"16", "title": "suspend_user"},
+    {"resource_id":"17", "title": "delete_user"},
+    {"resource_id":"18", "title": "change_default_settings"},
+    {"resource_id":"19", "title": "take_a_test"}
+
+]

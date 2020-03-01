@@ -81,7 +81,7 @@ app.use(expressValidator({
 app.use('/', admin);
 
 // mongoose.connect('mongodb://localhost/boilerdb');
-mongoose.connect('mongodb://localhost/testdb').then(() => {
+mongoose.connect('mongodb://localhost/brf').then(() => {
 console.log("Connected to Database");
 }).catch((err) => {
     console.log("Not Connected to Database ERROR! ", err);
@@ -289,6 +289,15 @@ hbs.registerHelper('formatDate', function(dateString) {
       return moment(dateString).format("MMM Do YY"); 
     }
     
+});
+hbs.registerHelper('checkers', function(status) {
+  if(status===true){
+    return "checked"
+  }
+  else {
+    return "unchecked"
+  }
+  
 });
 
 hbs.registerHelper('underscore_formatter', function(str){

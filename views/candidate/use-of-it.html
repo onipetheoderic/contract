@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>BRF Internship Program</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="MyraStudio" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- App css -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body>
+
+         <!-- Begin page -->
+         <div id="layout-wrapper">
+
+            <div class="main-content">
+
+                <header id="page-topbar">
+                    <div class="navbar-header">
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box d-flex align-items-left">
+                            <a href="index.html" class="logo">
+                                <i class="mdi mdi-album"></i>
+                                <span>
+                                   BRF
+                                </span>
+                            </a>
+
+                            <button type="button" class="btn btn-sm mr-2 font-size-16 d-lg-none header-item waves-effect waves-light" data-toggle="collapse" data-target="#topnav-menu-content">
+                                <i class="fa fa-fw fa-bars"></i>
+                            </button>
+                        </div>
+        
+                        <div class="d-flex align-items-center">
+        
+                         
+        
+                            <div class="dropdown d-inline-block">
+                                <button type="button" class="btn header-item noti-icon waves-effect waves-light" id="page-header-notifications-dropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="mdi mdi-bell"></i>
+                                    <span class="badge badge-danger badge-pill">3</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+                                    aria-labelledby="page-header-notifications-dropdown">
+                                    <div class="p-3">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h6 class="m-0"> Notifications </h6>
+                                            </div>
+                                            <div class="col-auto">
+                                                <a href="#!" class="small"> View All</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-simplebar style="max-height: 230px;">
+                                        <a href="#" class="text-reset notification-item">
+                                            <div class="media">
+                                                <img src="assets/images/users/avatar-2.jpg"
+                                                    class="mr-3 rounded-circle avatar-xs" alt="user-pic">
+                                                <div class="media-body">
+                                                    <h6 class="mt-0 mb-1">Samuel Coverdale</h6>
+                                                    <p class="font-size-12 mb-1">You have new follower on Instagram</p>
+                                                    <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> 2 min ago</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="text-reset notification-item">
+                                            <div class="media">
+                                                <div class="avatar-xs mr-3">
+                                                    <span class="avatar-title bg-success rounded-circle">
+                                                        <i class="mdi mdi-cloud-download-outline"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="mt-0 mb-1">Download Available !</h6>
+                                                    <p class="font-size-12 mb-1">Latest version of admin is now available. Please download here.</p>
+                                                    <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> 4 hours ago</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="text-reset notification-item">
+                                            <div class="media">
+                                                <img src="assets/images/users/avatar-3.jpg"
+                                                    class="mr-3 rounded-circle avatar-xs" alt="user-pic">
+                                                <div class="media-body">
+                                                    <h6 class="mt-0 mb-1">Victoria Mendis</h6>
+                                                    <p class="font-size-12 mb-1">Just upgraded to premium account.</p>
+                                                    <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> 1 day ago</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 border-top">
+                                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
+                                            <i class="mdi mdi-arrow-down-circle mr-1"></i> Load More..
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+        
+
+
+              
+                            
+                        </div>
+                    </div>
+                </header>
+                
+            
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                               
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+    
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="text-center mt-4">
+                                    <h4>Quickly Take the Test</h4>
+                        <p class="text-muted mt-3 mb-4"> Click the submit button before the Time elapse</p>
+    
+                                </div>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+    
+    
+<script>
+//var hoursleft = 0;
+var minutesleft = 1; //give minutes you wish
+var secondsleft = 30; // give seconds you wish
+var finishedtext = "Countdown finished!";
+var end1;
+if(localStorage.getItem("end1")) {
+end1 = new Date(localStorage.getItem("end1"));
+} else {
+end1 = new Date();
+end1.setMinutes(end1.getMinutes()+minutesleft);
+end1.setSeconds(end1.getSeconds()+secondsleft);
+
+}
+var counter = function () {
+var now = new Date();
+var diff = end1 - now;
+
+diff = new Date(diff);
+
+var milliseconds = parseInt((diff%1000)/100)
+    var sec = parseInt((diff/1000)%60)
+    var mins = parseInt((diff/(1000*60))%60)
+    //var hours = parseInt((diff/(1000*60*60))%24);
+
+if(mins < 10) {
+    mins = "0" + mins;
+}
+if(sec < 10) { 
+    sec = "0" + sec;
+}     
+if(now >= end1) {     
+    clearTimeout(interval);
+   // localStorage.setItem("end", null);
+     localStorage.removeItem("end1");
+     localStorage.clear();
+    document.getElementById('divCounter').innerHTML = finishedtext;
+     if(confirm("TIME UP!"))
+     window.location.href= "timeup.html";
+} else {
+    var value = mins + ":" + sec;
+    localStorage.setItem("end1", end1);
+    document.getElementById('divCounter').innerHTML = value;
+}
+}
+var interval = setInterval(counter, 1000);
+</script>
+                        <div class="row mt-5">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="mb-3 font-weight-bold text-uppercase">Use of IT <span id="divCounter" style="color:red;"></span> minutes!</h5>
+                                        <div id="accordion">
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="headingOne">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                                            aria-controls="collapseOne" class="text-dark">
+                                                            Which leading computer software bussnies created programes like Spread Sheet, Word and Power point?
+                                                        </a>
+                                                    </h5>
+                                                </div>
+    
+                                                <div id="collapseOne" class="collapse show"
+                                                        aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadio1">Google</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadio2">Apple</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadio3">Microsoft</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadio4">Dell</label>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="headingTwo">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" class="text-dark collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                            What does "www" stand for?
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadios" name="customRadios2" class="custom-control-input"><label class="custom-control-label" for="customRadios">                                                              Wicked Wizard Web</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadios2" name="customRadios2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadios2">Wiked Will West</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadios3" name="customRadios2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadios3">
+                                                                    Were World Was</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadios4" name="customRadios2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadios4">
+                                                                    World Wide Web</label>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="heading3">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" class="text-dark collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                                            Who created Mac Os Devices?
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse2" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioe1" name="customRadioe2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioe1">Steve Jobs</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioe2" name="customRadioe2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioe2">Bill Gates</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioe3" name="customRadioe2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioe3">Mesut Ozil</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioe4" name="customRadioe2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioe4">Barrak Obama</label>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="headingThree">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" class="text-dark collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                            Besides Windows and OSX, what is the most popular OS in the world?
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioz1" name="customRadioz2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioz1">KDE</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioz2" name="customRadioz2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioz2">Blackberry Os</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioz3" name="customRadioz2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioz3">Solaris</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioz4" name="customRadioz2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioz4">Linux</label>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block  px-4">Submit</button>
+                                    </div>
+                                </div>
+    
+    
+                      
+
+
+                            </div> <!-- end col -->
+        
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <button type="submit" class="btn btn-primary btn-block  px-4">IQ Test</button>
+                            <button type="submit" class="btn btn-primary btn-block  px-4">Personality Test</button>
+                            <button type="submit" class="btn btn-success btn-block  px-4">Use of IT</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-center text-lg-left">
+                                    2020 © BRF.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-right d-none d-lg-block">
+                                    Design & Develop by Mabto Strong
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- jQuery  -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/waves.js"></script>
+        <script src="assets/js/simplebar.min.js"></script>
+
+        <!-- App js -->
+        <script src="assets/js/theme.js"></script>
+
+    </body>
+
+
+<!-- Mirrored from myrathemes.com/xeloro/layouts/horizontal/pages-faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Feb 2020 12:17:06 GMT -->
+</html>

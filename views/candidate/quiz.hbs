@@ -1,0 +1,233 @@
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                              
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+    
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="text-center mt-4">
+                                    <h4>Quickly Take the Test</h4>
+                        <p class="text-muted mt-3 mb-4"> Click the submit button before the Time elapse</p>
+    
+                                </div>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+    
+    
+<script>
+//var hoursleft = 0;
+var minutesleft = 0; //give minutes you wish
+var secondsleft = 30; // give seconds you wish
+var finishedtext = "Countdown finished!";
+var end1;
+if(localStorage.getItem("end1")) {
+end1 = new Date(localStorage.getItem("end1"));
+} else {
+end1 = new Date();
+end1.setMinutes(end1.getMinutes()+minutesleft);
+end1.setSeconds(end1.getSeconds()+secondsleft);
+
+}
+var counter = function () {
+var now = new Date();
+var diff = end1 - now;
+
+diff = new Date(diff);
+
+var milliseconds = parseInt((diff%1000)/100)
+    var sec = parseInt((diff/1000)%60)
+    var mins = parseInt((diff/(1000*60))%60)
+    //var hours = parseInt((diff/(1000*60*60))%24);
+
+if(mins < 10) {
+    mins = "0" + mins;
+}
+if(sec < 10) { 
+    sec = "0" + sec;
+}     
+if(now >= end1) {     
+    clearTimeout(interval);
+   // localStorage.setItem("end", null);
+     localStorage.removeItem("end1");
+     localStorage.clear();
+    document.getElementById('divCounter').innerHTML = finishedtext;
+     if(confirm("TIME UP!"))
+     window.location.href= "personality.html";
+} else {
+    var value = mins + ":" + sec;
+    localStorage.setItem("end1", end1);
+    document.getElementById('divCounter').innerHTML = value;
+}
+}
+var interval = setInterval(counter, 1000);
+</script>
+                        <div class="row mt-5">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="mb-3 font-weight-bold text-uppercase">IQ Test <span id="divCounter" style="color:red;"></span> minutes!</h5>
+                                        <div id="accordion">
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="headingOne">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                                            aria-controls="collapseOne" class="text-dark">
+                                                            At a conference, 12 members shook hands with each other before & after the meeting. How many total number of hand shakes occurred?
+                                                        </a>
+                                                    </h5>
+                                                </div>
+    
+                                                <div id="collapseOne" class="collapse show"
+                                                        aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadio1">100</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadio2">132</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadio3">150</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadio4">160</label>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="headingTwo">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" class="text-dark collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                            The day after the day after tomorrow is four days before Monday. What day is it today?
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadios" name="customRadios2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadios">Monday</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadios2" name="customRadios2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadios2">Tuesday</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadios3" name="customRadios2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadios3">Wednesday</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadios4" name="customRadios2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadios4">Thursday</label>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="heading3">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" class="text-dark collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                                            6121135 is to flame as 21215120 is to ?
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse2" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioe1" name="customRadioe2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioe1">Voice</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioe2" name="customRadioe2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioe2">Bald</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioe3" name="customRadioe2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioe3">Bolt</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioe4" name="customRadioe2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioe4">Castle</label>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="headingThree">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" class="text-dark collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                          Forest is to tree as tree is to ?
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioz1" name="customRadioz2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioz1">Voice</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadiz2" name="customRadioz2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioz2">Bald</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioz3" name="customRadioz2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioz3">Bolt</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="customRadioz4" name="customRadioz2" class="custom-control-input">
+                                                                <label class="custom-control-label" for="customRadioz4">Castle</label>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block  px-4">Submit</button>
+                                    </div>
+                                </div>
+    
+    
+                      
+
+
+                            </div> <!-- end col -->
+        
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <button type="submit" class="btn btn-success btn-block  px-4">IQ Test</button>
+                            <button type="submit" class="btn btn-primary btn-block  px-4">Personality Test</button>
+                            <button type="submit" class="btn btn-primary btn-block  px-4">Use of IT</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+         

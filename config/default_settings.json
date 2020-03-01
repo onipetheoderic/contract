@@ -1,0 +1,22 @@
+[
+    {"phone_number": "07039148866"},
+    {"email": "brf@brf.com"},
+    {"logo": "logo.png"},
+    {"step_one_header": "Step 1 Apply"},
+    {"step_one_description": "Apply for the BRF Internship program by Inputing your details in the Registration form."},
+    {"step_two_header": "Step 2 Test"},
+    {"step_two_description": "Take a Quick Test, So that we can know your level of Creativity and logical Reasoning"},
+    {"step_three_header": "Step 3 Acceptance"},
+    {"step_three_description": "A Non-biased, Non-selective and Automative means of Choosing the Best Candidate for Intern in BRF"},
+    {"step_four_header": "Step 4 Enrolled"},
+    {"step_four_description": "After the Acceptance stage, Best Fit candidate will get Enrolled Automatically, then you can quickly resume-"},
+    {"about_us": "BRF addresses the challenge of youth unemployment by providing a structure for large scale and relevant work skills acquisition and development while linking its core and outcomes to fixing inadequate public services and stimulating the larger economy."},
+    {"department": 
+        [
+            {"title": "Finance and Account", "descrition": "The department of planning research is none of the most needed departments in the ministry work"},
+            {"title": "Planning and Statistics", "descrition": "The department of planning research is none of the most needed departments in the ministry work"},
+            {"title": "Title and Statistics", "descrition": "The department of planning research is none of the most needed departments in the ministry work"},
+            {"title": "Title and Statistics", "descrition": "The department of planning research is none of the most needed departments in the ministry work"}
+        ]
+    }
+]

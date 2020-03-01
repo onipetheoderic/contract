@@ -5,16 +5,10 @@ var UserSchema = new mongoose.Schema({
     lastName: String,
     firstName: String,
     gender: String,
-   	isSuperAdmin: {type: Boolean, default: false},
    	phoneNumber: String,	
-   	name: String,
 	token: String,
     suspended: String,
-    roles: Array,
-    userType: String,
-    
-
-    	
+    role: String,
 },{
     timestamps: true//this will automatically add the createdAt and the updatedAt field for us
 });

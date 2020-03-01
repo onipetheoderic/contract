@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-
+import RoleToResource from '../models/RoleToResource/roleToResource';
 const algorithm = 'aes-256-cbc';
 const key = crypto.randomBytes(32);
 const iv = crypto.randomBytes(16);
@@ -19,6 +19,14 @@ exports.decrypt = (text) => {
  let decrypted = decipher.update(encryptedText);
  decrypted = Buffer.concat([decrypted, decipher.final()]);
  return decrypted.toString();
+}
+exports.findResource = async function(params){
+    try {
+        return await RoleToResource.find(params)
+    }
+    catch(err) {
+        console.log(err)
+    }
 }
 
 export const BASEURL = "http://localhost:5000"

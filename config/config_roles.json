@@ -1,0 +1,6 @@
+[
+    {"role_id":"1", "title": "super_admin"},
+    {"role_id":"2", "title": "minister"},
+    {"role_id":"3", "title": "committee_members"},
+    {"role_id":"4", "title": "candidates"}
+]

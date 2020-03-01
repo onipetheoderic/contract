@@ -1,0 +1,427 @@
+<div class="login-register-area pt-130 pb-130">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+            <div class="login-register-wrapper">
+                <div class="login-register-tab-list nav">
+                    <a class="active" data-toggle="tab" href="#lg1">
+                        <h4> login </h4>
+                    </a>
+                    <a data-toggle="tab" href="#lg2">
+                        <h4> register </h4>
+                    </a>
+                </div>
+
+                <div class="tab-content">
+                    <div id="lg1" class="tab-pane active">
+                        <div class="login-form-container">
+                            <div class="login-register-form">
+                                <form action="#" method="post">
+                                    <input type="text" name="user-name" required placeholder="Email Address">
+                                    <input type="password" name="user-password" required placeholder="Password">
+                                    <div class="button-box">
+                                        <div class="login-toggle-btn">
+                                            <input type="checkbox">
+                                            <label>Remember me</label>
+                                            <a href="candidate_dashboard/horizontal/index.html">Forgot Password?</a>
+                                        </div>
+                                        
+                                            <button class="default-btn"><span>Login</span></button>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <script>document.getElementById("dob").min = "2000-01-01";</script>
+                    <div id="lg2" class="tab-pane">
+                        <div class="login-form-container">
+                            <div class="login-register-form">
+                                <form action="#" method="post">
+                                     <p style="margin:0px;">First Name</p>
+                                    <input type="text" required name="first_name" placeholder="First name">    
+                                   <p style="margin:0px;">Last Name</p>
+                                    <input type="text" required name="last_number" placeholder="Last name">  
+                                     <p style="margin:0px;">Date of Birth</p>
+                                    <input type="date" required name="dob" id="dob" placeholder="Date of Birth">  
+                                    <p style="margin:0px;">Gender</p>
+                                    <select required style="background-color: transparent;
+                                        border: 1px solid #ebebeb;
+                                        color: #333;
+                                        font-size: 14px;
+                                        height: 50px;
+                                        margin-bottom: 30px;
+                                        padding: 0 15px;">
+                                        <option>Select a Gender</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                     <p style="margin:0px;">State Of Origin</p>
+                                    <select name="state" id="state" onchange="getval(this);" style="background-color: transparent;
+                                        border: 1px solid #ebebeb;
+                                        color: #333;
+                                        font-size: 14px;
+                                        height: 50px;
+                                        margin-bottom: 30px;
+                                        padding: 0 15px;">
+							  <option value="" selected="selected" >- Select -</option>
+							  <option value='Abia'>Abia</option>
+							  <option value='Adamawa'>Adamawa</option>
+							  <option value='AkwaIbom'>AkwaIbom</option>
+							  <option value='Anambra'>Anambra</option>
+							  <option value='Bauchi'>Bauchi</option>
+							  <option value='Bayelsa'>Bayelsa</option>
+							  <option value='Benue'>Benue</option>
+							  <option value='Borno'>Borno</option>
+							  <option value='Cross River'>Cross River</option>
+							  <option value='Delta'>Delta</option>
+							  <option value='Ebonyi'>Ebonyi</option>
+							  <option value='Edo'>Edo</option>
+							  <option value='Ekiti'>Ekiti</option>
+							  <option value='Enugu'>Enugu</option>
+							  <option value='FCT'>FCT</option>
+							  <option value='Gombe'>Gombe</option>
+							  <option value='Imo'>Imo</option>
+							  <option value='Jigawa'>Jigawa</option>
+							  <option value='Kaduna'>Kaduna</option>
+							  <option value='Kano'>Kano</option>
+							  <option value='Katsina'>Katsina</option>
+							  <option value='Kebbi'>Kebbi</option>
+							  <option value='Kogi'>Kogi</option>
+							  <option value='Kwara'>Kwara</option>
+							  <option value='Lagos'>Lagos</option>
+							  <option value='Nasarawa'>Nasarawa</option>
+							  <option value='Niger'>Niger</option>
+							  <option value='Ogun'>Ogun</option>
+							  <option value='Ondo'>Ondo</option>
+							  <option value='Osun'>Osun</option>
+							  <option value='Oyo'>Oyo</option>
+							  <option value='Plateau'>Plateau</option>
+							  <option value='Rivers'>Rivers</option>
+							  <option value='Sokoto'>Sokoto</option>
+							  <option value='Taraba'>Taraba</option>
+							  <option value='Yobe'>Yobe</option>
+							  <option value='Zamfara'>Zamafara</option>
+							</select>  
+                              <p style="margin:0px;">L.G.A</p>
+                                    <select id="lga" name="lga" style="background-color: transparent;
+                                        border: 1px solid #ebebeb;
+                                        color: #333;
+                                        font-size: 14px;
+                                        height: 50px;
+                                        margin-bottom: 30px;
+                                        padding: 0 15px;">
+                                       
+                                    </select>
+                                <p style="margin:0px;">State of Residence</p>
+                                <select required name="state_residence" id="state_residence" style="background-color: transparent;
+                            border: 1px solid #ebebeb;
+                            color: #333;
+                            font-size: 14px;
+                            height: 50px;
+                            margin-bottom: 30px;
+                            padding: 0 15px;">
+							  <option value='Abia'>Abia</option>
+							  <option value='Adamawa'>Adamawa</option>
+							  <option value='AkwaIbom'>AkwaIbom</option>
+							  <option value='Anambra'>Anambra</option>
+							  <option value='Bauchi'>Bauchi</option>
+							  <option value='Bayelsa'>Bayelsa</option>
+							  <option value='Benue'>Benue</option>
+							  <option value='Borno'>Borno</option>
+							  <option value='Cross River'>Cross River</option>
+							  <option value='Delta'>Delta</option>
+							  <option value='Ebonyi'>Ebonyi</option>
+							  <option value='Edo'>Edo</option>
+							  <option value='Ekiti'>Ekiti</option>
+							  <option value='Enugu'>Enugu</option>
+							  <option value='FCT'>FCT</option>
+							  <option value='Gombe'>Gombe</option>
+							  <option value='Imo'>Imo</option>
+							  <option value='Jigawa'>Jigawa</option>
+							  <option value='Kaduna'>Kaduna</option>
+							  <option value='Kano'>Kano</option>
+							  <option value='Katsina'>Katsina</option>
+							  <option value='Kebbi'>Kebbi</option>
+							  <option value='Kogi'>Kogi</option>
+							  <option value='Kwara'>Kwara</option>
+							  <option value='Lagos'>Lagos</option>
+							  <option value='Nasarawa'>Nasarawa</option>
+							  <option value='Niger'>Niger</option>
+							  <option value='Ogun'>Ogun</option>
+							  <option value='Ondo'>Ondo</option>
+							  <option value='Osun'>Osun</option>
+							  <option value='Oyo'>Oyo</option>
+							  <option value='Plateau'>Plateau</option>
+							  <option value='Rivers'>Rivers</option>
+							  <option value='Sokoto'>Sokoto</option>
+							  <option value='Taraba'>Taraba</option>
+							  <option value='Yobe'>Yobe</option>
+							  <option value='Zamfara'>Zamafara</option>
+							</select>
+                            <p style="margin:0px;">School of Study</p>
+                                   <select required name="school_of_study" id="school_of_study" style="background-color: transparent;
+                            border: 1px solid #ebebeb;
+                            color: #333;
+                            font-size: 14px;
+                            height: 50px;
+                            margin-bottom: 30px;
+                            padding: 0 15px;"></select>
+                                        <p style="margin:0px;">Year of Graduation</p>
+                            <input type="month" required name="year_of_graduation" placeholder="Year of Graduation">  
+                              <p style="margin:0px;">NYSC Number</p>
+                            <input type="number" required name="nysc_number" placeholder="NYSC Number"> 
+                             <p style="margin:0px;">Course of Study</p>
+                            <select required name="course" id="course" style="background-color: transparent;
+                            border: 1px solid #ebebeb;
+                            color: #333;
+                            font-size: 14px;
+                            height: 50px;
+                            margin-bottom: 30px;
+                            padding: 0 15px;"></select>         
+                            <p style="margin:0px;">Email Address</p>
+                        <input name="user-email" required placeholder="Email" type="email">
+                         <p style="margin:0px;">Passport Sized Photograph</p>
+                         <img id="output" style="width:100px; height:100px"/>
+            <input name="photo" accept="image/*" onchange="loadFile(event)" required placeholder="photo.jpg" type="file">
+      <script>
+   document.getElementById("output").style.display="none"
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    document.getElementById("output").style.display="block"
+  };
+</script>
+                        <p style="margin:0px;">Password</p>
+                        <input type="password" name="user_password" id="user_password" required placeholder="Password">
+
+                        <p style="margin:0px;">Confirm Password</p>
+                        <input type="password" name="confirm_password" id="confirm_password" required placeholder="Confirm password">
+                        
+                        <div class="button-box">
+                            <button class="default-btn" type="submit"><span>Register</span></button>
+                        </div>
+                            
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+    var password = document.getElementById("user_password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+<script>
+
+function getval(sel)
+{
+   
+    const stateSelected = sel.value
+
+    switch (stateSelected) {
+  case "Abia":
+var data = ['Select item...', 'Aba North', 'Aba South', 'Arochukwu', 'Bende', 'Ikwuano', 'Isiala Ngwa North', 'Isiala Ngwa South', 'Isuikwuato', 'Obi Ngwa', 'Ohafia', 'Osisioma', 'Ugwunagbo', 'Ukwa East', 'Ukwa West', 'Umuahia North', 'muahia South', 'Umu Nneochi']; 
+   
+   break;
+ 
+ case "Adamawa":
+  var data = ['Select item...', 'Demsa', 'Fufure', 'Ganye', 'Gayuk', 'Gombi', 'Grie', 'Hong', 'Jada', 'Larmurde', 'Madagali', 'Maiha', 'Mayo Belwa', 'Michika', 'Mubi North', 'Mubi South', 'Numan', 'Shelleng', 'Song', 'Toungo', 'Yola North', 'Yola South'];
+   
+   break;
+    case "AkwaIbom":
+  var data = ['Select item...', 'Abak', 'Eastern Obolo', 'Eket', 'Esit Eket', 'Essien Udim', 'Etim Ekpo', 'Etinan', 'Ibeno', 'Ibesikpo Asutan', 'Ibiono-Ibom', 'Ika', 'Ikono', 'Ikot Abasi', 'Ikot Ekpene', 'Ini', 'Itu', 'Mbo', 'Mkpat-Enin', 'Nsit-Atai', 'Nsit-Ibom', 'Nsit-Ubium', 'Obot Akara', 'Okobo', 'Onna', 'Oron', 'Oruk Anam', 'Udung-Uko', 'Ukanafun', 'Uruan', 'Urue-Offong Oruko', 'Uyo'];
+ 
+   break;
+   case "Anambra":
+  var data = ['Select item...', 'Aguata', 'Anambra East', 'Anambra West', 'Anaocha', 'Awka North', 'Awka South', 'Ayamelum', 'Dunukofia', 'Ekwusigo', 'Idemili North', 'Idemili South', 'Ihiala', 'Njikoka', 'Nnewi North', 'Nnewi South', 'Ogbaru', 'Onitsha North', 'Onitsha South', 'Orumba North', 'Orumba South', 'Oyi'];
+   break;
+   
+   case "Anambra":
+  var data = ['Select item...', 'Aguata', 'Anambra East', 'Anambra West', 'Anaocha', 'Awka North', 'Awka South', 'Ayamelum', 'Dunukofia', 'Ekwusigo', 'Idemili North', 'Idemili South', 'Ihiala', 'Njikoka', 'Nnewi North', 'Nnewi South', 'Ogbaru', 'Onitsha North', 'Onitsha South', 'Orumba North', 'Orumba South', 'Oyi'];
+   break;
+    case "Bauchi":
+  var data = ['Select item...', 'Alkaleri', 'Bauchi', 'Bogoro', 'Damban', 'Darazo', 'Dass', 'Gamawa', 'Ganjuwa', 'Giade', 'Itas-Gadau', 'Jama are', 'Katagum', 'Kirfi', 'Misau', 'Ningi', 'Shira', 'Tafawa Balewa', ' Toro', ' Warji', ' Zaki'];
+
+   break;
+   
+   case "Bayelsa":
+  var data = ['Select item...', 'Brass', 'Ekeremor', 'Kolokuma Opokuma', 'Nembe', 'Ogbia', 'Sagbama', 'Southern Ijaw', 'Yenagoa'];
+
+   break;
+   case "Benue":
+  var data = ['Select item...', 'Agatu', 'Apa', 'Ado', 'Buruku', 'Gboko', 'Guma', 'Gwer East', 'Gwer West', 'Katsina-Ala', 'Konshisha', 'Kwande', 'Logo', 'Makurdi', 'Obi', 'Ogbadibo', 'Ohimini', 'Oju', 'Okpokwu', 'Oturkpo', 'Tarka', 'Ukum', 'Ushongo', 'Vandeikya'];
+
+   break;
+   case "Borno":
+  var data =  ['Select item...', 'Abadam', 'Askira-Uba', 'Bama', 'Bayo', 'Biu', 'Chibok', 'Damboa', 'Dikwa', 'Gubio', 'Guzamala', 'Gwoza', 'Hawul', 'Jere', 'Kaga', 'Kala-Balge', 'Konduga', 'Kukawa', 'Kwaya Kusar', 'Mafa', 'Magumeri', 'Maiduguri', 'Marte', 'Mobbar', 'Monguno', 'Ngala', 'Nganzai', 'Shani'];
+
+   break;
+   case "Cross River":
+  var data =  ['Select item...', 'Abi', 'Akamkpa', 'Akpabuyo', 'Bakassi', 'Bekwarra', 'Biase', 'Boki', 'Calabar Municipal', 'Calabar South', 'Etung', 'Ikom', 'Obanliku', 'Obubra', 'Obudu', 'Odukpani', 'Ogoja', 'Yakuur', 'Yala'];
+
+   break;
+   
+   case "Delta":
+  var data =  ['Select item...', 'Aniocha North', 'Aniocha South', 'Bomadi', 'Burutu', 'Ethiope East', 'Ethiope West', 'Ika North East', 'Ika South', 'Isoko North', 'Isoko South', 'Ndokwa East', 'Ndokwa West', 'Okpe', 'Oshimili North', 'Oshimili South', 'Patani', 'Sapele', 'Udu', 'Ughelli North', 'Ughelli South', 'Ukwuani', 'Uvwie', 'Warri North', 'Warri South', 'Warri South West'];
+
+   break;
+   
+   case "Ebonyi":
+  var data = ['Select item...', 'Abakaliki', 'Afikpo North', 'Afikpo South', 'Ebonyi', 'Ezza North', 'Ezza South', 'Ikwo', 'Ishielu', 'Ivo', 'Izzi', 'Ohaozara', 'Ohaukwu', 'Onicha'];
+   break;
+   case "Edo":
+  var data = ['Select item...', 'Akoko-Edo', 'Egor', 'Esan Central', 'Esan North-East', 'Esan South-East', 'Esan West', 'Etsako Central', 'Etsako East', 'Etsako West', 'Igueben', 'Ikpoba Okha', 'Orhionmwon', 'Oredo', 'Ovia North-East', 'Ovia South-West', 'Owan East', 'Owan West', 'Uhunmwonde'];
+   break;
+   
+    case "Ekiti":
+  var data = ['Select item...', 'Ado Ekiti', 'Efon', 'Ekiti East', 'Ekiti South-West', 'Ekiti West', 'Emure', 'Gbonyin', 'Ido Osi', 'Ijero', 'Ikere', 'Ikole', 'Ilejemeje', 'Irepodun-Ifelodun', 'Ise-Orun', 'Moba', 'Oye'];
+   break;
+    case "Rivers":
+  var data = ['Select item...', 'Port Harcourt', 'Obio-Akpor', 'Okrika', 'Ogu–Bolo', 'Eleme', 'Tai', 'Gokana', 'Khana', 'Oyigbo', 'Opobo–Nkoro', 'Andoni', 'Bonny', 'Degema', 'Asari-Toru', 'Akuku-Toru', 'Abua–Odual', 'Ahoada West', 'Ahoada East', 'Ogba–Egbema–Ndoni', 'Emohua', 'Ikwerre', 'Etche', 'Omuma'];
+   break;
+   case "Enugu":
+  var data =  ['Select item...', 'Aninri', 'Awgu', 'Enugu East', 'Enugu North', 'Enugu South', 'Ezeagu', 'Igbo Etiti', 'Igbo Eze North', 'Igbo Eze South', 'Isi Uzo', 'Nkanu East', 'Nkanu West', 'Nsukka', 'Oji River', 'Udenu', 'Udi', 'Uzo Uwani'];
+   break;
+   case "FCT":
+  var data =  ['Select item...', 'Abaji', 'Bwari', 'Gwagwalada', 'Kuje', 'Kwali', 'Municipal Area Council'];
+   break;
+   case "Gombe":
+  var data =   ['Select item...', 'Akko', 'Balanga', 'Billiri', 'Dukku', 'Funakaye', 'Gombe', 'Kaltungo', 'Kwami', 'Nafada', 'Shongom', 'Yamaltu-Deba'];
+   break;
+   case "Imo":
+  var data =   ['Select item...', 'Aboh Mbaise', 'Ahiazu Mbaise', 'Ehime Mbano', 'Ezinihitte', 'Ideato North', 'Ideato South', 'Ihitte-Uboma', 'Ikeduru', 'Isiala Mbano', 'Isu', 'Mbaitoli', 'Ngor Okpala', 'Njaba', 'Nkwerre', 'Nwangele', 'Obowo', 'Oguta', 'Ohaji-Egbema', 'Okigwe', 'Orlu', 'Orsu', 'Oru East', 'Oru West', 'Owerri Municipal', 'Owerri North', 'Owerri West', 'Unuimo'];
+   break;
+   case "Jigawa":
+  var data =   ['Select item...', 'Auyo', 'Babura', 'Biriniwa', 'Birnin Kudu', 'Buji', 'Dutse', 'Gagarawa', 'Garki', 'Gumel', 'Guri', 'Gwaram', 'Gwiwa', 'Hadejia', 'Jahun', 'Kafin Hausa', 'Kazaure', 'Kiri Kasama', 'Kiyawa', 'Kaugama', 'Maigatari', 'Malam Madori', 'Miga', 'Ringim', 'Roni', 'Sule Tankarkar', 'Taura', 'Yankwashi'];
+   break;
+    case "Kaduna":
+  var data =  ['Select item...', 'Birnin Gwari', 'Chikun', 'Giwa', 'Igabi', 'Ikara', 'Jaba', 'Jema a', 'Kachia', 'Kaduna North', 'Kaduna South', 'Kagarko', 'Kajuru', 'Kaura', 'Kauru', 'Kubau', 'Kudan', 'Lere', 'Makarfi', 'Sabon Gari', 'Sanga', 'Soba', 'Zangon Kataf', 'Zaria'];
+   break;
+   case "Kano":
+  var data = ['Select item...', 'Ajingi', 'Albasu', 'Bagwai', 'Bebeji', 'Bichi', 'Bunkure', 'Dala', 'Dambatta', 'Dawakin Kudu', 'Dawakin Tofa', 'Doguwa', 'Fagge', 'Gabasawa', 'Garko', 'Garun Mallam', 'Gaya', 'Gezawa', 'Gwale', 'Gwarzo', 'Kabo', 'Kano Municipal', 'Karaye', 'Kibiya', 'Kiru', 'Kumbotso', 'Kunchi', 'Kura', 'Madobi', 'Makoda', 'Minjibir', 'Nasarawa', 'Rano', 'Rimin Gado', 'Rogo', 'Shanono', 'Sumaila', 'Takai', 'Tarauni', 'Tofa', 'Tsanyawa', 'Tudun Wada', 'Ungogo', 'Warawa', 'Wudil'];
+   break;
+   case "Katsina":
+  var data = ['Select item...', 'Bakori', 'Batagarawa', 'Batsari', 'Baure', 'Bindawa', 'Charanchi', 'Dandume', 'Danja', 'Dan Musa', 'Daura', 'Dutsi', 'Dutsin Ma', 'Faskari', 'Funtua', 'Ingawa', 'Jibia', 'Kafur', 'Kaita', 'Kankara', 'Kankia', 'Katsina', 'Kurfi', 'Kusada', 'Mai Adua', 'Malumfashi', 'Mani', 'Mashi', 'Matazu', 'Musawa', 'Rimi', 'Sabuwa', 'Safana', 'Sandamu', 'Zango'];
+   break;
+   case "Kebbi":
+  var data =  ['Select item...', 'Aleiro', 'Arewa Dandi', 'Argungu', 'Augie', 'Bagudo', 'Birnin Kebbi', 'Bunza', 'Dandi', 'Fakai', 'Gwandu', 'Jega', 'Kalgo', 'Koko Besse', 'Maiyama', 'Ngaski', 'Sakaba', 'Shanga', 'Suru', 'Wasagu Danko', 'Yauri', 'Zuru'];
+   break;
+   case "Kogi":
+  var data =  ['Select item...', 'Adavi', 'Ajaokuta', 'Ankpa', 'Bassa', 'Dekina', 'Ibaji', 'Idah', 'Igalamela Odolu', 'Ijumu', 'Kabba Bunu', 'Kogi', 'Lokoja', 'Mopa Muro', 'Ofu', 'Ogori Magongo', 'Okehi', 'Okene', 'Olamaboro', 'Omala', 'Yagba East', 'Yagba West'];
+   break;
+   case "Kwara":
+  var data =  ['Select item...', 'Asa', 'Baruten', 'Edu', 'Ekiti', 'Ifelodun', 'Ilorin East', 'Ilorin South', 'Ilorin West', 'Irepodun', 'Isin', 'Kaiama', 'Moro', 'Offa', 'Oke Ero', 'Oyun', 'Pategi'];
+   break;
+   case "Lagos":
+  var data = ['Select item...', 'Agege', 'Ajeromi-Ifelodun', 'Alimosho', 'Amuwo-Odofin', 'Apapa', 'Badagry', 'Epe', 'Eti Osa', 'Ibeju-Lekki', 'Ifako-Ijaiye', 'Ikeja', 'Ikorodu', 'Kosofe', 'Lagos Island', 'Lagos Mainland', 'Mushin', 'Ojo', 'Oshodi-Isolo', 'Shomolu', 'Surulere'];
+   break;
+   case "Nasarawa":
+  var data = ['Select item...', 'Akwanga', 'Awe', 'Doma', 'Karu', 'Keana', 'Keffi', 'Kokona', 'Lafia', 'Nasarawa', 'Nasarawa Egon', 'Obi', 'Toto', 'Wamba'];
+   break;
+   case "Niger":
+  var data = ['Select item...', 'Agaie', 'Agwara', 'Bida', 'Borgu', 'Bosso', 'Chanchaga', 'Edati', 'Gbako', 'Gurara', 'Katcha', 'Kontagora', 'Lapai', 'Lavun', 'Magama', 'Mariga', 'Mashegu', 'Mokwa', 'Moya', 'Paikoro', 'Rafi', 'Rijau', 'Shiroro', 'Suleja', 'Tafa', 'Wushishi'];
+   break;
+   case "Ogun":
+  var data = ['Select item...', 'Abeokuta North', 'Abeokuta South', 'Ado-Odo Ota', 'Egbado North', 'Egbado South', 'Ewekoro', 'Ifo', 'Ijebu East', 'Ijebu North', 'Ijebu North East', 'Ijebu Ode', 'Ikenne', 'Imeko Afon', 'Ipokia', 'Obafemi Owode', 'Odeda', 'Odogbolu', 'Ogun Waterside', 'Remo North', 'Shagamu'];
+   break;
+   case "Ondo":
+  var data = ['Select item...', 'Akoko North-East', 'Akoko North-West', 'Akoko South-West', 'Akoko South-East', 'Akure North', 'Akure South', 'Ese Odo', 'Idanre', 'Ifedore', 'Ilaje', 'Ile Oluji-Okeigbo', 'Irele', 'Odigbo', 'Okitipupa', 'Ondo East', 'Ondo West', 'Ose', 'Owo'];
+   break;
+   case "Osun":
+  var data = ['Select item...', 'Atakunmosa East', 'Atakunmosa West', 'Aiyedaade', 'Aiyedire', 'Boluwaduro', 'Boripe', 'Ede North', 'Ede South', 'Ife Central', 'Ife East', 'Ife North', 'Ife South', 'Egbedore', 'Ejigbo', 'Ifedayo', 'Ifelodun', 'Ila', 'Ilesa East', 'Ilesa West', 'Irepodun', 'Irewole', 'Isokan', 'Iwo', 'Obokun', 'Odo Otin', 'Ola Oluwa', 'Olorunda', 'Oriade', 'Orolu', 'Osogbo'];
+   break;
+   case "Oyo":
+  var data = ['Select item...', 'Afijio', 'Akinyele', 'Atiba', 'Atisbo', 'Egbeda', 'Ibadan North', 'Ibadan North-East', 'Ibadan North-West', 'Ibadan South-East', 'Ibadan South-West', 'Ibarapa Central', 'Ibarapa East', 'Ibarapa North', 'Ido', 'Irepo', 'Iseyin', 'Itesiwaju', 'Iwajowa', 'Kajola', 'Lagelu', 'Ogbomosho North', 'Ogbomosho South', 'Ogo Oluwa', 'Olorunsogo', 'Oluyole', 'Ona Ara', 'Orelope', 'Ori Ire', 'Oyo', 'Oyo East', 'Saki East', 'Saki West', 'Surulere'];
+   break;
+    case "Plateau":
+  var data = ['Select item...', 'Bokkos', 'Barkin Ladi', 'Bassa', 'Jos East', 'Jos North', 'Jos South', 'Kanam', 'Kanke', 'Langtang South', 'Langtang North', 'Mangu', 'Mikang', 'Pankshin', 'Qua an Pan', 'Riyom', 'Shendam', 'Wase'];
+   break;
+     case "Sokoto":
+  var data = ['Select item...', 'Binji', 'Bodinga', 'Dange Shuni', 'Gada', 'Goronyo', 'Gudu', 'Gwadabawa', 'Illela', 'Isa', 'Kebbe', 'Kware', 'Rabah', 'Sabon Birni', 'Shagari', 'Silame', 'Sokoto North', 'Sokoto South', 'Tambuwal', 'Tangaza', 'Tureta', 'Wamako', 'Wurno', 'Yabo'];
+   break;
+     case "Taraba":
+  var data =  ['Select item...', 'Ardo Kola', 'Bali', 'Donga', 'Gashaka', 'Gassol', 'Ibi', 'Jalingo', 'Karim Lamido', 'Kumi', 'Lau', 'Sardauna', 'Takum', 'Ussa', 'Wukari', 'Yorro', 'Zing'];
+   break;
+    case "Yobe":
+  var data =   ['Select item...', 'Bade', 'Bursari', 'Damaturu', 'Fika', 'Fune', 'Geidam', 'Gujba', 'Gulani', 'Jakusko', 'Karasuwa', 'Machina', 'Nangere', 'Nguru', 'Potiskum', 'Tarmuwa', 'Yunusari', 'Yusufari'];
+   break;
+    case "Zamfara":
+  var data =   ['Select item...', 'Anka', 'Bakura', 'Birnin Magaji Kiyaw', 'Bukkuyum', 'Bungudu', 'Gummi', 'Gusau', 'Kaura Namoda', 'Maradun', 'Maru', 'Shinkafi', 'Talata Mafara', 'Chafe', 'Zurmi'];
+ 
+ }
+
+var select = document.getElementById("lga")
+var length = select.options.length;
+for (i = length-1; i >= 0; i--) {
+  select.options[i] = null;
+}
+
+for(var i in data)
+{
+  
+   var opt = document.createElement("option");
+   opt.value = data[i];
+   opt.innerHTML = data[i]; // whatever property it has
+
+   // then append it to the select element
+  select.appendChild(opt);
+}
+
+
+
+
+}
+
+
+</script> 
+
+<script>
+var select_institute = document.getElementById("school_of_study")
+var select_course = document.getElementById('course')
+var all_institutions = ["Bestower International University", "Benin Republic, Cotonou", "Adekunle Ajasin University, Akungba-Akoko","Afe Babalola University, Ado Ekiti","Caritas University, Enugu", "City University, Yaba, Lagos State", "Citygate University, Ibadan", "Cross River University of Technology, Calabar", "Crownhill University, Ilorin, Kwara State", "Enugu State University of Science and Technology, Enugu", "Federal University, Birnin Kebbi, Kebbi State", "Federal University Gashua, Yobe State", "Federal University Gusau, Zamfara State", "Federal University of Dutse (FUD)", "Federal University of Petroleum Resource Effurun", "Federal University of Technology Minna", "Federal University of Technology Owerri", "Free University of Nigeria (FUN), Proposed online, first 100% tuition-free university in the world. Lagos. Nigeria", "Gombe State University, Gombe", "Gombe State University of Science and Technology, Kumo", "Ibrahim Babangida University, Lapai", "Ibrahim Badamasi Babangida University, Niger State, Lapai", "Ignatius Ajuru University of Education (Rivers State University of Education), Port Harcourt", "Imo State University, Owerri", "Institute of Management and Technology, Enugu", "Joseph Ayo Babalola University, Ikeji-Arakeji", "Kaduna State University, Kaduna Kaduna State", "Kano State University of Science and Technology, Wudil", "Kebbi State University of Technology Aliero", "Kogi State University, Ayigba, Kogi State", "Koladaisi University, Ibadan, Oyo State", "Kwara State University, Malete, Kwara State", "Koladaisi University Ibadan, Oyo State", "Ladoke Akintola University of Technology, Ogbomoso", "Lagos Business School, Lagos", "Lead City University, Ibadan", "Madonna University (Ihiala), Okija", "Michael Okpara Federal University of Agriculture, Umudike", "Modibbo Adama University of Technology, Yola", "Michael and Cecilia Ibru University, Agbara-Otor, Ughelli North, Delta State", "Mountain Top University, Ogun State", "Nasarawa State University, Keffi", "National Open University of Nigeria, Lagos", "Niger Delta University, Wilberforce Island, Bayelsa State", "Nigerian Defence Academy, Kaduna", "Nnamdi Azikiwe University, Awka", "Northwest University, Kano", "Novena University, Ogume, Delta State", "Obafemi Awolowo University, Ile Ife", "Obong University, Obong Ntak, Akwa Ibom", "Oduduwa University, Ipetumodu, Osun State", "Olabisi Onabanjo University, Ago-Iwoye, Ogun State", "Ondo State University of Science and Technology, Okitipupa", "Osun State University, Osogbo", "Pan-Atlantic University, Lagos", "Paul University, Awka Anambra", "Ritman University, Ikot Ekpene, Akwa Ibom State", "Rivers State University, Port Harcourt", "Redeemer's University, Off, Gbongan – Oshogbo Rd, Ede", "Renaissance University, Agbani", "Rhema University, Aba Abia State", "Salem University, Lokoja Kogi State", "Samuel Adegboyega University, Ogwa Edo State", "Sokoto State University, Sokoto", "Sule Lamido University, Kaffin Hausa, Jigawa State", "Tai Solarin University of Education, Ijebu-Ode, Ogun State", "The University on Idemili, Alor, Anambra State", "University of Abuja, Gwagwalada", "University of Ado Ekiti, Ado Ekiti", "University of Agriculture, Abeokuta, Abeokuta", "University of Africa(Toru-Orua),Bayelsa State", "University of Agriculture, Makurdi, Makurdi, Benue State", "University of Ibadan, Ibadan", "University of Ilorin, Ilorin", "University of Jos, Jos", "University of Maiduguri, Maiduguri", "University of Mkar, Mkar-Gboko, Benue State", "University of Uyo, Uyo, Akwa Ibom State", "Usman Dan Fodio University, Sokoto, Sokoto State", "Wesley University, Ondo", "Western Delta University, Oghara, Delta State", "Yaba College of Technology, Yaba, Lagos State, Nigeria", "Bauchi State University, Gadau, Bauchi State", "Abubakar Tatari Ali Polytechnic, Bauchi", "Nigerian Army University Biu (NAUB)","Abdul Gusau Polytechnic","Abdul Gusau Polytechnic","Abraham Adesanya Polytechnic","Abubakar Tafari Ali Polytechnic","Adamawa State Polytechnic","Akanu Ibiam Federal Polytechnic","Akperan Orshi College of Agriculture","Akwa Ibom State Polytechnic","Akwa-Ibom College of Agriculture","Allover Central Polytechnic","Auchi Polytechnic","Audu Bako School of Agriculture","Bayelsa State College of Arts and Science","Benue State Polytechnic","Borno College of Agriculture","College of Agriculture and Animal Science","College of Agriculture, Jalingo","College of Agriculture, Kabba","College of Agriculture, Lafia","College of Agriculture, Zuru","Delta State College of Agriculture","Delta State Polytechnic (three institutions)","Divine Polytechnic, Mkpani","Dorben Polytechnic","Eastern Polytechnic","Edo State Polytechnic Usen","Ekwenugo Okeke Polytechnic","Federal College of Agriculture, Ishiagu","Federal College of Animal Health & Production Technology","Federal College of Animal Health and Production Technology, Ibadan","Federal College of Animal Health and Production Technology, Vom","Federal College of Chemical and Leather and Technology","Federal College of Education, Pankshin","Federal College of Fisheries and Marine Technology","Federal College of Forestry Mechanisation","Federal College of Forestry, Ibadan","Federal College of Forestry. Jos","Federal College of Fresh Water Fisheries Technology","Federal College of Land Resources Technology, Kuru","Federal College of Land Resources Technology, Owerri","Federal College of Wildlife Management","Federal Polytechnic Ekowe Bayelsa State","Federal Polytechnic, Ado-Ekiti","Federal Polytechnic, Bauchi","Federal Polytechnic, Bida","Federal Polytechnic, Birnin-Kebbi","Federal Polytechnic, Damaturu","Federal Polytechnic, Ede","Federal Polytechnic, Idah","Federal Polytechnic, Ilaro","Federal Polytechnic, Mubi","Federal Polytechnic, Namoda","Federal Polytechnic, Nassarawa","Federal Polytechnic, Nekede","Federal Polytechnic, Offa","Federal Polytechnic, Oko","Federal School of Dental Technology & Therapy","federal school of statistics Manchok","Foundation College of Technology","Gateway Polytechnic Saapade","Grace Polytechnic","Hassan Usman Katsina Polytechnic","Heritage Polytechnic","Hussaini Adamu Federal Polytechnic","Hussani Adamu PolytechnicIbrahim Babangida College of Agriculture","Igbajo Polytechnic, Igbajo","Imo State Polytechnic","Imo State Technological Skills Acquisition Center","Institute of Management Technology, Enugu","Interlink Polytechnic","Kaduna Polytechnic","Kano State Polytechnic","Kebbi State Polytechnic","Kings Polytechnic","Kogi State Polytechnic","Kwara State Polytechnic","Lagos City Polytechnic","Lagos State Polytechnic","Mai Idris Alooma Polytechnic","Maritime Academy of Nigeria","Marvic Polytechnic","Maurid Institute of Management & Technology, Nasarawa","Mohammed Abdullahi Wase Polytechnic","Moshood Abiola Polytechnic","Nasarawa State Polytechnic","Niger State College of Agriculture","Niger State Polytechnic","Nigerian College of Aviation Technology","Nuhu Bamalli Polytechnic","Ogun State College of Health Technology","Osun State College of Technology","Osun State Polytechnic","Our Saviour Institute of Science and Technology","Petroleum Training Institute","Plateau State College of Agriculture","Plateau State Polytechnic","Polytechnic Ile-Ife","Port Harcourt Polytechnic","Ramat Polytechnic","Rivers State Polytechnic","Ronik Polytechnic","Rufus Giwa Polytechnic","Samaru College of Agriculture","School of Agriculture, Ikorodu","Shaka Polytechnic","Southern Nigeria Institute of Innovative Technology (SNIITPOLY)","Temple Gate Polytechnic","The Kings Poly, Shaki, Oyo","The Oke-Ogun Polytechnic, Saki","The Polytechnic, Calabar","The Polytechnic, Ibadan","The UA College of Science and Technology , Isuofia","Tower Polytechnic, Ibadan","Wavecrest College of Hospitality","Wolex Polytechnic","Yaba College of Technology"]
+var all_course = ["Agriculture","Agricultural Economics","Agricultural Extension","Agronomy","Animal Science/husbandry","Crop Protection","Crop Science","Food Science and Technology","Fisheries","Forest Resources Management(Forestry)","Home Science, Nutrition andDietetics","Soil Science","Arts","Archeology and Tourism","Arabic and Islamic Studies","Christian Religious Studies","English and Literary Studies","Fine and Applied Arts (Creative Arts)","Foreign Languages and Literature","History and International Studies","Linguistics and Nigerian Languages","Mass Communication(Communication and Language Arts)","Music","Theatre and Film Studies","Biological Sciences","Biochemistry","Botany","Microbiology","Marine Biology","Cell Biology & Genetics","Zoology","Administration","Accountancy","Acturial Science","Business Administration","Business Management","Banking and Finance","Hospitality and Tourism","Marketing","Insurance","Industrial Relations and Personnel Management","Dentistry","Child Dental Health","Oral and Maxillofacial Surgery","Preventive Dentistry","Restorative Dentistry","Education","Adult Education and Extra-Mural","Studies","Arts EducationEducation & Accountancy","Education & Computer Science","Education & Economics","Education & Mathematics","Education & Physics","Education & Religious Studies","Education & Social Science","Education And Biology","Education And Chemistry","Education And English Language","Education And French","Education And Geography/Physics","Education And Political ScienceEducational Foundations","Educational / Psychology Guidance And Counselling","Health and Physical Education","Library and Information Science","Science Education","Social Sciences Education","Vocational Teacher Education(Technical Education)","Religion","Igbo Linguistics","Agricultural and Bioresources Engineering","Civil Engineering","Chemical Engineering","Computer Engineering","Electrical Engineering","Electronic Engineering","Marine Engineering","Mechanical Engineering","Metallurgical and Materials","Engineering","Petroleum and Gas Engineering","Systems Engineering","Structural Engineering","Production and Industrial","Engineering","Environmental Sciences","Architecture","Estate Management","Quantity Surveying","Building","Geoinformatics and Surveying","Urban and Regional Planning","Health Sciences & Technology","Health Administration and Management","Medical Laboratory Sciences","Medical Radiography and Radiological Sciences","Medical Rehabilitation","Nursing Sciences","Public Health Tech","Law","Commercial and Property Law","International and Jurisprudence","Private and Public Law","Medical Sciences","Anatomy","Anesthesia","Chemical Pathology","Community Medicine","Dermatology","Hematology and Immunology","Medical Biochemistry","Medical Microbiology","Medicine","Morbid Anatomy","Obstetrics and Gynecology","Ophthalmology","Otolaryngology","Pediatrics","Pharmacology and Therapeutics","Physiology","Radiation Medicine","Surgery","Psychological Medicine","Child Dental Health","Pharmaceutical Sciences","Clinical Pharmacy and Pharmacy","Management","Pharmaceutical Technology and Industrial Pharmacy","Pharmaceutics","Pharmacognosy","Department of Pharmacology and Toxicology","Physical Sciences","Computer Science","Geology","Mathematics","hysics and Astronomy","Geophysics","Pure and Industrial Chemistry","Statistics","Social Sciences","Economics","Geography","Philosophy","Political Science","Psychology","Public Administration","Public Administration and Local Government","Religion","Social Work","Sociology/Anthropology","Veterinary Medicine","Veterinary Physiology/Pharmacology","eterinary Anatomy","Animal Health and Production","Veterinary Parasitology and Entomology","Veterinary Pathology and Microbiology","Veterinary Public Health and Preventive Medicine","Veterinary Surgery","eterinary Medicine","Veterinary Obstetrics and Reproductive Diseases","Veterinary Teaching Hospital"]
+for(var i in all_institutions){
+    var opt = document.createElement("option");
+   opt.value = all_institutions[i];
+   opt.innerHTML = all_institutions[i]; // whatever property it has
+
+   // then append it to the select element
+  select_institute.appendChild(opt);
+}
+for(var i in all_institutions){
+    var opt = document.createElement("option");
+   opt.value = all_institutions[i];
+   opt.innerHTML = all_institutions[i]; // whatever property it has
+
+   // then append it to the select element
+  select_institute.appendChild(opt);
+}
+
+for(var i in all_course){
+    var opt = document.createElement("option");
+   opt.value = all_course[i];
+   opt.innerHTML = all_course[i]; // whatever property it has
+
+   // then append it to the select element
+  select_course.appendChild(opt);
+}
+</script>
