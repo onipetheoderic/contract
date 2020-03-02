@@ -16,14 +16,14 @@
                     <div id="lg1" class="tab-pane active">
                         <div class="login-form-container">
                             <div class="login-register-form">
-                                <form action="#" method="post">
-                                    <input type="text" name="user-name" required placeholder="Email Address">
-                                    <input type="password" name="user-password" required placeholder="Password">
+                                <form action="/candidate_login" method="post">
+                                    <input type="email" name="email" required placeholder="Email Address">
+                                    <input type="password" name="password" required placeholder="Password">
                                     <div class="button-box">
                                         <div class="login-toggle-btn">
                                             <input type="checkbox">
                                             <label>Remember me</label>
-                                            <a href="candidate_dashboard/horizontal/index.html">Forgot Password?</a>
+                                            {{!-- <a href="candidate_dashboard/horizontal/index.html">Forgot Password?</a> --}}
                                         </div>
                                         
                                             <button class="default-btn"><span>Login</span></button>
@@ -38,7 +38,7 @@
                     <div id="lg2" class="tab-pane">
                         <div class="login-form-container">
                             <div class="login-register-form">
-                                <form action="#" method="post">
+                                <form action="/register" method="POST" enctype="multipart/form-data">
                                      <p style="margin:0px;">First Name</p>
                                     <input type="text" required name="first_name" placeholder="First name">    
                                    <p style="margin:0px;">Last Name</p>
@@ -46,7 +46,7 @@
                                      <p style="margin:0px;">Date of Birth</p>
                                     <input type="date" required name="dob" id="dob" placeholder="Date of Birth">  
                                     <p style="margin:0px;">Gender</p>
-                                    <select required style="background-color: transparent;
+                                    <select required name="gender" style="background-color: transparent;
                                         border: 1px solid #ebebeb;
                                         color: #333;
                                         font-size: 14px;
@@ -181,7 +181,7 @@
                             margin-bottom: 30px;
                             padding: 0 15px;"></select>         
                             <p style="margin:0px;">Email Address</p>
-                        <input name="user-email" required placeholder="Email" type="email">
+                        <input name="email" required placeholder="Email" type="email">
                          <p style="margin:0px;">Passport Sized Photograph</p>
                          <img id="output" style="width:100px; height:100px"/>
             <input name="photo" accept="image/*" onchange="loadFile(event)" required placeholder="photo.jpg" type="file">
@@ -194,7 +194,7 @@
   };
 </script>
                         <p style="margin:0px;">Password</p>
-                        <input type="password" name="user_password" id="user_password" required placeholder="Password">
+                        <input type="password" name="password" id="user_password" required placeholder="Password">
 
                         <p style="margin:0px;">Confirm Password</p>
                         <input type="password" name="confirm_password" id="confirm_password" required placeholder="Confirm password">

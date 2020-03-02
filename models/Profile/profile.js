@@ -5,18 +5,19 @@ var ProfileSchema = new mongoose.Schema({
         ref: 'User'
       }],
     role_id: String,
-    state: String,
+    state_of_origin: String,
+    gender: String,
     lga: String,
-    institution: String,
-    picture: String,
+    state_residence: String,
+    year_of_graduation: String,
+    school_of_study: String,
+    photo: String,
     nysc_number: String,
     course_study: String,
     test_score: String,
-    age: String,
     marital_status: String,
     religion: String,
     tribe: String,
-    
 
     
 },{

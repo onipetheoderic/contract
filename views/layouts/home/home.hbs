@@ -2,7 +2,59 @@
 <html class="no-js" lang="zxx">
 
 
-<!-- Mirrored from demo.hasthemes.com/glaxdu-v1/glaxdu/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Feb 2020 14:12:46 GMT -->
+<style type="text/css">
+
+.alert {
+    padding: 40px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+  
+.alert-success {
+color: #FFF;
+background-color: #19B698;
+border-color: #0FAC8E;
+}
+  
+.alert-info {
+color: #FFF;
+background-color: #4AA3DF;
+border-color: #4099D5;
+}
+.notice_wrapper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background: rgba(135,216,211,0.5);
+   
+}
+.notice_wrapper_error {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background: rgba(102, 4, 4, 0.5);
+   
+}
+.alert, .notice {
+    padding-top: 1.7rem;
+    text-align: center;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.alert-danger {
+    color: #FFF;
+    background-color: #EA6153;
+    border-color: #E05749;
+}
+
+</style>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -25,9 +77,23 @@
     <link rel="stylesheet" href="/home/assets/css/style.css">
     <script src="/home/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
+<script src="/home/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script>
 
+  $(document).ready(function(){
+			setTimeout(function(){
+    	$('.notice_wrapper').slideUp('slow', function(){
+        	$(this).remove();
+          })
+        }, 2000);
+	
+});
+</script>
 <body>
     <header class="header-area">
+    <div class="notice_wrapper">		  	
+	    <p class="alert">{{{message.error}}}{{{message.success}}}</p>				
+	</div>
         <div class="header-top bg-img" style="background-image:url(/home/assets/img/icon-img/header-shape.png);">
             <div class="container">
                 <div class="row">

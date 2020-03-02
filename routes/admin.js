@@ -18,6 +18,10 @@ router.route('/admin_fg_dashboard_brf/shortlisted_candidate')
 router.route('/admin_fg_dashboard_brf/shortlisted_candidate_detail')
     .get(AdminController.shortlisted_candidate_detail)
 
+router.route('/admin_fg_dashboard_brf/admin_create_test')
+    .get(AdminController.admin_create_test)
+    .post(AdminController.admin_create_test_post)
+
 router.route('/')
     .get(HomeController.home)
 
@@ -26,6 +30,7 @@ router.route('/login')
 
 router.route('/register')
     .get(HomeController.login_register)
+    .post(HomeController.register_post)
 
 router.route('/about')
     .get(HomeController.about)
@@ -33,10 +38,15 @@ router.route('/about')
 router.route('/candidate_home')
     .get(CandidateController.candidate_home)
 
+
+router.route('/candidate_login')
+    .post(HomeController.candidate_login)
+
 router.route('/quiz')
     .get(CandidateController.quiz)
 
-
+router.route('/submit_test/:test_type')
+    .post(CandidateController.submit_test)
 // router.route('/login')
 //     .get(AuthDashboard.login)
 //     .post(AuthDashboard.login_post)

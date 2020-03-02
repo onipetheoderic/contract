@@ -1,3 +1,9 @@
+import User from '../../models/User/user';
+import Profile from '../../models/Profile/profile';
+import {encrypt, decrypt, findResource} from '../../utility/encryptor'
+import {redirector, admin_checker_redirector} from '../../utility/redirector'
+
+
 exports.home = function(req, res) {
     res.render('home/index', {layout: "layouts/home/home"})
 }
@@ -5,9 +11,18 @@ exports.home = function(req, res) {
 exports.login_register = function(req, res) {
     res.render('home/login-register', {layout: "layouts/home/home"})
 }
+const filePlacerAndNamer = (req, res, the_file) => {
+    // let file_name = the_file.name
+    let file_name = Date.now()+ the_file.name
+    the_file.mv('views/public/uploads/' + file_name, function(err) {
+   });
+    return file_name
+}
+
 
 exports.register_post = function(req, res) {
     console.log("registerpost url", req.body)    
+    let incoming_file_name = filePlacerAndNamer(req, res, req.files.photo);
     User.findOne({email: req.body.email}, function(err, email_registered){
         if (email_registered==null) { 
             User.findOne({phoneNumber: req.body.email}, function(err, phone_registered){
@@ -22,18 +37,39 @@ exports.register_post = function(req, res) {
                     user.password = req.body.password;
                     user.role = "4";                
                     user.phoneNumber = req.body.phone_number;     
-                    user.save(function(err, auth_details){       
+                    user.save(function(err, user_detail){       
                         if(err){
+                        console.log("errr",err)
                             res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Error occured during user registration"}})
-                        } else {                    
-                            res.render('Admin/dashboard/successpage', {layout: false, message:{successMessage: "User Successfully Registered", successDescription: `The Username is ${req.body.email}, while the Password is ${randomPassword}`} })
+                        } else {
+                            let profile = new Profile();
+                            profile.user = user_detail._id;
+                            profile.role_id = "4";                           
+                            profile.state_of_origin = req.body.state;
+                            profile.state_residence = req.body.state_residence;
+                            profile.lga = req.body.lga;
+                            profile.school_of_study = req.body.school_of_study
+                            profile.photo = incoming_file_name;
+                            profile.course_study = req.body.course;
+                            profile.nysc_number = req.body.nysc_number;
+                            profile.save(function(err, profile_details){
+                                if(err){
+                                    
+                                    res.render('home/login-register', {layout: "layouts/home/home", message:{error:"server error"}})
+                                }
+                                else {
+                                    res.render('home/login-register', {layout: "layouts/home/home", message:{success:"Registration successful, Login to your profile"}})
+                                }
+                            })
+                           
+
+
                         }
                     });
                 }
                 else if(phone_registered !=null){
                     // console.log("Phone number taken")
-                    res.render('Admin/dashboard/register_user', {layout: false, message:{error: "Phone Number has already been taken"} })
-
+                    res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Phone Number has already been taken"}})
                 }
             })
         }
@@ -50,7 +86,7 @@ exports.candidate_login = function(req, res) {
         User.findOne({email: email}, function(err, user) {
            if(user == null)
             {
-               res.render('Admin/dashboard/login', {layout: "layout/admin-login", message:{error: "Email not registered"}})
+                res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Email Not Registered"}})
             }
             else{
                 let user_id = user.id
@@ -60,9 +96,9 @@ exports.candidate_login = function(req, res) {
                       let encRole = encrypt(user.role)
                       req.session.user_id = encId;
                       req.session.role = encRole;
-                      res.redirect("/")
+                      res.redirect("/candidate_home")
                 }else{
-                    res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Invalid Email/password"}})
+                    res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Passwords dont match"}})
                 }
             }
     

@@ -117,7 +117,16 @@ app.get('*', function(req, res, next){
 //   console.log('error')
 // });
 
+// hbs.registerHelper('entries', (data, options) => {
+//   console.log("aaaa",data)
+//   var ret = "";
 
+//   for (var i = 0, j = data.length; i < j; i++) {
+//     ret = ret + options.fn(data[i]);
+//   }
+
+//   return ret;
+// });
 
 hbs.registerHelper('json', function (content) {
     return JSON.stringify(content);
