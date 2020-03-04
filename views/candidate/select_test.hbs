@@ -1,0 +1,155 @@
+             <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">All Tests Must be Taken</h4>
+    
+                                   
+                                    
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+   
+                        <div class="row">
+                             {{#unless data.iq_test_taken}}
+                            <div class="col-md-6 col-xl-4">
+                                <a href="/iq_test">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                
+                                                <h5 class="card-title mb-0">Qualitative Reasoning Test</h5>
+                                            </div>
+                                            <div class="row d-flex align-items-center mb-4">
+                                                <div class="col-8">
+                                                
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                        <!--end card body-->
+                                    </div><!-- end card-->
+                                </a>
+                            </div> <!-- end col-->
+                            {{else}}
+                            <div class="col-md-6 col-xl-4" style="pointer-events:none;">
+                                <a href="/iq_test">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                
+                                                <h5 class="card-title mb-0">Qualitative Reasoning Test</h5>
+                                            </div>
+                                            <div class="row d-flex align-items-center mb-4">
+                                                <div class="col-8">
+                                                <img src="/candidate/assets/images/mark.png" alt="test taken" style="width:60px; height:60px;"/>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                        <!--end card body-->
+                                    </div><!-- end card-->
+                                </a>
+                            </div> <!-- end col-->
+                            {{/unless}}
+
+                            {{#unless data.use_of_it_taken}}
+                            <div class="col-md-6 col-xl-4">
+                                 <a href="/use_of_it">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                
+                                               <h5 class="card-title mb-0">Use of IT Test</h5>
+                                            </div>
+                                            <div class="row d-flex align-items-center mb-4">
+                                                <div class="col-8">
+                                                
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                        <!--end card body-->
+                                    </div><!-- end card-->
+                                </a>
+                            </div> <!-- end col-->
+                            {{else}}
+                            <div class="col-md-6 col-xl-4" style="pointer-events:none;">
+                                <a href="/use_of_it">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                
+                                                  <h5 class="card-title mb-0">Use of IT Test</h5>
+                                            </div>
+                                            <div class="row d-flex align-items-center mb-4">
+                                                <div class="col-8">
+                                                <img src="/candidate/assets/images/mark.png" alt="test taken" style="width:60px; height:60px;"/>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                        <!--end card body-->
+                                    </div><!-- end card-->
+                                </a>
+                            </div> <!-- end col-->
+                            {{/unless}}
+
+                        
+                        {{#unless data.personality_taken}}
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card">
+                                    <a href="/personality">
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                        
+                                            <h5 class="card-title mb-0">Personality Test</h5>
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-4">
+                                           
+                                            <div class="col-4 text-right">
+                                                
+                                            </div>
+                                        </div>
+
+                                       
+                                    </div>
+                                </a>
+                                    <!--end card body-->
+                                </div>
+                                <!--end card-->
+                            </div> <!-- end col-->
+                            {{else}}
+                            <div class="col-md-6 col-xl-4" style="pointer-events:none;">
+                                <a href="/personality">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                
+                                                  <h5 class="card-title mb-0">Use of IT Test</h5>
+                                            </div>
+                                            <div class="row d-flex align-items-center mb-4">
+                                                <div class="col-8">
+                                                <img src="/candidate/assets/images/mark.png" alt="test taken" style="width:60px; height:60px;"/>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                        <!--end card body-->
+                                    </div><!-- end card-->
+                                </a>
+                            </div> <!-- end col-->
+                        {{/unless}}
+
+                        </div>
+                        <!-- end row-->
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+
+
+

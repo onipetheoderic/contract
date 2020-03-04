@@ -4,16 +4,16 @@
         <div class="col-lg-7 col-md-12 ml-auto mr-auto">
             <div class="login-register-wrapper">
                 <div class="login-register-tab-list nav">
-                    <a class="active" data-toggle="tab" href="#lg1">
-                        <h4> login </h4>
+                    <a class="active" data-toggle="tab" href="#lg2">
+                        <h4>Register</h4>
                     </a>
-                    <a data-toggle="tab" href="#lg2">
-                        <h4> register </h4>
+                    <a data-toggle="tab" href="#lg1">
+                        <h4> Login</h4>
                     </a>
                 </div>
 
                 <div class="tab-content">
-                    <div id="lg1" class="tab-pane active">
+                    <div id="lg1" class="tab-pane">
                         <div class="login-form-container">
                             <div class="login-register-form">
                                 <form action="/candidate_login" method="post">
@@ -35,14 +35,14 @@
                     </div>
                    
                     <script>document.getElementById("dob").min = "2000-01-01";</script>
-                    <div id="lg2" class="tab-pane">
+                    <div id="lg2" class="tab-pane active">
                         <div class="login-form-container">
                             <div class="login-register-form">
                                 <form action="/register" method="POST" enctype="multipart/form-data">
                                      <p style="margin:0px;">First Name</p>
                                     <input type="text" required name="first_name" placeholder="First name">    
                                    <p style="margin:0px;">Last Name</p>
-                                    <input type="text" required name="last_number" placeholder="Last name">  
+                                    <input type="text" required name="last_name" placeholder="Last name">  
                                      <p style="margin:0px;">Date of Birth</p>
                                     <input type="date" required name="dob" id="dob" placeholder="Date of Birth">  
                                     <p style="margin:0px;">Gender</p>
@@ -168,8 +168,8 @@
                             height: 50px;
                             margin-bottom: 30px;
                             padding: 0 15px;"></select>
-                                        <p style="margin:0px;">Year of Graduation</p>
-                            <input type="month" required name="year_of_graduation" placeholder="Year of Graduation">  
+                                        <p style="margin:0px;">NYSC Passing Out date</p>
+                            <input type="date" required name="dog" placeholder="Date of Graduation">  
                               <p style="margin:0px;">NYSC Number</p>
                             <input type="number" required name="nysc_number" placeholder="NYSC Number"> 
                              <p style="margin:0px;">Course of Study</p>

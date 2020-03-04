@@ -1,0 +1,140 @@
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                              
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+    <input type="hidden" value='{{data.all_test}}' id="all_test"/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="text-center mt-4">
+                                    <h4>Use of IT Test</h4>
+                        <p class="text-muted mt-3 mb-4"> Submit Your Test before the Time Elapses</p>
+    
+                                </div>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                        <div class="row mt-5">
+                            <div class="col-lg-2">                   
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="mb-3 font-weight-bold text-uppercase">IQ Test <span id="divCounter" style="color:red;"></span> minutes!</h5>
+                                        <form id="quizForm" action="/submit_test/use_of_it" method="POST">
+                                        <div id="accordion">
+                                           
+                                           
+                                            {{#each data.all_tests}}
+                                            <div class="card mb-1">
+                                                <div class="card-header bg-white border-bottom-0 p-3" id="headingOne">
+                                                    <h5 class="m-0 font-size-16">
+                                                        <a href="#" data-toggle="collapse" data-target="#theoderic{{@index}}" aria-expanded="false"
+                                                            aria-controls="collapseOne" class="text-dark collapsed">
+                                                           {{this.question}}
+                                                        </a>
+                                                    </h5>
+                                                </div>
+    
+                                                <div id="theoderic{{@index}}" class="collapse"
+                                                        aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body text-muted pt-1">
+                                                        <div class="mt-3">
+                                                            {{#each this.answers}}
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="{{../this._id}}{{this.id}}" name="{{../this._id}}" class="custom-control-input" value="{{this.id}}">
+                                                                <label class="custom-control-label" for="{{../this._id}}{{this.id}}">{{this.option}}</label>
+                                                            </div>
+                                                           
+                                                            {{/each}}
+
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          {{/each}}
+               
+                                            
+                                        </div>
+                                         <button type="submit" class="btn btn-primary btn-block  px-4">Submit</button>
+                                        </form>
+                                       
+                                    </div>
+                                </div>
+    
+    
+                      
+
+
+                            </div> <!-- end col -->
+        
+                <div class="col-lg-2">
+                    {{!-- <div class="card">
+                        <div class="card-body">
+                            
+                            <button type="submit" class="btn btn-success btn-block  px-4">IQ Test</button>
+                            <button type="submit" class="btn btn-primary btn-block  px-4">Personality Test</button>
+                            <button type="submit" class="btn btn-primary btn-block  px-4">Use of IT</button>
+                            
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+    
+
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+<script>
+//var hoursleft = 0;
+var all_tests = document.getElementById('all_test')
+console.log(all_tests)
+var minutesleft = 0; //give minutes you wish
+var secondsleft = 30; // give seconds you wish
+var finishedtext = "Countdown finished!";
+var end5;
+if(localStorage.getItem("end5")) {
+end5 = new Date(localStorage.getItem("end5"));
+} else {
+end5 = new Date();
+end5.setMinutes(end5.getMinutes()+minutesleft);
+end5.setSeconds(end5.getSeconds()+secondsleft);
+
+}
+var counter = function () {
+var now = new Date();
+var diff = end5 - now;
+
+diff = new Date(diff);
+
+var milliseconds = parseInt((diff%1000)/100)
+    var sec = parseInt((diff/1000)%60)
+    var mins = parseInt((diff/(1000*60))%60)
+    //var hours = parseInt((diff/(1000*60*60))%24);
+
+if(mins < 10) {
+    mins = "0" + mins;
+}
+if(sec < 10) { 
+    sec = "0" + sec;
+}     
+if(now >= end5) {     
+    clearTimeout(interval);
+   // localStorage.setItem("end", null);
+     localStorage.removeItem("end5");
+     localStorage.clear();
+    document.getElementById('divCounter').innerHTML = finishedtext;
+     if(confirm("TIME UP!"))
+    // window.location.href= "personality.html";
+    document.getElementById("quizForm").submit();
+    } else {
+        var value = mins + ":" + sec;
+        localStorage.setItem("end5", end5);
+        document.getElementById('divCounter').innerHTML = value;
+    }
+}
+var interval = setInterval(counter, 1000);
+</script>

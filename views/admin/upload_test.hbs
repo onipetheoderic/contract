@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="/admin/assets/images/favicon.png">
-    <title>Materialart Admin Template</title>
+    <title>BRF Internship Admin Portal</title>
     <link href="/admin/dist/css/style.css" rel="stylesheet">
     <!-- This page CSS -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -311,7 +311,7 @@
                                                 <select name="test_type" required>
                                                     <option value="" disabled selected>Select Test type</option>
                                                     <option value="iq_test">IQ Test</option>
-                                                    <option value="personality_test">Personality Test</option>
+                                                    {{!-- <option value="personality_test">Personality Test</option> --}}
                                                     <option value="use_of_it">Use of IT</option>
                                                 </select>
                                                 <label>Select Test Type</label>
@@ -340,6 +340,13 @@
                                     </div>
                                   
                                     <div class="row">
+                                       
+                                        <div class="input-field col s12">
+                                            <input id="answer_index" required name="answer_index" type="number">
+                                            <label for="question">Index of Answer</label>
+                                        </div>
+                                  
+                                    
                                         <div class="input-field col s12">
                                             <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
                                             </button>

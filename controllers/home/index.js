@@ -2,7 +2,7 @@ import User from '../../models/User/user';
 import Profile from '../../models/Profile/profile';
 import {encrypt, decrypt, findResource} from '../../utility/encryptor'
 import {redirector, admin_checker_redirector} from '../../utility/redirector'
-
+import moment from 'moment';
 
 exports.home = function(req, res) {
     res.render('home/index', {layout: "layouts/home/home"})
@@ -11,6 +11,10 @@ exports.home = function(req, res) {
 exports.login_register = function(req, res) {
     res.render('home/login-register', {layout: "layouts/home/home"})
 }
+exports.login = function(req, res) {
+    res.render('home/login', {layout: "layouts/home/home"})
+}
+
 const filePlacerAndNamer = (req, res, the_file) => {
     // let file_name = the_file.name
     let file_name = Date.now()+ the_file.name
@@ -19,10 +23,63 @@ const filePlacerAndNamer = (req, res, the_file) => {
     return file_name
 }
 
+/* 2017-01-31 1998-01-31*/
+
+
+
+const geopolitical_zone_grouper = (state) => {
+    let _northCentral = ["Niger", "Benue", "Nassarawa", "Plateau", "Kogi", "Kwara", "FCT"];
+    let _northWest = ["Jigawa", "Kano", "Katsina", "Kaduna", "Kebbi", "Zamfara", "Sokoto"];
+    let _northEast = ["Gombe", "Bauchi", "Yobe", "Borno", "Adamawa", "Taraba"];
+    let _southSouth = ["Akwa-Ibom", "Cross River", "Bayelsa", "Rivers", "Delta", "Edo"];
+    let _southEast = ["Abia", "Imo", "Ebonyi", "Enugu", "Anambara"];
+    let _southWest = ["Ekiti", "Ondo", "Osun", "Oyo", "Ogun", "Lagos" ];
+
+    if(_northCentral.includes(state)){
+        return "north_central"
+    }
+    else if(_northWest.includes(state)){
+        return "north_west"
+    }
+    else if(_northEast.includes(state)){
+        return "north_east"
+    }
+    else if(_southSouth.includes(state)){
+        return "south_south"
+    }
+    else if(_southEast.includes(state)){
+        return "south_east"
+    }
+    else if(_southWest.includes(state)){
+        return "south_west"
+    }
+}
+function dateTimeFormatter(initial_date, todays_date){    
+    var a = moment(initial_date,'YYYY-MM-DD');
+    var b = moment(todays_date,'YYYY-MM-DD');
+    var diffYears = b.diff(a, 'years');
+    return diffYears
+}
+
+const registration_shortlisted_verifier = (pop_year, age) => {
+    if(parseInt(pop_year)<=4 && age<=26){
+        return true
+    }
+    else return false
+}
+
 
 exports.register_post = function(req, res) {
-    console.log("registerpost url", req.body)    
     let incoming_file_name = filePlacerAndNamer(req, res, req.files.photo);
+    let dog = req.body.dog;
+    let dob = req.body.dob;
+    var today = new Date();
+    var date = today.toISOString().split('T')[0]
+    console.log(dog, dob, date)
+    let years_of_pop = dateTimeFormatter(dog, date)
+    let age = dateTimeFormatter(dob, date)
+    //registration_shortlisted
+
     User.findOne({email: req.body.email}, function(err, email_registered){
         if (email_registered==null) { 
             User.findOne({phoneNumber: req.body.email}, function(err, phone_registered){
@@ -35,6 +92,7 @@ exports.register_post = function(req, res) {
                     user.middleName = req.body.middle_name;
                     user.phoneNumber = req.body.phone_number;
                     user.password = req.body.password;
+                    user.gender = req.body.gender;
                     user.role = "4";                
                     user.phoneNumber = req.body.phone_number;     
                     user.save(function(err, user_detail){       
@@ -42,28 +100,31 @@ exports.register_post = function(req, res) {
                         console.log("errr",err)
                             res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Error occured during user registration"}})
                         } else {
+                            /* geopolitical_zone */ 
                             let profile = new Profile();
+                             profile.dob = req.body.dob;
+                             profile.dog = req.body.dog;
                             profile.user = user_detail._id;
                             profile.role_id = "4";                           
                             profile.state_of_origin = req.body.state;
+                            profile.geopolitical_zone = geopolitical_zone_grouper(req.body.state)
                             profile.state_residence = req.body.state_residence;
                             profile.lga = req.body.lga;
                             profile.school_of_study = req.body.school_of_study
                             profile.photo = incoming_file_name;
+                            profile.registration_shortlisted = registration_shortlisted_verifier(years_of_pop, age);
                             profile.course_study = req.body.course;
                             profile.nysc_number = req.body.nysc_number;
                             profile.save(function(err, profile_details){
                                 if(err){
-                                    
+                                    console.log(err)
                                     res.render('home/login-register', {layout: "layouts/home/home", message:{error:"server error"}})
                                 }
                                 else {
-                                    res.render('home/login-register', {layout: "layouts/home/home", message:{success:"Registration successful, Login to your profile"}})
+                                    res.render('home/login', {layout: "layouts/home/home", message:{success:"Registration successful, Login to your profile"}})
                                 }
                             })
                            
-
-
                         }
                     });
                 }

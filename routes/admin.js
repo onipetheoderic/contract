@@ -26,7 +26,7 @@ router.route('/')
     .get(HomeController.home)
 
 router.route('/login')
-    .get(HomeController.login_register)
+    .get(HomeController.login)
 
 router.route('/register')
     .get(HomeController.login_register)
@@ -42,8 +42,24 @@ router.route('/candidate_home')
 router.route('/candidate_login')
     .post(HomeController.candidate_login)
 
-router.route('/quiz')
-    .get(CandidateController.quiz)
+router.route('/select_test')
+    .get(CandidateController.select_test)
+
+router.route('/test_success')
+    .get(CandidateController.test_success)
+
+router.route('/test_taken')
+    .get(CandidateController.test_taken)
+
+router.route('/iq_test')
+    .get(CandidateController.iq_test)
+
+router.route('/use_of_it')
+    .get(CandidateController.use_of_it)
+
+router.route('/personality')
+    .get(CandidateController.personality_test)
+    .post(CandidateController.personality_test_post)
 
 router.route('/submit_test/:test_type')
     .post(CandidateController.submit_test)
