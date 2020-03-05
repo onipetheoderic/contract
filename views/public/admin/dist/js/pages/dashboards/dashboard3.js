@@ -56,10 +56,24 @@ Total
     // ============================================================== 
     // Net income
     // ============================================================== 
+    let all_genders = document.getElementById("all_genders").value;
+    let all_candidates = document.getElementById("all_zone").value;
+    console.log(all_candidates.split("-"))
+    let all_zones = all_candidates.split("-");
+    let all_splitted_gender = all_genders.split("-")
+    let my_zones = [];
+    let my_genders = [];
+    for(var i in all_zones){
+        my_zones.push(parseInt(all_zones[i]))
+    }
+    for(var k in all_splitted_gender){
+        my_genders.push(parseInt(all_splitted_gender[k]))
+    }
+   
     var data = {
         labels: ['North-Central', 'North-West', 'North-East', 'South-South', 'South-East', 'South-West'],
         series: [
-            [1225, 1370, 955, 1370, 1355, 1470]
+            my_zones
         ]
     };
 
@@ -181,8 +195,8 @@ Total
         bindto: '#visitor',
         data: {
             columns: [
-                ['Male', 43],
-                ['Female', 47],
+                ['Male', my_genders[0]],
+                ['Female', my_genders[1]],
               
             ],
 
@@ -206,7 +220,7 @@ Total
             //or hide: ['data1', 'data2']
         },
         color: {
-            pattern: ['#40c4ff', '#2961ff', '#ff821c', '#e9edf2']
+            pattern: ['#1D065B', '#2961ff', '#ff821c', '#e9edf2']
         }
     });
 /*
@@ -222,16 +236,17 @@ South-East1355
 
 South-West1470
 */ 
+console.log(my_zones)
     var chart2 = c3.generate({
         bindto: '#visitor2',
         data: {
             columns: [
-                ['North-Central', 150],
-                ['North-West', 200],
-                ['North-East', 110],
-                ['South-South', 147],
-                ['South-East', 143],
-                ['South-West', 257],
+                ['North-Central', my_zones[0]],
+                ['North-West', my_zones[1]],
+                ['North-East', my_zones[2]],
+                ['South-South', my_zones[3]],
+                ['South-East', my_zones[4]],
+                ['South-West', my_zones[5]],
               
               
             ],

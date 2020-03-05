@@ -20,6 +20,14 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" id="all_zone" value="{{data.north_central}}-{{data.north_west}}-{{data.north_east}}-{{data.south_south}}-{{data.south_east}}-{{data.south_west}}">
+         <input type="hidden" id="all_genders" value="{{data.shortlisted_gender.male}}-{{data.shortlisted_gender.female}}">
+        
+{{!-- <script>
+    
+    let all_genders = document.getElementById("all_genders").value;
+ 
+</script> --}}
 
                     <div class="col s12 l5">
                         <div class="row">
@@ -27,9 +35,9 @@
                                 <div class="card warning-gradient card-hover">
                                     <div class="card-content">
                                         <a href="/admin_fg_dashboard_brf/shortlisted_candidate"><h5 class="card-title  white-text">Shortlisted Candidate</h5></a>
-                                        <p class="m-b-5"><span style="color:white">Male <span class="right">42</span></span></p>
-                                        <p><span style="color:white">Female <span class="right">48</span></span></p>
-                                        <p><span style="color:white">Total <span class="right"><strong style="font-size:18px; color:white">90</strong></span></span></p>
+                                        <p class="m-b-5"><span style="color:white">Male <span class="right">{{data.shortlisted_gender.male}}</span></span></p>
+                                        <p><span style="color:white">Female <span class="right">{{data.shortlisted_gender.female}}</span></span></p>
+                                        <p><span style="color:white">Total <span class="right"><strong style="font-size:18px; color:white">{{data.shortlisted_gender.total_gender}}</strong></span></span></p>
                                         
                                     </div>
                                     <div id="revenue" style="height:75px; width:100%;"></div>
@@ -71,13 +79,13 @@
                                 <div class="card primary-gradient card-hover">
                                     <div class="card-content">
                                         <h5 class="card-title white-text">Selected Applicants (6) Geopolitical Zones</h5>
-                                        <p class="m-b-5"><span style="color:white">North-Central<span class="right">16</span></span></p>
-                                        <p><span style="color:white">North-West<span class="right">16</span></span></p>
-                                        <p class="m-b-5"><span style="color:white">North-East<span class="right">16</span></span></p>
-                                        <p><span style="color:white">South-South<span class="right">16</span></span></p>
-                                        <p class="m-b-5"><span style="color:white">South-East<span class="right">16</span></span></p>
-                                        <p><span style="color:white">South-West<span class="right">16</span></span></p>
-                                        <p><span style="color:white">Total<span class="right"><strong style="font-size:18px;">96</strong></span></span></p>
+                                        <p class="m-b-5"><span style="color:white">North-Central<span class="right">{{data.shortlisted_candidate_geozone.north_central}}</span></span></p>
+                                        <p><span style="color:white">North-West<span class="right">{{data.shortlisted_candidate_geozone.north_central}}</span></span></p>
+                                        <p class="m-b-5"><span style="color:white">North-East<span class="right">{{data.shortlisted_candidate_geozone.north_east}}</span></span></p>
+                                        <p><span style="color:white">South-South<span class="right">{{data.shortlisted_candidate_geozone.south_south}}</span></span></p>
+                                        <p class="m-b-5"><span style="color:white">South-East<span class="right">{{data.shortlisted_candidate_geozone.south_east}}</span></span></p>
+                                        <p><span style="color:white">South-West<span class="right">{{data.shortlisted_candidate_geozone.south_west}}</span></span></p>
+                                        <p><span style="color:white">Total<span class="right"><strong style="font-size:18px;">{{data.shortlisted_candidate_geozone.total}}</strong></span></span></p>
                                     </div>
                                     <div class="center-align">
                                         <div id="visits"></div>
@@ -214,112 +222,37 @@
                                         <thead>
                                             <tr>
                                                 <th>full Name</th>
-                                                <th>Age</th>
+                                               
                                                 <th>Geopolitical Zone</th>
                                                 <th>State of Origin</th>
-                                                <th>Score</th>
-                                                <th>Year of NYSC</th>
+                                                <th>IQ Test Score</th>
+                                                <th>Use of IT Score</th>
+                                                <th>Course of Study</th>
                                                
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {{#each data.shortlisted}}
                                             <tr>
                                                 <td>
                                                     <div class="d-flex no-block align-items-center">
-                                                        <div class="m-r-10"><img src="/admin/assets/images/users/d1.jpg" alt="user" class="circle" width="45" /></div>
+                                                        <div class="m-r-10"><img src="/uploads/{{this.photo}}" alt="user" class="circle" width="45" /></div>
                                                         <div class="">
-                                                       <a href="app-contact-detail.html"> <h5 class="m-b-0 font-16 font-medium">Abimbola Blessing</h5><span></a>
+                                                       <a href="/single_candidate_page/{{this.id}}"> <h5 class="m-b-0 font-16 font-medium">{{{jsonp this.user}}}</h5><span></a>
                                                     </div>
                                                 </td>
-                                                <td>23</td>
                                                 <td>
-                                                    North Central
+                                                   {{{underscore_formatter this.geopolitical_zone}}}
                                                 </td>
-                                                <td>Niger State</td>
-                                                <td>95/100</td>
-                                                <td class="blue-grey-text  text-darken-4 font-medium">2016</td>
+                                                <td>{{this.state_of_origin}}</td>
+                                                <td>{{{approximator this.iq_test_score}}}/100</td>
+                                                <td>{{{approximator this.use_of_it_score}}}/100</td>
+                                                <td class="blue-grey-text  text-darken-4 font-medium">{{this.course_study}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex no-block align-items-center">
-                                                        <div class="m-r-10"><img src="/admin/assets/images/users/d1.jpg" alt="user" class="circle" width="45" /></div>
-                                                        <div class="">
-                                                            <a href="app-contact-detail.html">  <h5 class="m-b-0 font-16 font-medium">Ngozi Chukwuma</h5><span></a>
-                                                    </div>
-                                                </td>
-                                                <td>23</td>
-                                                <td>
-                                                    South East
-                                                </td>
-                                                <td>Enugu</td>
-                                                <td>94/100</td>
-                                                <td class="blue-grey-text  text-darken-4 font-medium">2017</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex no-block align-items-center">
-                                                        <div class="m-r-10"><img src="/admin/assets/images/users/d1.jpg" alt="user" class="circle" width="45" /></div>
-                                                        <div class="">
-                                                            <a href="app-contact-detail.html"><h5 class="m-b-0 font-16 font-medium">Mustapha Abubakar</h5><span></a>
-                                                    </div>
-                                                </td>
-                                                <td>23</td>
-                                                <td>
-                                                    North East
-                                                </td>
-                                                <td>Borno</td>
-                                                <td>92/100</td>
-                                                <td class="blue-grey-text  text-darken-4 font-medium">2016</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex no-block align-items-center">
-                                                        <div class="m-r-10"><img src="/admin/assets/images/users/d1.jpg" alt="user" class="circle" width="45" /></div>
-                                                        <div class="">
-                                                            <a href="app-contact-detail.html"><h5 class="m-b-0 font-16 font-medium">Yinka Hassan</h5><span></a>
-                                                    </div>
-                                                </td>
-                                                <td>23</td>
-                                                <td>
-                                                    South West
-                                                </td>
-                                                <td>Osun</td>
-                                                <td>97/100</td>
-                                                <td class="blue-grey-text  text-darken-4 font-medium">2016</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex no-block align-items-center">
-                                                        <div class="m-r-10"><img src="/admin/assets/images/users/d1.jpg" alt="user" class="circle" width="45" /></div>
-                                                        <div class="">
-                                                            <a href="app-contact-detail.html"><h5 class="m-b-0 font-16 font-medium">Paul Chibuike</h5><span></a>
-                                                    </div>
-                                                </td>
-                                                <td>23</td>
-                                                <td>
-                                                    South South
-                                                </td>
-                                                <td>Akwa Ibom</td>
-                                                <td>95/100</td>
-                                                <td class="blue-grey-text  text-darken-4 font-medium">2016</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex no-block align-items-center">
-                                                        <div class="m-r-10"><img src="/admin/assets/images/users/d1.jpg" alt="user" class="circle" width="45" /></div>
-                                                        <div class="">
-                                                            <a href="app-contact-detail.html">  <h5 class="m-b-0 font-16 font-medium">Abimbola Blessing</h5><span></a>
-                                                            
-                                                    </div>
-                                                </td>
-                                                <td>23</td>
-                                                <td>
-                                                    North Central
-                                                </td>
-                                                <td>Niger State</td>
-                                                <td>95/100</td>
-                                                <td class="blue-grey-text  text-darken-4 font-medium">2016</td>
-                                            </tr>
+                                            {{/each}}
+                                        
+                                       
+                                       
                                         </tbody>
                                     </table>
                                 </div>

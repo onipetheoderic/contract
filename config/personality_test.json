@@ -78,10 +78,10 @@
                     {"answer":"Lose Focus and Attend to it", "id": 4}
                 ],
         "scores": [
-            {"id": 1, "ssr":0, "open_minded":10, "flexibility":5, "sacrifice":10, "laziness":20},
+            {"id": 1, "ssr":0, "open_minded":10, "flexibility":5, "sacrifice":10, "laziness":15},
             {"id":2, "ssr":0, "open_minded":10, "flexibility":5, "sacrifice":10, "laziness":20},
-            {"id": 3, "ssr":0, "open_minded":10, "flexibility":0, "sacrifice":5, "laziness":20},
-            {"id":4, "ssr":20, "open_minded":20, "flexibility":20, "sacrifice":20, "laziness":20}
+            {"id": 3, "ssr":0, "open_minded":10, "flexibility":0, "sacrifice":5, "laziness":5},
+            {"id":4, "ssr":20, "open_minded":20, "flexibility":20, "sacrifice":20, "laziness":0}
                 ]
     }
 

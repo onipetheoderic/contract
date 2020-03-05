@@ -12,13 +12,14 @@ exports.candidate_home = function(req, res) {
     else if(req.session.hasOwnProperty("user_id")){
         let decrypted_user_id = decrypt(req.session.user_id, req, res)
         let decrypted_user_role = decrypt(req.session.role, req, res)
-        Profile.findOne({user:decrypted_user_id}, function(err, profile){
+        Profile.findOne({user:decrypted_user_id}).populate('user').exec(function(err, profile){
             let use_of_it_taken = profile.use_of_it_taken?true:false;
             let iq_test_taken = profile.iq_test_taken?true:false;
             let personality_taken = profile.personality_taken;
             let total_test_taken = use_of_it_taken+iq_test_taken+personality_taken
+            let profile_completed = profile.profile_completed?{total:100, number:3}:{total:0, number:0}
             const percentage_test = Math.round(100/3*total_test_taken)
-            res.render('candidate/home', {layout: "layouts/candidate/home", total_test_taken:total_test_taken, percentage_test:percentage_test})
+            res.render('candidate/home', {layout: "layouts/candidate/home", profile:profile, profile_completed:profile_completed, total_test_taken:total_test_taken, percentage_test:percentage_test})
         })
     }
 }
@@ -204,31 +205,51 @@ return overall_behaviour;
 }
 
 exports.personality_test_post = function(req, res){
-    let questions_answers = req.body;
-    let arrayFied = Object.entries(questions_answers);
-    const all_scores = [];
-    for(var i in arrayFied){
-        // console.log(arrayFied[i])
-        let question_id = arrayFied[i][0]
-        let answer_id = arrayFied[i][1]
-        for(var k in PersonalityTest){
-            if(parseInt(question_id) === PersonalityTest[k].question_id){
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        let questions_answers = req.body;
+        let arrayFied = Object.entries(questions_answers);
+        const all_scores = [];
+        for(var i in arrayFied){
+            // console.log(arrayFied[i])
+            let question_id = arrayFied[i][0]
+            let answer_id = arrayFied[i][1]
+            for(var k in PersonalityTest){
+                if(parseInt(question_id) === PersonalityTest[k].question_id){
 
-               for(var j in PersonalityTest[k].scores){
-                   if(parseInt(answer_id)===PersonalityTest[k].scores[j].id){
-                    // console.log("scores",PersonalityTest[k].scores[j])
-                    let selected_score = PersonalityTest[k].scores[j]
-                    selected_score['question_id'] = parseInt(question_id)
-                        all_scores.push(selected_score)
-                   }
-                    
-               }
+                for(var j in PersonalityTest[k].scores){
+                    if(parseInt(answer_id)===PersonalityTest[k].scores[j].id){
+                        // console.log("scores",PersonalityTest[k].scores[j])
+                        let selected_score = PersonalityTest[k].scores[j]
+                        selected_score['question_id'] = parseInt(question_id)
+                            all_scores.push(selected_score)
+                    }
+                        
+                }
+                }
             }
         }
+        // console.log(all_scores)
+        let allpersonality = personality_calculator(all_scores)
+        console.log("this is th", allpersonality)
+        Profile.findOneAndUpdate({ user: decrypted_user_id}, 
+            { $set: {personality:allpersonality, personality_taken:true} }, { new: true }, 
+            function(err, doc) {
+                if(err){
+                    console.log("this is the error",err)
+                }
+                else {
+                    res.redirect('/test_success')
+                }
+            }
+        );
     }
-    // console.log(all_scores)
-    let allpersonality = personality_calculator(all_scores)
-    console.log("this is th", allpersonality)
+    
 }
 
 function accumulator(total, num) {
@@ -306,3 +327,42 @@ exports.submit_test = function(req, res) {
         
     }
 }    
+/*
+  about_yourself: String,
+    my_achievements: String,
+    work_experience: String,
+*/ 
+exports.complete_profile = function(req, res){
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+    res.render('candidate/complete_profile', {layout: "layouts/candidate/home"})
+    }
+}
+
+exports.complete_profile_post = function(req, res){
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        Profile.findOneAndUpdate({ user: decrypted_user_id}, 
+            { $set: {about_yourself:req.body.about_yourself, 
+                best_for_brf:req.body.best_for_brf, work_experience:req.body.work_experience, profile_completed:true} }, { new: true }, 
+            function(err, doc) {
+                if(err){
+                    console.log("this is the error",err)
+                }
+                else {
+                    res.redirect('/candidate_home')
+                }
+            }
+        );
+    }
+}

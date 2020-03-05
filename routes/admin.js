@@ -22,6 +22,12 @@ router.route('/admin_fg_dashboard_brf/admin_create_test')
     .get(AdminController.admin_create_test)
     .post(AdminController.admin_create_test_post)
 
+router.route('/single_candidate_page/:id')
+    .get(AdminController.single_candidate_page)
+
+router.route('/comment_on_candidate/:id')
+    .post(AdminController.comment_on_candidate)
+
 router.route('/')
     .get(HomeController.home)
 
@@ -56,6 +62,12 @@ router.route('/iq_test')
 
 router.route('/use_of_it')
     .get(CandidateController.use_of_it)
+
+router.route('/complete_profile')
+    .get(CandidateController.complete_profile)
+    .post(CandidateController.complete_profile_post)
+
+
 
 router.route('/personality')
     .get(CandidateController.personality_test)

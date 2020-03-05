@@ -134,8 +134,9 @@ hbs.registerHelper('json', function (content) {
 
 hbs.registerHelper('jsonp', function(cont){
   let content = JSON.parse(JSON.stringify(cont))
+  console.log(content)
   if(content[0]!==undefined){
-   let companyName = content[0].companyName
+   let companyName = `${content[0].firstName} ${content[0].lastName}`
     return companyName
   }
   else return;

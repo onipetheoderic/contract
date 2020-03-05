@@ -15,11 +15,11 @@ var ProfileSchema = new mongoose.Schema({
     year_of_graduation: String,
     school_of_study: String,
     photo: String,
-    
-    about_yourself: String,
-    my_achievements: String,
-    work_experience: String,
 
+    about_yourself: String,
+    best_for_brf: String,
+    work_experience: String,
+    profile_completed:{type:Boolean, default:false},
     personality: Array,
     iq_test_score: Number,
     use_of_it_score: Number,
