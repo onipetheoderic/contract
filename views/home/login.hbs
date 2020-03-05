@@ -42,11 +42,14 @@
                                      <p style="margin:0px;">First Name</p>
                                     <input type="text" required name="first_name" placeholder="First name">    
                                    <p style="margin:0px;">Last Name</p>
+                                    <p style="margin:0px;">Home Address</p>
+                                    <input type="text" required name="home_address" placeholder="No 12, ">  
                                     <input type="text" required name="last_name" placeholder="Last name">  
                                      <p style="margin:0px;">Date of Birth</p>
+                                     
                                     <input type="date" required name="dob" id="dob" placeholder="Date of Birth">  
                                     <p style="margin:0px;">Gender</p>
-                                    <select required name="gender" style="background-color: transparent;
+                                     <select required name="gender" style="background-color: transparent;
                                         border: 1px solid #ebebeb;
                                         color: #333;
                                         font-size: 14px;
@@ -54,8 +57,8 @@
                                         margin-bottom: 30px;
                                         padding: 0 15px;">
                                         <option>Select a Gender</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                      <p style="margin:0px;">State Of Origin</p>
                                     <select name="state" id="state" onchange="getval(this);" style="background-color: transparent;
@@ -168,6 +171,21 @@
                             height: 50px;
                             margin-bottom: 30px;
                             padding: 0 15px;"></select>
+                            <p style="margin:0px;">Grade Obtained In School</p>
+                              <select required name="grade_of_school" style="background-color: transparent;
+                                        border: 1px solid #ebebeb;
+                                        color: #333;
+                                        font-size: 14px;
+                                        height: 50px;
+                                        margin-bottom: 30px;
+                                        padding: 0 15px;">
+                                        <option>Select a Grade</option>
+                                        <option value="first_class_honours">First Class Honours (5)</option>
+                                        <option value="second_class_honours_upper">Second Class Honours, Upper (4)</option>
+                                        <option value="second_class_honours_lower">Second Class Honours, Lower (3)</option>
+                                        <option value="third_class_honours_lower">Third Class Honours, Lower (2)</option>
+                                        <option value="pass">Pass (1)</option>
+                              </select>
                               <p style="margin:0px;">NYSC Passing Out date</p>
                             <input type="date" required name="dog" placeholder="NYSC Passing Out date">  
                               <p style="margin:0px;">NYSC Number</p>

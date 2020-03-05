@@ -15,8 +15,17 @@
             <!-- Container fluid scss in scafholding.scss -->
             <!-- ============================================================== -->
 <div class="container-fluid">
-  
-   
+{{!-- role_id: String,
+    state_of_origin: String,
+    dob: String,
+    dog: String,
+    gender: String,
+    lga: String,
+    state_residence: String,
+    geopolitical_zone: String,
+    year_of_graduation: String,
+    school_of_study: String,
+    photo: String, --}}
                 <div class="row">
                     <div class="col s4">
                         <div class="card">
@@ -31,15 +40,15 @@
                         </div>
                         <div class="card">
                             <div class="card-content">
-                                <small>Email address </small>
-                                <h6>james@gmail.com</h6>
-                                <small>Phone</small>
-                                <h6>07039148866</h6>
-                                <small>Address</small>
-                                <h6>71 Pilgrim jabi lake mall, MD 20815</h6>
-                               
-                                <small class="db m-t-20">University of Abuja</small>
-                                <h6>Second Class Lower</h6>
+                                <small>State of Origin/Geopolitical Zone</small>
+                                <h6>{{data.profile.state_of_origin}} / {{data.profile.geopolitical_zone}}</h6>
+                                <small>Year of NYSC completion</small>
+                                <h6>{{data.profile.dog}}</h6>
+                                <small>Course of Study</small>
+                                <h6>{{data.profile.course_study}}</h6>
+                                <small>Institution Attended</small>
+                                <h6>{{data.profile.school_of_study}}</h6>
+                                <h6>{{data.profile.grade_of_school}}</h6>
                                 </div>
                         </div>
                     </div>
@@ -163,7 +172,7 @@
                                     </div>
                                 </div>
                                 <div id="settings" class="col s12">
-
+                                    
                                     <div class="col s12">
                                         <div class="card">
                                             <div class="card-content">

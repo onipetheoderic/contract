@@ -10,6 +10,7 @@ var ProfileSchema = new mongoose.Schema({
     dog: String,
     gender: String,
     lga: String,
+    home_address:String,
     state_residence: String,
     geopolitical_zone: String,
     year_of_graduation: String,
@@ -36,6 +37,7 @@ var ProfileSchema = new mongoose.Schema({
     nysc_number: String,
     course_study: String,
     marital_status: String,
+    grade_of_school:String,
     religion: String,
     tribe: String,
 
