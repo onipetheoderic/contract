@@ -3,9 +3,19 @@ import Profile from '../../models/Profile/profile';
 import {encrypt, decrypt, findResource} from '../../utility/encryptor'
 import {redirector, admin_checker_redirector} from '../../utility/redirector'
 import moment from 'moment';
+import {geopolitical_zone_calculator, gender_calculator} from '../../utility/geopoliticalgrouper'
 
 exports.home = function(req, res) {
-    res.render('home/index', {layout: "layouts/home/home"})
+    Profile.find({}).populate('user').exec(function(err, profiles){      
+        let all_profiles = profiles;
+        let all_candidate_geozone = geopolitical_zone_calculator(all_profiles)       
+        let gender_calculato = gender_calculator(all_profiles)       
+        const {male, female, total_gender} = gender_calculato
+        const { north_central, north_east, north_west, south_south, south_west, south_east, total } = all_candidate_geozone;
+      
+        res.render('home/index', {layout: "layouts/home/home", data:{all_candidate_geozone:all_candidate_geozone, total_gender:total_gender, male:male, female:female, total:total, north_central:north_central, north_east:north_east, north_west:north_west, south_south:south_south, south_west:south_west, south_east:south_east}})
+    })    
+   
 }
 
 exports.login_register = function(req, res) {

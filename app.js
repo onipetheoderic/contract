@@ -143,6 +143,17 @@ hbs.registerHelper('jsonp', function(cont){
   
 })
 
+
+hbs.registerHelper('dob_calc', function(dob){
+    var today = new Date();
+    var todays_date = today.toISOString().split('T')[0]
+    var a = moment(dob,'YYYY-MM-DD');
+    var b = moment(todays_date,'YYYY-MM-DD');
+    var diffYears = b.diff(a, 'years');
+    return diffYears
+})
+
+
 hbs.registerHelper('uppercase', function (str) {
   if(str && typeof str === "string") {
     return str.toUpperCase();
@@ -284,6 +295,13 @@ hbs.registerHelper('approximator', function(num){
  let newNum = num.toFixed(2)
  return newNum
 })
+hbs.registerHelper('approximator_percentager', function(num){
+  let newNum = num.toFixed(1)
+  if(newNum>100){
+    return 100
+  }
+  else return newNum
+ })
 
 
 hbs.registerHelper('odds_verifier', function(val, homeGS, homeGC){
@@ -311,8 +329,14 @@ hbs.registerHelper('checkers', function(status) {
 });
 
 hbs.registerHelper('underscore_formatter', function(str){
-  let new_str = str.toUpperCase();
-  return new_str.replace(/_/g, ' ');
+  if(str!=undefined){
+    let new_str = str.toUpperCase();
+    return new_str.replace(/_/g, ' ');
+  }
+  else {
+    return str
+  }
+  
 })
 
 hbs.registerHelper('link', function(text, options) {

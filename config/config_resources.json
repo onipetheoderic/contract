@@ -17,6 +17,8 @@
     {"resource_id":"16", "title": "suspend_user"},
     {"resource_id":"17", "title": "delete_user"},
     {"resource_id":"18", "title": "change_default_settings"},
-    {"resource_id":"19", "title": "take_a_test"}
+    {"resource_id":"19", "title": "take_a_test"},
+    {"resource_id":"21", "title": "view_all_permission"},
+    {"resource_id":"20", "title": "candidate_registration"}
 
 ]

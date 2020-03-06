@@ -46,7 +46,7 @@
                                         <div class="mt-3">
                                             {{#each this.answers}}
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="{{../this.question_id}}{{this.id}}" name="{{../this.question_id}}" class="custom-control-input" value="{{this.id}}">
+                                                <input required type="radio" id="{{../this.question_id}}{{this.id}}" name="{{../this.question_id}}" class="custom-control-input" value="{{this.id}}">
                                                 <label class="custom-control-label" for="{{../this.question_id}}{{this.id}}">{{this.answer}}</label>
                                             </div>
                                            

@@ -1,10 +1,140 @@
 import CandidateTest from '../../models/CandidateTest/candidateTest';
 import Profile from '../../models/Profile/profile';
 import Remark from '../../models/Remark/remark';
+import User from '../../models/User/user';
+
+import Role from '../../models/Role/role';
+import Resource from '../../models/Resource/resource';
+import RoleToResource from '../../models/RoleToResource/roleToResource';
+
+//Configuration of roles
+import config_resources from '../../config/config_resources.json';
+import config_roles from '../../config/config_roles.json';
+import config_resourse_link from '../../config/config_resourse_link.json';
+
 import {encrypt, decrypt, findResource} from '../../utility/encryptor'
 
 import {geopolitical_zone_calculator, gender_calculator} from '../../utility/geopoliticalgrouper'
 
+const filePlacerAndNamer = (req, res, the_file) => {
+    // let file_name = the_file.name
+    let file_name = Date.now()+ the_file.name
+    the_file.mv('views/public/uploads/' + file_name, function(err) {
+   });
+    return file_name
+}
+
+exports.sudo_page = function(req, res) {
+    Role.find({}, function(err, roles){
+        const roles_present = roles.length===0?false:true;
+        Resource.find({}, function(err, resources){
+            res.render('admin/sudo', {layout: "layouts/admin/sudo", 
+            data:{resources_count:resources.length, roles_count:roles.length,
+                roles_present:roles_present}})
+        })
+    }) 
+}
+
+exports.manage_roles = function(req, res) {
+    Role.find({}, function(err, roles){
+        if(roles.length===0){
+            console.log("There is no roles created yet, so lets create em")
+            for(var i in config_roles){
+                // console.log("these are the configs", config_roles[i])
+                let role = new Role();
+                role.role_id = config_roles[i].role_id;
+                role.title = config_roles[i].title;
+                role.save(function(err, auth_details){       
+                    if(err){
+                      console.log(err)
+                    } else {                    
+                      console.log("successfull")
+                    }
+                });
+            }
+            for(var k in config_resources){
+                let resource = new Resource();
+                resource.title = config_resources[k].title;
+                resource.resource_id = config_resources[k].resource_id;
+                resource.save(function(err, resource){
+                    if(err){
+                        console.log(err)
+                      } else {                    
+                        console.log("successfull")
+                      }
+                })
+            }
+            for(var m in config_resourse_link){
+                let roleToResource = new RoleToResource();
+                roleToResource.resource_id = config_resourse_link[m].resource_id;
+                roleToResource.role_id = config_resourse_link[m].role_id;
+                roleToResource.role_name = config_resourse_link[m].role_name;
+                roleToResource.resource_name = config_resourse_link[m].resource_name;
+                roleToResource.save(function(err, roleToResources){
+                    
+                    if(err){
+                        console.log(err)
+                      } else {                    
+                        console.log("successfull")
+                      }
+                })
+            }
+            res.redirect('/admin_fg_dashboard_brf/sudo_page')
+        }
+        else {
+            let all_roles_filtered=[]
+            Role.find({}, function(err, all_roles){
+                for(var k in all_roles){
+                    if(all_roles[k].role_id !="1"){
+                        all_roles_filtered.push(all_roles[k])
+                    }
+                    
+                }
+                Resource.find({}, function(err, all_resource){
+                    RoleToResource.find({})                    
+                    .exec(function(err, all_roles_to_resource){
+                        let all_super_roles = [];
+                        let all_minister = [];
+                        let all_commitee_members = [];
+                        let candidates = [];
+                        let engineers = []
+                        for(var i in all_roles_to_resource){
+                            if(all_roles_to_resource[i].role_id==="1"){
+                                all_super_roles.push(all_roles_to_resource[i])
+                            }
+                            if(all_roles_to_resource[i].role_id==="2"){
+                                all_minister.push(all_roles_to_resource[i])
+                            }
+                            if(all_roles_to_resource[i].role_id==="3"){
+                                all_commitee_members.push(all_roles_to_resource[i])
+                            }
+                            if(all_roles_to_resource[i].role_id==="4"){
+                                candidates.push(all_roles_to_resource[i])
+                            }
+                            if(all_roles_to_resource[i].role_id==="5"){
+                                engineers.push(all_roles_to_resource[i])
+                            }
+                        }
+
+                        res.render('admin/manage_roles', {layout: "layouts/admin/sudo", 
+                        data:{all_roles:all_roles, 
+                            roles_count:all_roles.length,
+                            all_resource:all_resource,
+                            all_roles_filtered: all_roles_filtered,
+                            resource_count:all_resource.length,
+                            all_super_roles:all_super_roles,
+                            all_minister: all_minister,
+                            all_commitee_members:all_commitee_members,
+                            engineers:engineers,
+                            candidates:candidates
+                        }})
+                    })
+                })
+            })
+            console.log("_______________________route reached")
+        }
+    })
+}
 
 exports.home = function(req, res) {
 
@@ -66,11 +196,132 @@ exports.admin_create_test_post = function(req, res) {
 
 }
 
+exports.login_post = function(req, res) {
+    let email = req.body.email;
+    let password = req.body.password;
+    // let passwordhash = sha512(req.body.password)
+    User.findOne({email: email}, function(err, user) {
+        if(user == null){
+            res.render('admin/login', {layout: false, message:{error: "Email Not Registered"}})
+        }
+        else if(user.role!=="3" || user.role!=="1" || user.role !== "2" || user.role!=="5"){
+            res.redirect("/login")//you dont belong here
+        }
+        else if(user.role ==="3" || user.role === "2" || user.role==="5" || user.role==="1"){
+            if (user.password == password){
+                console.log('User connected');
+                let encId = encrypt(user_id)
+                let encRole = encrypt(user.role)
+                req.session.user_id = encId;
+                req.session.role = encRole;
+                res.redirect("/admin_fg_dashboard_brf")
+            }else{
+                res.render('admin/login', {layout: false, message:{error: "Passwords dont match"}})
+            }
+        }
+    })
+    
+}
+
+exports.login = function(req, res){
+    res.render('admin/login', {layout: false})
+}
+
+exports.register_user = function(req, res){
+    res.render('admin/register_user', {layout: false})
+}
+
+exports.register_super = function(req, res){
+    res.render('admin/register_super', {layout: false})
+}
+
+exports.forgot_password = function(req, res){
+    res.render('admin/forgot_password', {layout: false})
+}
+
+exports.change_password = function(req, res){
+    res.render('admin/change_password', {layout: false})
+}
 exports.single_candidate_page = function(req, res){
     let candidate_id = req.params.id;
     Profile.findOne({_id:candidate_id}).populate('user').exec(function(err, profile){   
-        res.render('admin/single_candidate_page', {layout: "layouts/admin/home", data:{profile:profile}})
+        res.render('admin/single_candidate_page', {layout: "layouts/admin/single", data:{profile:profile}})
     }) 
+}
+
+
+exports.register_user_post = function(req, res) {
+    let incoming_file_name = filePlacerAndNamer(req, res, req.files.photo);
+    User.findOne({email: req.body.email}, function(err, email_registered){
+        if (email_registered==null) { 
+            User.findOne({phoneNumber: req.body.email}, function(err, phone_registered){
+                if (phone_registered==null) { 
+                    console.log("Phone number not taken")//
+                    const user_role = req.body.user_type ==="engineer"?"5":req.body.user_type==="minister"?"2":req.body.user_type==="commitee_members"?"3":false
+                    let user = new User();
+                    user.email = req.body.email;
+                    user.firstName = req.body.first_name;
+                    user.lastName = req.body.last_name;
+                    user.phoneNumber = req.body.phone_number;
+                    user.password = req.body.password;
+                    user.role = user_role;
+                    user.picture = incoming_file_name;
+                    user.save(function(err, user_detail){
+                        if(err){
+                        console.log("errr",err)
+                            res.render('admin/register_user', {layout: false, message:{error: "Error occured during user registration"}})
+                        } else {
+                            res.redirect('/admin_fg_dashboard_brf/login')
+                        }
+                    });
+                }
+                else if(phone_registered !=null){
+                    // console.log("Phone number taken")
+                    res.render('admin/register_user', {layout: false, message:{error: "Phone Number has already been taken"}})
+                }
+            })
+        }
+        else if(email_registered !=null){
+            res.render('admin/register_user', {layout: false, message:{error: "Email has already been taken"}})
+        }
+     })
+}
+
+exports.register_super_post = function(req, res) {
+    let incoming_file_name = filePlacerAndNamer(req, res, req.files.photo);
+    User.findOne({email: req.body.email}, function(err, email_registered){
+        if (email_registered==null) { 
+            User.findOne({phoneNumber: req.body.email}, function(err, phone_registered){
+                if (phone_registered==null) { 
+                    console.log("Phone number not taken")//
+                    const user_role = req.body.user_type ==="engineer"?"5":req.body.user_type==="minister"?"2":req.body.user_type==="commitee_members"?"3":false
+                    let user = new User();
+                    user.email = req.body.email;
+                    user.firstName = req.body.first_name;
+                    user.lastName = req.body.last_name;
+                    user.phoneNumber = req.body.phone_number;
+                    user.password = req.body.password;
+                    user.role = "1";
+                    user.picture = incoming_file_name;
+                    user.save(function(err, user_detail){
+                        if(err){
+                        console.log("errr",err)
+                            res.render('admin/register_user', {layout: false, message:{error: "Error occured during user registration"}})
+                        } else {
+                            res.redirect('/admin_fg_dashboard_brf/login')
+                        }
+                    });
+                }
+                else if(phone_registered !=null){
+                    // console.log("Phone number taken")
+                    res.render('admin/register_user', {layout: false, message:{error: "Phone Number has already been taken"}})
+                }
+            })
+        }
+        else if(email_registered !=null){
+            res.render('admin/register_user', {layout: false, message:{error: "Email has already been taken"}})
+        }
+     })
 }
 
 exports.comment_on_candidate = function(req, res){

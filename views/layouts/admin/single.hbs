@@ -2,31 +2,26 @@
 <html>
 
 
-<!-- Mirrored from www.wrappixel.com/demos/admin-templates/materialart/html/mini-sidebar/index3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Feb 2020 05:33:20 GMT -->
+<!-- Mirrored from www.wrappixel.com/demos/admin-templates/materialart/html/mini-sidebar/app-contact-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Feb 2020 05:33:46 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="/admin/assets/images/favicon.png">
-    <title>BRF Internship Admin Portal</title>
-    <!-- This page CSS -->
-    <link href="/admin/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="/admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css" rel="stylesheet">
-    <link href="/admin/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <link href="/admin/assets/extra-libs/css-chart/css-chart.css" rel="stylesheet">
+    <title>Materialart Admin Template</title>
     <link href="/admin/dist/css/style.css" rel="stylesheet">
-    <link href="/admin/dist/css/pages/dashboard3.css" rel="stylesheet">
-
-<link href="/admin/dist/js/pages/chartist/chartist-init.css" rel="stylesheet">
-
-
-
+    <!-- This page CSS -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:/ -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https:/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https:/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link href="/admin/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="/admin/dist/js/pages/chartist/chartist-init.css" rel="stylesheet">
+    <link href="/admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,13 +32,13 @@
         <div class="preloader">
             <div class="loader">
                 <div class="loader__figure"></div>
-                <p class="loader__label">BRF</p>
+                <p class="loader__label">Material Admin</p>
             </div>
         </div>
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
-        <header class="topbar">
+          <header class="topbar">
             <!-- ============================================================== -->
             <!-- Navbar scss in header.scss -->
             <!-- ============================================================== -->
@@ -246,7 +241,7 @@
             <!-- Navbar scss in header.scss -->
             <!-- ============================================================== -->
         </header>
-        <!-- ============================================================== -->
+  <!-- ============================================================== -->
         <!-- Sidebar scss in sidebar.scss -->
         <!-- ============================================================== -->
         <aside class="left-sidebar">
@@ -297,22 +292,27 @@
         <!-- ============================================================== -->
         <!-- Page wrapper scss in scafholding.scss -->
         <!-- ============================================================== -->
-        <div class="page-wrapper page-header">
+        <div class="page-wrapper">
             <!-- ============================================================== -->
-            <!-- Temp - Earnings -->
+            <!-- Title and breadcrumb -->
             <!-- ============================================================== -->
+            <div class="page-titles">
+                <div class="d-flex align-items-center">
+                    <h5 class="font-medium m-b-0">Candidate Details Page</h5>
+                    <div class="custom-breadcrumb ml-auto">
+                        <a href="/admin_fg_dashboard_brf" class="breadcrumb">Home</a>
+                        <a href="#" class="breadcrumb">Candidate Detail</a>
+                    </div>
+                </div>
+            </div>
             <!-- ============================================================== -->
             <!-- Container fluid scss in scafholding.scss -->
             <!-- ============================================================== -->
-
-{{{body}}}
-
-
-            
+     {{{body}}}
             <!-- ============================================================== -->
             <!-- Container fluid scss in scafholding.scss -->
             <!-- ============================================================== -->
-            <footer class="center-align m-b-30">Developed by Mabto Strong</footer>
+               <footer class="center-align m-b-30">Developed by Mabto Strong</footer>
         </div>
         <!-- ============================================================== -->
         <!-- Page wrapper scss in scafholding.scss -->
@@ -320,7 +320,7 @@
         <!-- ============================================================== -->
         <!-- Right Sidebar -->
         <!-- ============================================================== -->
-      
+        <a href="#" data-target="right-slide-out" class="sidenav-trigger right-side-toggle btn-floating btn-large waves-effect waves-light red"><i class="material-icons">settings</i></a>
         <aside class="right-sidebar">
             <!-- Right Sidebar -->
             <ul id="right-slide-out" class="sidenav right-sidenav p-t-10">
@@ -633,7 +633,7 @@
                 </li>
             </ul>
         </aside>
-        <div class="chat-windows "></div>
+        <div class="chat-windows"></div>
         <!-- ============================================================== -->
         <!-- Right Sidebar -->
         <!-- ============================================================== -->
@@ -641,32 +641,44 @@
     <!-- ============================================================== -->
     <!-- All Required js -->
     <!-- ============================================================== -->
- <script src="/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-    <script data-cfasync="false" src="/admin/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script data-cfasync="false" src="/admin/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/admin/dist/js/materialize.min.js"></script>
+    <script src="/admin/assets/libs/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- Apps -->
 
+    <script data-cfasync="false" src="/admin/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/admin/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="/admin/dist/js/materialize.min.js"></script>
     <script src="/admin/assets/libs/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!-- ============================================================== -->
     <!-- Apps -->
     <!-- ============================================================== -->
     <script src="/admin/dist/js/app.js"></script>
-    <script src="/admin/dist/js/app.init.mini-sidebar.js"></script>
+     <script src="/admin/dist/js/app.init.mini-sidebar.js"></script>
     <script src="/admin/dist/js/app-style-switcher.js"></script>
     <!-- ============================================================== -->
     <!-- Custom js -->
     <!-- ============================================================== -->
- 
+    <script src="/admin/dist/js/custom.min.js"></script>
     <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->
     <script src="/admin/assets/libs/chartist/dist/chartist.min.js"></script>
     <script src="/admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="/admin/assets/libs/gaugeJS/dist/gauge.min.js"></script>
-    <script src="/admin/assets/extra-libs/c3/d3.min.js"></script>
-    <script src="/admin/assets/extra-libs/c3/c3.min.js"></script>
-    <script src="/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-    <script src="/admin/dist/js/pages/dashboards/dashboard3.js"></script>
-   <script src="/admin/dist/js/custom.min.js"></script>
-
+    <script src="/admin/dist/js/pages/chartist/chartist-init.js"></script>
+    <!-- ============================================================== -->
+    <script src="/admin/dist/js/app.js"></script>
+     <script src="/admin/dist/js/app.init.mini-sidebar.js"></script>
+    <script src="/admin/dist/js/app-style-switcher.js"></script>
+    <!-- ============================================================== -->
+    <!-- Custom js -->
+    <!-- ============================================================== -->
+    <script src="/admin/dist/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
 </body>
+
+
+<!-- Mirrored from www.wrappixel.com/demos/admin-templates/materialart/html/mini-sidebar/app-contact-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Feb 2020 05:33:47 GMT -->
 </html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.wrappixel.com/demos/admin-templates/materialart/html/mini-sidebar/authentication-register1.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Feb 2020 05:36:19 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="/admin/assets/images/favicon.png">
+    <title>BRF Internship Admin Portal</title>
+    <link href="/admin/dist/css/style.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <link href="/admin/dist/css/pages/authentication.css" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="notice_wrapper">		  	
+	<p class="alert">{{{message.error}}}{{{message.success}}}</p>				
+</div>
+    <div class="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="loader">
+                <div class="loader__figure"></div>
+                <p class="loader__label">BRF</p>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Login box.scss -->
+        <!-- ============================================================== -->
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(/admin/assets/images/big/auth-bg.jpg) no-repeat center center;">
+            <div class="auth-box">
+                <div id="loginform">
+                    <div class="logo">
+                        <span class="db"><img src="/admin/assets/images/logo-icon.png" alt="logo" /></span>
+                        <h5 class="font-medium m-b-20">Register A User</h5>
+                    </div>
+                    <!-- Form -->
+                    <div class="row">
+                        <form class="col s12" action="/admin_fg_dashboard_brf/register_user" method="POST" enctype="multipart/form-data">
+                            <!-- email -->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="first_name" name="first_name" type="text" class="validate" required>
+                                    <label for="first_name">First Name</label>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="last_name" name="last_name" type="text" class="validate" required>
+                                    <label for="last_name">Last Name</label>
+                                </div>
+                            </div>
+                            <!-- email -->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="email" name="email" type="email" readonly onfocus="this.removeAttribute('readonly');" class="validate" required>
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="phone_number" name="phone_number" type="number" readonly onfocus="this.removeAttribute('readonly');" class="validate" required>
+                                    <label for="phone_number">Phone Number</label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="file-field input-field">
+                                    <div class="btn blue darken-1">
+                                        <span>Photo</span>
+                                        <input type="file" name="photo">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" readonly onfocus="this.removeAttribute('readonly');" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- pwd -->
+                            <div class="row">
+                               <label>Select User Role</label>
+                                <select class="browser-default" name="user_type">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="minister">Minister</option>
+                                    <option value="commitee_members">Commitee Members</option>
+                                    <option value="engineer">Engineer</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="password" name="password" readonly onfocus="this.removeAttribute('readonly');" type="password" class="validate" required>
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                            <!-- pwd -->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="cpassword" type="password" class="validate" readonly onfocus="this.removeAttribute('readonly');" required>
+                                    <label for="cpassword">Confirm Password</label>
+                                </div>
+                            </div>
+                            <!-- pwd -->
+                            {{!-- <div class="row m-t-5">
+                                <div class="col s7">
+                                    <label>
+                                        <input type="checkbox" />
+                                        <span>Agree to all Terms</span>
+                                    </label>
+                                </div>
+                            </div> --}}
+                            <!-- pwd -->
+                            <div class="row m-t-40">
+                                <div class="col s12">
+                                    <button class="btn-large w100 red" type="submit">Sign Up</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+       <script>
+
+    var password = document.getElementById("password")
+  , confirm_password = document.getElementById("cpassword");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+    </div>
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/admin/dist/js/materialize.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script type="text/javascript">
+        $(function() {
+            $(".preloader").fadeOut();
+        });
+    </script>
+    <script>
+  $(document).ready(function(){
+			setTimeout(function(){
+    	$('.notice_wrapper').slideUp('slow', function(){
+        	$(this).remove();
+          })
+        }, 2000);
+	
+});
+</script>
+</body>
+</html>

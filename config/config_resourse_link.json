@@ -7,12 +7,12 @@
     {"resource_id":"15", "resource_name":"ability_to_post_in_blog", "role_id": "","role_name": "minister"},
     {"resource_id":"16", "resource_name":"suspend_user", "role_id": "2","role_name": "minister"},
     
-    {"resource_id":"10", "resource_name":"view_shortlisted_candidate", "role_id": "2","role_name": "committee_members"},
-    {"resource_id":"11", "resource_name":"make_remark_on_candidate", "role_id": "2","role_name": "committee_members"},
-    {"resource_id":"12", "resource_name":"broadcast_message_to_staff", "role_id": "2","role_name": "committee_members"},
-    {"resource_id":"13", "resource_name":"broadcast_message_to_candidate", "role_id": "2","role_name": "committee_members"},
-    {"resource_id":"14", "resource_name":"broadcast_message_to_non_candidate", "role_id": "2","role_name": "committee_members"},
-    {"resource_id":"15", "resource_name":"ability_to_post_in_blog", "role_id": "","role_name": "committee_members"},
+    {"resource_id":"10", "resource_name":"view_shortlisted_candidate", "role_id": "3","role_name": "committee_members"},
+    {"resource_id":"11", "resource_name":"make_remark_on_candidate", "role_id": "3","role_name": "committee_members"},
+    {"resource_id":"12", "resource_name":"broadcast_message_to_staff", "role_id": "3","role_name": "committee_members"},
+    {"resource_id":"13", "resource_name":"broadcast_message_to_candidate", "role_id": "3","role_name": "committee_members"},
+    {"resource_id":"14", "resource_name":"broadcast_message_to_non_candidate", "role_id": "3","role_name": "committee_members"},
+    {"resource_id":"15", "resource_name":"ability_to_post_in_blog", "role_id": "3","role_name": "committee_members"},
  
     {"resource_id":"1", "resource_name":"update_about_us_page", "role_id": "1","role_name": "super_admin"},
     {"resource_id":"2", "resource_name":"update_stages_home_page", "role_id": "1","role_name": "super_admin"},
@@ -32,5 +32,29 @@
     {"resource_id":"16", "resource_name":"suspend_user", "role_id": "1","role_name": "super_admin"},
     {"resource_id":"17", "resource_name":"delete_user", "role_id": "1","role_name": "super_admin"},
     {"resource_id":"18", "resource_name":"change_default_settings", "role_id": "1","role_name": "super_admin"},
-    {"resource_id":"19", "resource_name":"view_all_permission", "role_id": "1","role_name": "super_admin"}
+    {"resource_id":"19", "resource_name":"take_a_test", "role_id": "1","role_name": "super_admin"},
+    {"resource_id":"21", "resource_name":"view_all_permission", "role_id": "1","role_name": "super_admin"},
+
+
+    {"resource_id":"1", "resource_name":"update_about_us_page", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"2", "resource_name":"update_stages_home_page", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"3", "resource_name":"update_our_department_text", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"4", "resource_name":"write_testimony", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"5", "resource_name":"upload_course_material", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"6", "resource_name":"create_a_user", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"7", "resource_name":"upload_test", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"8", "resource_name":"upload_candidate_status", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"9", "resource_name":"upload_profile_questions", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"10", "resource_name":"view_shortlisted_candidate", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"11", "resource_name":"make_remark_on_candidate", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"12", "resource_name":"broadcast_message_to_staff", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"13", "resource_name":"broadcast_message_to_candidate", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"14", "resource_name":"broadcast_message_to_non_candidate", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"15", "resource_name":"ability_to_post_in_blog", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"16", "resource_name":"suspend_user", "role_id": "5","role_name": "engineer"},
+    {"resource_id":"17", "resource_name":"delete_user", "role_id": "5","role_name": "engineer"},
+
+    {"resource_id":"19", "resource_name":"take_a_test", "role_id": "4","role_name": "candidates"},
+    {"resource_id":"20", "resource_name":"candidate_registration", "role_id": "4","role_name": "candidates"}
+
 ]

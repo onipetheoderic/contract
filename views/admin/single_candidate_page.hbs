@@ -1,16 +1,4 @@
-<div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Title and breadcrumb -->
-            <!-- ============================================================== -->
-            <div class="page-titles">
-                <div class="d-flex align-items-center">
-                    <h5 class="font-medium m-b-0">Candidate Details Page</h5>
-                    <div class="custom-breadcrumb ml-auto">
-                        <a href="#!" class="breadcrumb">Home</a>
-                        <a href="#!" class="breadcrumb">Contact Detail</a>
-                    </div>
-                </div>
-            </div>
+
             <!-- ============================================================== -->
             <!-- Container fluid scss in scafholding.scss -->
             <!-- ============================================================== -->
@@ -57,7 +45,7 @@
                             <div class="row">
                                 <div class="col s12">
                                     <ul class="tabs">
-                                        <li class="tab col s4"><a class="active" href="#timeline">Candidate Remarks</a></li>
+                                        <li class="tab col s4"><a href="#timeline">Candidate Remarks</a></li>
                                         <li class="tab col s4"><a href="#profile">Candidate Profile</a></li>
                                         <li class="tab col s4"><a href="#settings">Analysis</a></li>
                                     </ul>
@@ -122,65 +110,69 @@
                                         <div class="row">
                                             <div class="col m3 b-r"> <strong>Full Name</strong>
                                                 <br>
-                                                <p>James Anderson</p>
+                                                <p>{{{jsonp data.profile.user}}}</p>
                                             </div>
                                             <div class="col m3 b-r"> <strong>Age</strong>
                                                 <br>
-                                                <p>25 Years</p>
+                                                <p>{{{dob_calc data.profile.dob}}} Years</p>
                                             </div>
                                             <div class="col m3 b-r"> <strong>State of Origin</strong>
                                                 <br>
-                                                <p>Kaduna</p>
+                                                <p>{{data.profile.state_of_origin}}</p>
                                             </div>
                                             <div class="col m3"> <strong>Location</strong>
                                                 <br>
-                                                <p>Abuja</p>
+                                                <p>{{data.profile.state_residence}}</p>
                                             </div>
                                         </div>
                                         <hr>
-                                        <p class="m-t-30">To continue working and learning in the field of Information Technology where I can contribute my skills to solving various problems that contributes to the growth of any Organization.</p>
-                                        <h5 class="card-title">Skill Set</h5>
+                                         <small>About the Candidate</small>
+                                        <p class="m-t-30" style="margin-top:1px!important;">{{data.profile.about_yourself}}</p>
                                         <hr>
-                                        <h6 class="font-light m-t-30">Engineering <span class="pull-right">80%</span></h6>
+                                         <small>Candidate's Say on "Why I am the best for BRF"</small>
+                                        <p class="m-t-30" style="margin-top:1px!important;">{{data.profile.best_for_brf}}</p>
+                                         <hr>
+                                         <small>Work Experience</small>
+                                        <p class="m-t-30" style="margin-top:1px!important;">{{data.profile.work_experience}}</p>
+                                        <hr>
+
+                                        <h5 class="card-title">Candidate Analysis</h5>
+                                        <hr>
+                                         <h6 class="font-light m-t-30">IQ Test Score<span class="pull-right">({{{approximator_percentager data.profile.iq_test_score}}}%)</span></h6>
                                         <div class="progress">
-                                            <div class="determinate" style="width: 80%"></div>
+                                            <div class="determinate" style="width: {{data.profile.iq_test_score}}%"></div>
                                         </div>
-                                        <h6 class="font-light m-t-30">Researching <span class="pull-right">90%</span></h6>
+                                        <h6 class="font-light m-t-30">Use of IT Score <span class="pull-right">({{{approximator_percentager data.profile.use_of_it_score}}}%)</span></h6>
                                         <div class="progress">
-                                            <div class="determinate" style="width: 90%"></div>
+                                            <div class="determinate" style="width: {{data.profile.use_of_it_score}}%"></div>
                                         </div>
-                                        <h6 class="font-light m-t-30">Intelligent Quotient <span class="pull-right">80%</span></h6>
+                                        {{#each data.profile.personality}}
+                                        <h6 class="font-light m-t-30">{{{underscore_formatter this.name}}} <span class="pull-right">({{{approximator_percentager this.score}}}%)</span></h6>
                                         <div class="progress">
-                                            <div class="determinate" style="width: 80%"></div>
+                                            <div class="determinate" style="width: {{this.score}}%"></div>
                                         </div>
-                                        <h6 class="font-light m-t-30">Verbal Reasoning <span class="pull-right">70%</span></h6>
-                                        <div class="progress">
-                                            <div class="determinate" style="width: 70%"></div>
-                                        </div>
-                                        <h6 class="font-light m-t-30">IT Skills <span class="pull-right">80%</span></h6>
-                                        <div class="progress">
-                                            <div class="determinate" style="width: 80%"></div>
-                                        </div>
-                                        <h6 class="font-light m-t-30">Field Experience <span class="pull-right">60%</span></h6>
-                                        <div class="progress">
-                                            <div class="determinate" style="width: 60%"></div>
-                                        </div>
-                                        <h6 class="font-light m-t-30">Work Experience <span class="pull-right">80%</span></h6>
-                                        <div class="progress">
-                                            <div class="determinate" style="width: 80%"></div>
-                                        </div>
+                                        {{/each}}
+
+                                        
                                     </div>
                                 </div>
+                                
+                               <script>
+                                   window.onload = function() {
+  document.getElementById('settings').style.display = 'none';
+};
+                               </script>
                                 <div id="settings" class="col s12">
-                                    
-                                    <div class="col s12">
+                                    <div class="card-content">
+                                        <div class="row">
+                                     {{!-- <div class="col s12">
                                         <div class="card">
                                             <div class="card-content">
                                                 <h5 class="card-title">Descriptive Analysis Based on User <Datal></Datal></h5>
                                                 <div class="ct-bar-chart" style="height: 200px;"></div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col s12">
                                         <div class="card">
@@ -214,10 +206,13 @@
                                 </div>
                             </div>
                         </div>
+                         </div>
+                        </div>
                     </div>
                 </div>
                <!-- ============================================================== -->
 
 </div>
-</div>
- <script src="/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+
+
+

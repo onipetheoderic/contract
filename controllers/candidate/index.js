@@ -184,21 +184,21 @@ function score_percentage(arr){
 }
 
 let overall_behaviour = [
-    {"creativity":score_percentage(creativity) },
-    {"introvert":score_percentage(introvert)},
-    {"extrovert":score_percentage(extrovert) },
-    {"laziness":score_percentage(laziness)},
-    {"take_risk":score_percentage(take_risk) },
-    {"know_boundaries":score_percentage(kb)},
-    {"critical_thinking":score_percentage(ct) },
-    {"eagerness_to_learn":score_percentage(etl)},
-    {"radicalism":score_percentage(radicalism)},
-    {"flexibility":score_percentage(flexibility) },
-    {"open_minded":score_percentage(open_minded)},
-    {"sacrifice":score_percentage(sacrifice) },
-    {"personal_growth":score_percentage(pg)},
-{"perceverance_and_endurance": (score_percentage(sacrifice)+score_percentage(radicalism)+score_percentage(open_minded)+score_percentage(etl))/4},
-{"research_abitlity": (score_percentage(sacrifice)+score_percentage(radicalism)+score_percentage(open_minded)+score_percentage(etl) + score_percentage(creativity)+score_percentage(take_risk)+ score_percentage(flexibility))/6}
+    {name:"creativity", score:score_percentage(creativity) },
+    {name:"introvert", score:score_percentage(introvert)},
+    {name:"extrovert", score:score_percentage(extrovert) },
+    {name:"laziness", score:score_percentage(laziness)},
+    {name:"take_risk", score:score_percentage(take_risk) },
+    {name:"know_boundaries", score:score_percentage(kb)},
+    {name:"critical_thinking", score:score_percentage(ct) },
+    {name:"eagerness_to_learn", score:score_percentage(etl)},
+    {name:"radicalism", score:score_percentage(radicalism)},
+    {name:"flexibility", score:score_percentage(flexibility) },
+    {name:"open_minded", score:score_percentage(open_minded)},
+    {name:"sacrifice", score:score_percentage(sacrifice) },
+    {name:"personal_growth", score:score_percentage(pg)},
+    {name:"perceverance_and_endurance", score: (score_percentage(sacrifice)+score_percentage(radicalism)+score_percentage(open_minded)+score_percentage(etl))/4},
+    {name:"research_abitlity", score:(score_percentage(sacrifice)+score_percentage(radicalism)+score_percentage(open_minded)+score_percentage(etl) + score_percentage(creativity)+score_percentage(take_risk)+ score_percentage(flexibility))/6}
 ]
 
 return overall_behaviour;

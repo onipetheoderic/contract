@@ -1,0 +1,144 @@
+            
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Summery -->
+                <!-- ============================================================== -->
+                 <h5 class="card-title">Roles</h5>
+                <div class="row">
+                    {{#each data.all_roles_filtered}}
+                    
+                    <div class="col l3 m6 s12">
+                        <div class="card danger-gradient card-hover">
+                            <div class="card-content">
+                                <div class="d-flex no-block align-items-center">
+                                    <div>
+                                        <h4 class="white-text m-b-5">{{{underscore_formatter this.title}}}</h4>
+                                        <h6 class="white-text op-5 light-blue-text">Modify Permissions</h6>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <span class="white-text display-6"><i class="material-icons">assignment</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                    
+                </div>
+                <!-- ============================================================== -->
+                <!-- Sales Summery -->
+                <!-- ============================================================== -->
+             
+                <!-- ============================================================== -->
+                <!-- Sales -->
+                <!-- ============================================================== -->
+                <div class="row">
+                     <div class="col s12 l12" style="margin-bottom:30px">
+                     
+                                <h5 class="card-title">Minister Permissions</h5>
+                                <div class="message-box">
+                                
+                                        <!-- Message -->
+                                       
+                                    {{#each data.all_minister}}
+                                   
+                                    <div class="col l4 m4 s12" style="margin-top:5px;">
+                                        <a class="waves-effect waves-light btn-small"><i class="material-icons left">cloud</i>
+                                        {{{underscore_formatter this.resource_name}}}</a>
+                                     
+                                     </div>
+                                   
+                                    {{/each}}
+                            </div>
+                         
+                    </div>
+                       <div class="col s12 l12" style="margin-bottom:30px">
+                     
+                                <h5 class="card-title">Committee Members Permissions</h5>
+                                <div class="message-box">
+                                
+                                        <!-- Message -->
+                                       
+                                    {{#each data.all_commitee_members}}
+                                   
+                                    <div class="col l4 m4 s12" style="margin-top:5px;">
+                                        <a class="waves-effect waves-light btn-small"><i class="material-icons left">cloud</i>
+                                        {{{underscore_formatter this.resource_name}}}</a>
+                                     
+                                     </div>
+                                   
+                                    {{/each}}
+                            </div>
+                         
+                    </div>
+                    <div class="col s12 l12" style="margin-bottom:30px">
+                     
+                                <h5 class="card-title">Site Engineer/Admin Permissions</h5>
+                                <div class="message-box">
+                                
+                                        <!-- Message -->
+                                       
+                                    {{#each data.engineers}}
+                                   
+                                    <div class="col l4 m4 s12" style="margin-top:5px;">
+                                        <a class="waves-effect waves-light btn-small"><i class="material-icons left">cloud</i>
+                                        {{{underscore_formatter this.resource_name}}}</a>
+                                     
+                                     </div>
+                                   
+                                    {{/each}}
+                            </div>
+                         
+                    </div>
+                     <div class="col s12 l12" style="margin-bottom:30px">
+                     
+                                <h5 class="card-title">Candidates Permissions</h5>
+                                <div class="message-box">
+                                
+                                        <!-- Message -->
+                                       
+                                    {{#each data.candidates}}
+                                   
+                                    <div class="col l4 m4 s12" style="margin-top:5px;">
+                                        <a class="waves-effect waves-light btn-small"><i class="material-icons left">cloud</i>
+                                        {{{underscore_formatter this.resource_name}}}</a>
+                                     
+                                     </div>
+                                   
+                                    {{/each}}
+                            </div>
+                         
+                    </div>
+                    <div class="col s12 l12">
+                     
+                                <h5 class="card-title">Sudo Permissions</h5>
+                                <div class="message-box">
+                                
+                                        <!-- Message -->
+                                       
+                                    {{#each data.all_super_roles}}
+                                   
+                                    <div class="col l4 m4 s12" style="margin-top:5px;">
+                                        <a class="waves-effect waves-light btn-small"><i class="material-icons left">cloud</i>
+                                        {{{underscore_formatter this.resource_name}}}</a>
+                                     
+                                     </div>
+                                   
+                                    {{/each}}
+                                                                   </div>
+                         
+                    </div>
+                             
+             
+
+                </div>
+                <!-- ============================================================== -->
+                <!-- product sales anf active users -->
+                <!-- ============================================================== -->
+               
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+               
+            </div>

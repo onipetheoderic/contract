@@ -8,6 +8,7 @@ var UserSchema = new mongoose.Schema({
    	phoneNumber: String,	
 	token: String,
     suspended: String,
+    picture: String,//this is for the admin user, dont wanna make extra relation
     role: String,
 },{
     timestamps: true//this will automatically add the createdAt and the updatedAt field for us
