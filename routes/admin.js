@@ -12,12 +12,26 @@ const router = express.Router();
 router.route('/admin_fg_dashboard_brf')
     .get(AdminController.home)
 
+router.route('/error_403')
+    .get(AdminController.error_403)
+
+router.route('/logout')
+    .get(AdminController.logout)
+
+
+
 router.route('/admin_fg_dashboard_brf/login')
     .get(AdminController.login)
     .post(AdminController.login_post)
 
 router.route('/admin_fg_dashboard_brf/sudo_page')
     .get(AdminController.sudo_page)
+
+router.route('/admin_fg_dashboard_brf/view_permissions/:id')
+    .get(AdminController.view_permissions)
+
+router.route('/edit_permission/:id')
+    .post(AdminController.edit_permission)
 
 router.route('/admin_fg_dashboard_brf/manage_roles')
     .get(AdminController.manage_roles)
@@ -55,7 +69,8 @@ router.route('/comment_on_candidate/:id')
 
 router.route('/')
     .get(HomeController.home)
-
+router.route('/departments')
+    .get(HomeController.departments)
 router.route('/login')
     .get(HomeController.login)
 

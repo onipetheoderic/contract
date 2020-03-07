@@ -17,11 +17,13 @@
             <!-- ============================================================== -->
             <div class="container-fluid">
                 <div class="row el-element-overlay">
+                    {{#each data.shortlisted}}
                     <div class="col m6 l3">
+                       
                         <div class="card">
                             <div class="card-image">
                                 <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/admin/assets/images/users/1.jpg" alt="user" />
+                                    <div class="el-card-avatar el-overlay-1"> <img src="/uploads/{{this.photo}}" alt="user" />
                                         <div class="el-overlay">
                                             <ul class="el-info">
                                                 <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/1.jpg"><i class="material-icons">search</i></a></li>
@@ -30,153 +32,18 @@
                                         </div>
                                     </div>
                                     <div class="el-card-content">
-                                        <h5 class="m-b-0">Oliver Abram</h5>
-                                        <small>Graphics Designer</small>
+                                         <a href="/single_candidate_page/{{this.id}}">  <h5 class="m-b-0">{{{jsonp this.user}}}</h5>  </a>
+                                        <small>{{this.course_study}}</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                  
                     </div>
-                    <div class="col m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/admin/assets/images/users/3.jpg" alt="user" />
-                                        <div class="el-overlay">
-                                            <ul class="el-info">
-                                                <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/3.jpg"><i class="material-icons">search</i></a></li>
-                                                <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="el-card-content">
-                                    <a href="/admin_fg_dashboard_brf/shortlisted_candidate_detail"><h5 class="m-b-0">Desmond Olalekan</h5></a> 
-                                        <small>Civil Engineer</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/admin/assets/images/users/4.jpg" alt="user" />
-                                        <div class="el-overlay">
-                                            <ul class="el-info">
-                                                <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/4.jpg"><i class="material-icons">search</i></a></li>
-                                                <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="el-card-content">
-                                        <a href="/admin_fg_dashboard_brf/shortlisted_candidate_detail"> <h5 class="m-b-0">Theoderic Onipe</h5></a>
-                                        <small>Mobile App Developer</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/admin/assets/images/users/5.jpg" alt="user" />
-                                        <div class="el-overlay">
-                                            <ul class="el-info">
-                                                <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/5.jpg"><i class="material-icons">search</i></a></li>
-                                                <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="el-card-content">
-                                        <a href="/admin_fg_dashboard_brf/shortlisted_candidate_detail"><h5 class="m-b-0">Emily Adley</h5></a>
-                                        <small>Accountant</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/admin/assets/images/users/6.jpg" alt="user" />
-                                        <div class="el-overlay">
-                                            <ul class="el-info">
-                                                <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/6.jpg"><i class="material-icons">search</i></a></li>
-                                                <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="el-card-content">
-                                        <a href="/admin_fg_dashboard_brf/shortlisted_candidate_detail"><h5 class="m-b-0">Zainab Abdulahi</h5></a>
-                                        <small>Mechanical Engineer</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/admin/assets/images/users/7.jpg" alt="user" />
-                                        <div class="el-overlay">
-                                            <ul class="el-info">
-                                                <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/7.jpg"><i class="material-icons">search</i></a></li>
-                                                <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="el-card-content">
-                                        <a href="/admin_fg_dashboard_brf/shortlisted_candidate_detail"><h5 class="m-b-0">Haruna Aishat</h5></a>
-                                        <small>Graphics Designer</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/admin/assets/images/users/8.jpg" alt="user" />
-                                        <div class="el-overlay">
-                                            <ul class="el-info">
-                                                <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/8.jpg"><i class="material-icons">search</i></a></li>
-                                                <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="el-card-content">
-                                        <h5 class="m-b-0">Olivia Alby</h5>
-                                        <small>Mobile App Developer</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/admin/assets/images/users/2.jpg" alt="user" />
-                                        <div class="el-overlay">
-                                            <ul class="el-info">
-                                                <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/2.jpg"><i class="material-icons">search</i></a></li>
-                                                <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="el-card-content">
-                                        <h5 class="m-b-0">Aminat Yakubu</h5>
-                                        <small>Business Administrator</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
+                    
+                    
+                    
                 </div>
             </div>
 </div>

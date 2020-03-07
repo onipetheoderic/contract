@@ -21,6 +21,7 @@ var debug = require('debug');
 var http = require('http').Server(app);
 const port = process.env.PORT || '4000';
 
+var io = require('socket.io')(http);
 
 // export locals ato template
 hbs.localsAsTemplateData(app);
@@ -87,7 +88,46 @@ console.log("Connected to Database");
     console.log("Not Connected to Database ERROR! ", err);
 });
 
+//socket
+var new_user = 0
+var count = 0;
+var $ipsConnected = [];
 
+
+io.on("connection", socket => {
+  var $ipAddress = socket.handshake.address;
+  console.log("this is the ip", $ipAddress)
+ 
+  if (!$ipsConnected.includes($ipAddress)) {
+  	$ipsConnected.push($ipAddress)
+  	count++;
+      
+   // io.emit("counter",`${count}`);
+  }
+  console.log("list of ips in array",$ipsConnected)
+
+
+  socket.emit("unique_count",$ipsConnected.length);
+
+  new_user++
+  io.emit("announcement",`${new_user}`);
+  socket.broadcast.emit("announcement_text", "a new user joined...");
+
+  socket.on("chat message", msg => {
+    io.emit("chat message", msg);
+  });
+
+  socket.on("disconnect", () => {
+    new_user--
+    count--
+    io.emit("announcement", `${new_user}`);
+    
+  });
+  
+});
+
+
+//socket end
 
 
 app.use((req, res, next) => {
@@ -134,7 +174,7 @@ hbs.registerHelper('json', function (content) {
 
 hbs.registerHelper('jsonp', function(cont){
   let content = JSON.parse(JSON.stringify(cont))
-  console.log(content)
+  console.log("this iis the content",content)
   if(content[0]!==undefined){
    let companyName = `${content[0].firstName} ${content[0].lastName}`
     return companyName
@@ -142,7 +182,25 @@ hbs.registerHelper('jsonp', function(cont){
   else return;
   
 })
+hbs.registerHelper('pix_getter', function(cont){
+  let content = JSON.parse(JSON.stringify(cont))
+  console.log("this iis the content",content)
+  if(content[0]!==undefined){
+   
+    return content[0].picture
+  }
+  else return;
+  
+})
 
+hbs.registerHelper('ago_time', function(time){
+  return moment(time).fromNow();
+})
+
+hbs.registerHelper('jsonpp', function(status) {
+  let content = JSON.parse(JSON.stringify(cont))
+  console.log(content)
+});
 
 hbs.registerHelper('dob_calc', function(dob){
     var today = new Date();
@@ -327,6 +385,7 @@ hbs.registerHelper('checkers', function(status) {
   }
   
 });
+
 
 hbs.registerHelper('underscore_formatter', function(str){
   if(str!=undefined){

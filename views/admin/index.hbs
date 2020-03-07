@@ -92,6 +92,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{#if data.isSuperAdmin}}
                             <div class="col s12 m6 l6">
                                 <div class="card success-gradient card-hover">
                                     <div class="card-content">
@@ -100,7 +101,7 @@
                                             <li>
                                                 <div class="d-flex no-block align-items-center">
                                                     <div>
-                                                        <span style="color:white">Home Page Modification</span>
+                                                        <a href="/admin_fg_dashboard_brf/sudo_page"><span style="color:white">Sudo Page</span></a>
                                                     </div>
                                                     
                                                    
@@ -152,6 +153,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{/if}}
                             <div class="col s12 m6 l6">
                                 <div class="card success-gradient card-hover">
                                     <div class="card-content">

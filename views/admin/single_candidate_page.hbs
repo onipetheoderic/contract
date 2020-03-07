@@ -53,53 +53,18 @@
 <div id="timeline" class="col s12">
     <div class="card-content">
         <div class="profiletimeline">          
-        
-          
+            {{#each data.comment}}
             <div class="sl-item">
-                <div class="sl-left"> <img src="/admin/assets/images/users/3.jpg" alt="user" class="circle" /> </div>
+                <div class="sl-left"> <img src="/uploads/{{{pix_getter this.commenter}}}" alt="user" class="circle" /> </div>
                 <div class="sl-right">
-                    <div><a href="javascript:void(0)" class="">Mr Chucks</a> <span class="sl-date">5 minutes ago</span>
-                        <p class="m-t-10">I believe this Young man has all it takes to be an Intern with Us</p>
+                    <div><a href="javascript:void(0)" class="">{{{jsonp this.commenter}}}</a> <span class="sl-date">{{{ago_time this.createdAt}}}</span>
+                        <p class="m-t-10">{{this.message}}</p>
                     </div>
                 </div>
-            </div>
+            </div>            
             <hr>
-            <div class="sl-item">
-                <div class="sl-left"> <img src="/admin/assets/images/users/3.jpg" alt="user" class="circle" /> </div>
-                <div class="sl-right">
-                    <div><a href="javascript:void(0)" class="">Mr Chucks</a> <span class="sl-date">5 minutes ago</span>
-                        <p class="m-t-10">I believe this Young man has all it takes to be an Intern with Us</p>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="sl-item">
-                <div class="sl-left"> <img src="/admin/assets/images/users/4.jpg" alt="user" class="circle" /> </div>
-                <div class="sl-right">
-                    <div><a href="javascript:void(0)" class="">Mr Chucks</a> <span class="sl-date">5 minutes ago</span>
-                          This man has a very solid Civil Engineering foundation, I think he will be a Nice addition to our team
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="sl-item">
-                <div class="sl-left"> <img src="/admin/assets/images/users/3.jpg" alt="user" class="circle" /> </div>
-                <div class="sl-right">
-                    <div><a href="javascript:void(0)" class="">Mr Chucks</a> <span class="sl-date">5 minutes ago</span>
-                        <p class="m-t-10">I believe this Young man has all it takes to be an Intern with Us</p>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="sl-item">
-                <div class="sl-left"> <img src="/admin/assets/images/users/4.jpg" alt="user" class="circle" /> </div>
-                <div class="sl-right">
-                    <div><a href="javascript:void(0)" class="">Mr Chucks</a> <span class="sl-date">5 minutes ago</span>
-                          This man has a very solid Civil Engineering foundation, I think he will be a Nice addition to our team
-                        
-                    </div>
-                </div>
-            </div>
+            {{/each}}
+            
         </div>
     </div>
 </div>
@@ -186,19 +151,19 @@
                                    
                                     <div class="card-content">
                                         <h5>Enter Your Own personal Remark about this Candidate</h5>
-                                        <form>
+                                        <form action="/comment_on_candidate/{{data.profile.id}}" method="POST">
                                           
                                   
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <textarea id="message" class="materialize-textarea">My suggestion is that this candidate</textarea>
+                                                    <textarea name="message" id="message" class="materialize-textarea"></textarea>
                                                     <label for="message">Remark</label>
                                                 </div>
                                             </div>
                                             
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <button class="btn teal waves-effect waves-light" type="submit" name="action">Submit Remark</button>
+                                                    <button class="btn teal waves-effect waves-light" type="submit" >Submit Remark</button>
                                                 </div>
                                             </div>
                                         </form>

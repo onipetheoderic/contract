@@ -1,0 +1,98 @@
+
+            <!-- ============================================================== -->
+            <!-- Container fluid scss in scafholding.scss -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card">
+        <div class="alert alert-success" role="alert" id="msg_alert">
+     permission successfully changed
+        </div>
+        
+                            <div class="card-content">
+                                  <h4 class="card-title">{{data.role_name}}'s Priveledges/Ability</h4>
+        
+                                
+                             {{!--  <span style="float:left; padding-right:10px;">{{{underscore_formatter this.resource_name}}}</span>
+                        <input type="checkbox" id="{{this._id}}" switch="none" {{{checkers this.status}}} onclick="checkAddress(this)"/>
+                        
+                        <label for="{{this._id}}" data-on-label="On"
+                                data-off-label="Off"></label> --}}
+<script>
+    function checkAddress(checkbox){
+        
+        if (checkbox.checked){
+            let form_content = {
+                status: "checked",
+                id: checkbox.id
+            }
+            console.log("checked", form_content)
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                 if(this.status == 200) {
+                       let parsedJson = JSON.parse(this.response)
+                        var toastHTML = `<span>${parsedJson.data.resource_name} successfully Changed</span>`;
+                    M.toast({html: toastHTML});
+                  //  document.getElementById("msg_alert").innerHTML = `${parsedJson.data.resource_name} successfully Changed`;
+                }
+            };
+            xhttp.open("POST", `/edit_permission/${checkbox.id}`, true);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.send(JSON.stringify(form_content))
+        }
+        else{
+             let form_content = {
+                status: "unchecked",
+                id: checkbox.id
+            }
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                console.log(this)
+                if(this.status == 200) {
+                    let parsedJson = JSON.parse(this.response)
+                    var toastHTML = `<span>${parsedJson.data.resource_name} successfully Changed</span>`;
+                    M.toast({html: toastHTML});
+                    //document.getElementById("msg_alert").innerHTML = `${parsedJson.data.resource_name} successfully Changed`;
+                }
+            };
+            xhttp.open("POST", `/edit_permission/${checkbox.id}`, true);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.send(JSON.stringify(form_content))
+        }
+    }
+</script>
+                               {{#each data.permissions}}
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" id="{{this._id}}" {{{checkers this.status}}} onclick="checkAddress(this)"/>
+                                            <span>{{{underscore_formatter this.resource_name}}}</span>
+                                        </label>
+                                    </p>
+                                {{/each}}
+                                    {{!-- <p>
+                                        <label>
+                                            <input type="checkbox" checked="checked" />
+                                            <span>Yellow</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" checked="checked" />
+                                            <span>Filled in</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input id="indeterminate-checkbox" type="checkbox" />
+                                            <span>Indeterminate Style</span>
+                                        </label>
+                                    </p> --}}
+                                    
+                               
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        

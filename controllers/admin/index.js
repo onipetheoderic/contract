@@ -24,18 +24,50 @@ const filePlacerAndNamer = (req, res, the_file) => {
     return file_name
 }
 
-exports.sudo_page = function(req, res) {
-    Role.find({}, function(err, roles){
-        const roles_present = roles.length===0?false:true;
-        Resource.find({}, function(err, resources){
-            res.render('admin/sudo', {layout: "layouts/admin/sudo", 
-            data:{resources_count:resources.length, roles_count:roles.length,
-                roles_present:roles_present}})
-        })
-    }) 
+exports.sudo_page = function(req, res) {   
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "change_default_settings"
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
+        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){
+            Role.find({}, function(err, roles){
+                const roles_present = roles.length===0?false:true;
+                Resource.find({}, function(err, resources){
+                    res.render('admin/sudo', {layout: "layouts/admin/sudo", 
+                    data:{resources_count:resources.length, roles_count:roles.length,
+                        roles_present:roles_present}})
+                })
+            }) 
+        }
+        else{
+            res.redirect('/error_503')
+        }
+    })
+}
 }
 
 exports.manage_roles = function(req, res) {
+    let action_type="change_default_settings";
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
     Role.find({}, function(err, roles){
         if(roles.length===0){
             console.log("There is no roles created yet, so lets create em")
@@ -135,66 +167,175 @@ exports.manage_roles = function(req, res) {
         }
     })
 }
+}
 
-exports.home = function(req, res) {
-
-    Profile.find({}).populate('user').exec(function(err, profiles){
-        Profile.find({registration_shortlisted:true, use_of_it_shortlisted:true,iq_test_shortlisted:true}).populate('user').exec(function(err, shortlisted){
-        let all_profiles = profiles;
-        let all_candidate_geozone = geopolitical_zone_calculator(all_profiles)
-        let shortlisted_candidate_geozone = geopolitical_zone_calculator(shortlisted)
-        let gender_calculato = gender_calculator(all_profiles)
-        let shortlisted_gender = gender_calculator(shortlisted)
-        const {male, female, total_gender} = gender_calculato
-        const { north_central, north_east, north_west, south_south, south_west, south_east, total } = all_candidate_geozone;
-        console.log(shortlisted)
-        res.render('admin/index', {layout: "layouts/admin/home", data:{all_candidate_geozone:all_candidate_geozone, shortlisted:shortlisted, shortlisted_gender:shortlisted_gender, shortlisted_candidate_geozone:shortlisted_candidate_geozone, total_gender:total_gender, male:male, female:female, total:total, north_central:north_central, north_east:north_east, north_west:north_west, south_south:south_south, south_west:south_west, south_east:south_east}})
-    })    
-})
+exports.home = function(req, res) {    
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type="view_shortlisted_candidate";
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
+        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){    
+        const isSuperAdmin = decrypted_user_role==="1"?true:false
+        Profile.find({}).populate('user').exec(function(err, profiles){
+            Profile.find({registration_shortlisted:true, use_of_it_shortlisted:true,iq_test_shortlisted:true}).populate('user').exec(function(err, shortlisted){
+            let all_profiles = profiles;
+            let all_candidate_geozone = geopolitical_zone_calculator(all_profiles)
+            let shortlisted_candidate_geozone = geopolitical_zone_calculator(shortlisted)
+            let gender_calculato = gender_calculator(all_profiles)
+            let shortlisted_gender = gender_calculator(shortlisted)
+            const {male, female, total_gender} = gender_calculato
+            const { north_central, north_east, north_west, south_south, south_west, south_east, total } = all_candidate_geozone;
+            console.log(shortlisted)
+            res.render('admin/index', {layout: "layouts/admin/home", data:{isSuperAdmin:isSuperAdmin, all_candidate_geozone:all_candidate_geozone, shortlisted:shortlisted, shortlisted_gender:shortlisted_gender, shortlisted_candidate_geozone:shortlisted_candidate_geozone, total_gender:total_gender, male:male, female:female, total:total, north_central:north_central, north_east:north_east, north_west:north_west, south_south:south_south, south_west:south_west, south_east:south_east}})
+            })    
+        })
+        }
+        else{
+            res.redirect('/error_503')
+        }
+    })
+    }
+    
 }
 exports.shortlisted = function(req, res) {
-    res.render('admin/shortlisted', {layout: "layouts/admin/home"})
+  
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "view_shortlisted_candidate"
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
+        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){
+            Profile.find({registration_shortlisted:true, use_of_it_shortlisted:true,iq_test_shortlisted:true}).populate('user').exec(function(err, shortlisted){
+                res.render('admin/shortlisted', {layout: "layouts/admin/home", data:{shortlisted:shortlisted}})
+            })
+        }
+        else{
+            res.redirect('/error_503')
+        }
+    })
+    }
 }
 exports.shortlisted_candidate_detail = function(req, res) {
+
+    let action_type = "make_remark_on_candidate"
     res.render('admin/shortlisted_candidate_detail', {layout: "layouts/admin/home"})
 }
 
 exports.admin_create_test = function(req, res) {
-    res.render('admin/upload_test', {layout: false})
-}
-/*
- { question: 'Who am I',
-  'repeater-group':
-   [ { option: 'theoderic' },
-     { option: 'ohinoyi' },
-     { option: 'holy mountain' } ],
-*/ 
-
-exports.admin_create_test_post = function(req, res) {
-    let options = req.body.options
-    let test_type = req.body.test_type
-    let questionWithId = [];
-    let count = 1
-    for(var i in options){
-        let obj = options[i]
-        obj["id"] = count++
-        questionWithId.push(obj)
+    
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
     }
-    let candidateTest = new CandidateTest();
-    candidateTest.question = req.body.question;
-    candidateTest.category = test_type
-    candidateTest.answers = questionWithId
-    candidateTest.answer = req.body.answer_index;
-    candidateTest.save(function(err, test){
-        if(err){
-            console.log(err)
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "upload_test"
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
         }
-        else {
-            res.redirect('/admin_fg_dashboard_brf/admin_create_test')
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){
+            res.render('admin/upload_test', {layout: false})
+        }
+        else{
+            res.redirect('/error_503')
         }
     })
-
+    }
+    
 }
+
+
+exports.admin_create_test_post = function(req, res) {
+    
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "upload_test"
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
+        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){
+            let options = req.body.options
+            let test_type = req.body.test_type
+            let questionWithId = [];
+            let count = 1
+            for(var i in options){
+                let obj = options[i]
+                obj["id"] = count++
+                questionWithId.push(obj)
+            }
+            let candidateTest = new CandidateTest();
+            candidateTest.question = req.body.question;
+            candidateTest.category = test_type
+            candidateTest.answers = questionWithId
+            candidateTest.answer = req.body.answer_index;
+            candidateTest.save(function(err, test){
+                if(err){
+                    console.log(err)
+                }
+                else {
+                    res.redirect('/admin_fg_dashboard_brf/admin_create_test')
+                }
+            })
+        }
+        else{
+            res.redirect('/error_503')
+        }
+    })
+    }
+}
+
+
 
 exports.login_post = function(req, res) {
     let email = req.body.email;
@@ -204,13 +345,13 @@ exports.login_post = function(req, res) {
         if(user == null){
             res.render('admin/login', {layout: false, message:{error: "Email Not Registered"}})
         }
-        else if(user.role!=="3" || user.role!=="1" || user.role !== "2" || user.role!=="5"){
+        else if(user.role === "4"){
             res.redirect("/login")//you dont belong here
         }
         else if(user.role ==="3" || user.role === "2" || user.role==="5" || user.role==="1"){
             if (user.password == password){
                 console.log('User connected');
-                let encId = encrypt(user_id)
+                let encId = encrypt(user.id)
                 let encRole = encrypt(user.role)
                 req.session.user_id = encId;
                 req.session.role = encRole;
@@ -228,7 +369,40 @@ exports.login = function(req, res){
 }
 
 exports.register_user = function(req, res){
-    res.render('admin/register_user', {layout: false})
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "create_a_user";
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
+        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){
+           
+            if(!req.session.hasOwnProperty("user_id")){
+                // console.log("its working", req.session.user_id)
+                res.redirect('/admin_fg_dashboard_brf/login')
+            }
+            else if(req.session.hasOwnProperty("user_id")){
+                res.render('admin/register_user', {layout: false})
+            }
+        }
+        else{
+            res.redirect('/error_503')
+        }
+    })
+    }
 }
 
 exports.register_super = function(req, res){
@@ -240,51 +414,116 @@ exports.forgot_password = function(req, res){
 }
 
 exports.change_password = function(req, res){
-    res.render('admin/change_password', {layout: false})
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        res.render('admin/change_password', {layout: false})
+    }
 }
 exports.single_candidate_page = function(req, res){
-    let candidate_id = req.params.id;
-    Profile.findOne({_id:candidate_id}).populate('user').exec(function(err, profile){   
-        res.render('admin/single_candidate_page', {layout: "layouts/admin/single", data:{profile:profile}})
-    }) 
+    
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "make_remark_on_candidate";
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
+        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){
+    
+            let candidate_id = req.params.id;
+            Profile.findOne({_id:candidate_id}).populate('user').exec(function(err, profile){   
+                Remark.find({candidate:candidate_id}).populate('commenter').exec(function(err, comment){   
+                    console.log("comments", comment)
+                    res.render('admin/single_candidate_page', {layout: "layouts/admin/single", data:{profile:profile, comment:comment}})
+                })
+            })
+        }
+        else{
+            res.redirect('/error_503')
+        }
+    })
+    }
+
 }
 
 
 exports.register_user_post = function(req, res) {
-    let incoming_file_name = filePlacerAndNamer(req, res, req.files.photo);
-    User.findOne({email: req.body.email}, function(err, email_registered){
-        if (email_registered==null) { 
-            User.findOne({phoneNumber: req.body.email}, function(err, phone_registered){
-                if (phone_registered==null) { 
-                    console.log("Phone number not taken")//
-                    const user_role = req.body.user_type ==="engineer"?"5":req.body.user_type==="minister"?"2":req.body.user_type==="commitee_members"?"3":false
-                    let user = new User();
-                    user.email = req.body.email;
-                    user.firstName = req.body.first_name;
-                    user.lastName = req.body.last_name;
-                    user.phoneNumber = req.body.phone_number;
-                    user.password = req.body.password;
-                    user.role = user_role;
-                    user.picture = incoming_file_name;
-                    user.save(function(err, user_detail){
-                        if(err){
-                        console.log("errr",err)
-                            res.render('admin/register_user', {layout: false, message:{error: "Error occured during user registration"}})
-                        } else {
-                            res.redirect('/admin_fg_dashboard_brf/login')
-                        }
-                    });
-                }
-                else if(phone_registered !=null){
-                    // console.log("Phone number taken")
-                    res.render('admin/register_user', {layout: false, message:{error: "Phone Number has already been taken"}})
-                }
-            })
+    
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "create_a_user";
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
         }
-        else if(email_registered !=null){
-            res.render('admin/register_user', {layout: false, message:{error: "Email has already been taken"}})
-        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){    
+        let incoming_file_name = filePlacerAndNamer(req, res, req.files.photo);
+        User.findOne({email: req.body.email}, function(err, email_registered){
+            if (email_registered==null) { 
+                User.findOne({phoneNumber: req.body.email}, function(err, phone_registered){
+                    if (phone_registered==null) { 
+                        console.log("Phone number not taken")//
+                        const user_role = req.body.user_type ==="engineer"?"5":req.body.user_type==="minister"?"2":req.body.user_type==="commitee_members"?"3":false
+                        let user = new User();
+                        user.email = req.body.email;
+                        user.firstName = req.body.first_name;
+                        user.lastName = req.body.last_name;
+                        user.phoneNumber = req.body.phone_number;
+                        user.password = req.body.password;
+                        user.role = user_role;
+                        user.picture = incoming_file_name;
+                        user.save(function(err, user_detail){
+                            if(err){
+                            console.log("errr",err)
+                                res.render('admin/register_user', {layout: false, message:{error: "Error occured during user registration"}})
+                            } else {
+                                res.redirect('/admin_fg_dashboard_brf/sudo_page')
+                            }
+                        });
+                    }
+                    else if(phone_registered !=null){
+                        // console.log("Phone number taken")
+                        res.render('admin/register_user', {layout: false, message:{error: "Phone Number has already been taken"}})
+                    }
+                })
+            }
+            else if(email_registered !=null){
+                res.render('admin/register_user', {layout: false, message:{error: "Email has already been taken"}})
+            }
      })
+    }
+    else{
+        res.redirect('/error_503')
+    }
+})
+}
 }
 
 exports.register_super_post = function(req, res) {
@@ -324,18 +563,94 @@ exports.register_super_post = function(req, res) {
      })
 }
 
-exports.comment_on_candidate = function(req, res){
+exports.error_403 = function(req, res) {
+    res.render('admin/error_403', {layout:false})
+}
+
+exports.view_permissions = function(req, res){
     if(!req.session.hasOwnProperty("user_id")){
         // console.log("its working", req.session.user_id)
-        res.redirect('/login')
+        res.redirect('/admin_fg_dashboard_brf/login')
     }
     else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "view_all_permission";
         let decrypted_user_id = decrypt(req.session.user_id, req, res)
         let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
+        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){    
+        RoleToResource.find({role_id:req.params.id}, function(err, permissions){
+            console.log("all", permissions)
+            let role_name = permissions[0].role_name.toUpperCase()
+            res.render('admin/all_permissions', {layout: "layouts/admin/home", data:{permissions:permissions, role_name:role_name}})
+        }) 
+    }
+    else if(email_registered !=null){
+        res.render('admin/register_user', {layout: false, message:{error: "Email has already been taken"}})
+    }
+ })
+}
+}
+exports.edit_permission = function(req, res){
+    console.log('body', req.body)
+    if(req.body.status === "checked"){
+        RoleToResource.findByIdAndUpdate(req.body.id, {status:true})
+        .exec(function(err, updated_staff){
+        if(err){
+            res.json({"error":true})
+        }else {
+            res.json({"error":false, data:updated_staff})
+        }
+        })
+    }
+    else {
+        RoleToResource.findByIdAndUpdate(req.body.id, {status:false})
+        .exec(function(err, updated_staff){
+        if(err){
+            res.json({"error":true})
+        }else {
+            res.json({"error":false, data:updated_staff})
+        }
+        })
+    }
+}
+
+exports.comment_on_candidate = function(req, res){
+   
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let action_type = "make_remark_on_candidate";
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+        const getUser = findResource({role_id: decrypted_user_role})
+        getUser.then(function(permissions){
+        let my_permissions = []
+        for(var i in permissions){
+            // console.log(permissions[i].resource_name)
+            if(permissions[i].status === true){
+                my_permissions.push(permissions[i].resource_name)
+            }               
+        }
+        console.log(my_permissions)
+        let permission = my_permissions.includes(action_type);           
+        if(permission===true){  
         let candidate_id = req.params.id;//this is the profile id
+        console.log(candidate_id)
         let remark = new Remark()
         remark.message = req.body.message;
-        remark.candidate = req.params.candidate_id;
+        remark.candidate = candidate_id;
         remark.commenter = decrypted_user_id;
         remark.save(function(err, saved_remark){
             if(err){
@@ -346,4 +661,16 @@ exports.comment_on_candidate = function(req, res){
             }
         })
     }
+    else{
+        res.redirect('/error_503')
+    }
+})
 }
+}
+
+exports.logout = function(req, res){
+    req.session.destroy();  
+     res.redirect('/')                
+  
+}
+  

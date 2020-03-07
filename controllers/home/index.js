@@ -151,7 +151,9 @@ exports.register_post = function(req, res) {
         }
      })
 }
-
+exports.departments = function(req, res){
+    res.render('home/departments', {layout: "layouts/home/home"})
+}
 exports.candidate_login = function(req, res) {
         let email = req.body.email;
         let password = req.body.password;
