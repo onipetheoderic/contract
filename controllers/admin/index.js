@@ -2,6 +2,7 @@ import CandidateTest from '../../models/CandidateTest/candidateTest';
 import Profile from '../../models/Profile/profile';
 import Remark from '../../models/Remark/remark';
 import User from '../../models/User/user';
+import Newsletter from '../../models/Newsletter/newsletter';
 
 import Role from '../../models/Role/role';
 import Resource from '../../models/Resource/resource';
@@ -45,17 +46,25 @@ exports.sudo_page = function(req, res) {
         console.log(my_permissions)
         let permission = my_permissions.includes(action_type);           
         if(permission===true){
-            Role.find({}, function(err, roles){
-                const roles_present = roles.length===0?false:true;
-                Resource.find({}, function(err, resources){
-                    res.render('admin/sudo', {layout: "layouts/admin/sudo", 
-                    data:{resources_count:resources.length, roles_count:roles.length,
-                        roles_present:roles_present}})
-                })
-            }) 
+            User.find({role:"4"}).sort({'createdAt': -1})
+            .limit(5)
+            .exec(function(err, candidates) { 
+            Newsletter.find({}).sort({'createdAt': -1})
+            .limit(5)
+            .exec(function(err, newsletters) {       
+                Role.find({}, function(err, roles){
+                    const roles_present = roles.length===0?false:true;
+                    Resource.find({}, function(err, resources){
+                        res.render('admin/sudo', {layout: "layouts/admin/sudo", 
+                        data:{candidates:candidates, resources_count:resources.length, roles_count:roles.length,
+                            roles_present:roles_present, newsletters:newsletters}})
+                    })
+                }) 
+            });
+            })
         }
         else{
-            res.redirect('/error_503')
+            res.redirect('/error_403')
         }
     })
 }
@@ -206,7 +215,7 @@ exports.home = function(req, res) {
         })
         }
         else{
-            res.redirect('/error_503')
+            res.redirect('/error_403')
         }
     })
     }
@@ -239,7 +248,7 @@ exports.shortlisted = function(req, res) {
             })
         }
         else{
-            res.redirect('/error_503')
+            res.redirect('/error_403')
         }
     })
     }
@@ -275,7 +284,7 @@ exports.admin_create_test = function(req, res) {
             res.render('admin/upload_test', {layout: false})
         }
         else{
-            res.redirect('/error_503')
+            res.redirect('/error_403')
         }
     })
     }
@@ -329,7 +338,7 @@ exports.admin_create_test_post = function(req, res) {
             })
         }
         else{
-            res.redirect('/error_503')
+            res.redirect('/error_403')
         }
     })
     }
@@ -399,7 +408,7 @@ exports.register_user = function(req, res){
             }
         }
         else{
-            res.redirect('/error_503')
+            res.redirect('/error_403')
         }
     })
     }
@@ -411,6 +420,33 @@ exports.register_super = function(req, res){
 
 exports.forgot_password = function(req, res){
     res.render('admin/forgot_password', {layout: false})
+}
+
+exports.change_password_post = function(req, res){
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/admin_fg_dashboard_brf/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+
+        User.findOne({_id:decrypted_user_id}, function(err, user){
+            if(user.password === req.body.prev_password){
+                User.findByIdAndUpdate(decrypted_user_id, {password:req.body.new_password})
+                .exec(function(err, updated_staff){
+                    if(err){
+                        console.log(err)
+                    }else {
+                        res.redirect('/admin_fg_dashboard_brf/login')
+                    }
+                })
+            }
+            else {
+                res.render('admin/change_password', {layout: false, message:{success:"Passwords dont match"}})
+            }
+        })
+    }
 }
 
 exports.change_password = function(req, res){
@@ -454,7 +490,7 @@ exports.single_candidate_page = function(req, res){
             })
         }
         else{
-            res.redirect('/error_503')
+            res.redirect('/error_403')
         }
     })
     }
@@ -520,7 +556,7 @@ exports.register_user_post = function(req, res) {
      })
     }
     else{
-        res.redirect('/error_503')
+        res.redirect('/error_403')
     }
 })
 }
@@ -662,7 +698,7 @@ exports.comment_on_candidate = function(req, res){
         })
     }
     else{
-        res.redirect('/error_503')
+        res.redirect('/error_403')
     }
 })
 }

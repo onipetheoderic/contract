@@ -47,6 +47,7 @@ router.route('/admin_fg_dashboard_brf/register_super')
 
 router.route('/admin_fg_dashboard_brf/change_password')
     .get(AdminController.change_password)
+    .post(AdminController.change_password_post)
 
 router.route('/admin_fg_dashboard_brf/forgot_password')
     .get(AdminController.forgot_password)
@@ -81,9 +82,15 @@ router.route('/register')
 router.route('/about')
     .get(HomeController.about)
 
+router.route('/change_password')
+    .get(CandidateController.change_password_get)
+    .post(CandidateController.change_password_post)
+
 router.route('/candidate_home')
     .get(CandidateController.candidate_home)
 
+router.route('/newsletter_post')
+    .post(HomeController.newsletter_post)
 
 router.route('/candidate_login')
     .post(HomeController.candidate_login)

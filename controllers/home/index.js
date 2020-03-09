@@ -1,5 +1,6 @@
 import User from '../../models/User/user';
 import Profile from '../../models/Profile/profile';
+import Newsletter from '../../models/Newsletter/newsletter';
 import {encrypt, decrypt, findResource} from '../../utility/encryptor'
 import {redirector, admin_checker_redirector} from '../../utility/redirector'
 import moment from 'moment';
@@ -16,6 +17,28 @@ exports.home = function(req, res) {
         res.render('home/index', {layout: "layouts/home/home", data:{all_candidate_geozone:all_candidate_geozone, total_gender:total_gender, male:male, female:female, total:total, north_central:north_central, north_east:north_east, north_west:north_west, south_south:south_south, south_west:south_west, south_east:south_east}})
     })    
    
+}
+
+exports.newsletter_post = function(req, res){
+    Newsletter.findOne({email: req.body.email}, function(err, newsletter){
+        if(newsletter===null){
+            let newsletter = new Newsletter
+            newsletter.email = req.body.email
+        
+            newsletter.save(function(err, saved_newsletter){
+                if(err){
+                    console.log("this is the error incured in saving the newsletter", err)
+                }
+                else{
+                    res.render('home/index', {layout: "layouts/home/home", message:{success:"Newsletter Subscription successful!!!"}})
+                }
+            })
+        }
+        else { 
+            res.render('home/index', {layout: "layouts/home/home", message:{success:"You have already Subscribed for our Newsletter"}})
+        }
+    })
+    
 }
 
 exports.login_register = function(req, res) {
@@ -157,24 +180,30 @@ exports.departments = function(req, res){
 exports.candidate_login = function(req, res) {
         let email = req.body.email;
         let password = req.body.password;
+    
         // let passwordhash = sha512(req.body.password)
         User.findOne({email: email}, function(err, user) {
-           if(user == null)
-            {
-                res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Email Not Registered"}})
-            }
-            else{
-                let user_id = user.id
-                if (user.password == password){
-                    console.log('User connected');
-                      let encId = encrypt(user_id)
-                      let encRole = encrypt(user.role)
-                      req.session.user_id = encId;
-                      req.session.role = encRole;
-                      res.redirect("/candidate_home")
-                }else{
-                    res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Passwords dont match"}})
+            if(user.role==="4"){
+                if(user == null)
+                {
+                    res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Email Not Registered"}})
                 }
+                else{
+                    let user_id = user.id
+                    if (user.password == password){
+                        console.log('User connected');
+                          let encId = encrypt(user_id)
+                          let encRole = encrypt(user.role)
+                          req.session.user_id = encId;
+                          req.session.role = encRole;
+                          res.redirect("/candidate_home")
+                    }else{
+                        res.render('home/login-register', {layout: "layouts/home/home", message:{error: "Passwords dont match"}})
+                    }
+                }
+            }
+            else {
+                res.render('home/login-register', {layout: "layouts/home/home", message:{error: "You are not a Candidate"}})
             }
     
         })

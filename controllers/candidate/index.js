@@ -1,6 +1,7 @@
 import CandidateTest from '../../models/CandidateTest/candidateTest';
 import PersonalityTest from '../../config/personality_test.json';
-import Profile from '../../models/Profile/profile'
+import Profile from '../../models/Profile/profile';
+import User from '../../models/User/user';
 import {encrypt, decrypt, findResource} from '../../utility/encryptor'
 
 
@@ -25,6 +26,43 @@ exports.candidate_home = function(req, res) {
 }
 exports.test_success = function(req, res) {
     res.render('candidate/test_success', {layout: false})
+}
+
+exports.change_password_get = function(req, res){
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        res.render('candidate/change_password', {layout: false})
+    }
+}
+
+exports.change_password_post = function(req, res){
+    if(!req.session.hasOwnProperty("user_id")){
+        // console.log("its working", req.session.user_id)
+        res.redirect('/login')
+    }
+    else if(req.session.hasOwnProperty("user_id")){
+        let decrypted_user_id = decrypt(req.session.user_id, req, res)
+        let decrypted_user_role = decrypt(req.session.role, req, res)
+
+        User.findOne({_id:decrypted_user_id}, function(err, user){
+            if(user.password === req.body.prev_password){
+                User.findByIdAndUpdate(decrypted_user_id, {password:req.body.new_password})
+                .exec(function(err, updated_staff){
+                    if(err){
+                        console.log(err)
+                    }else {
+                        res.redirect('/login')
+                    }
+                })
+            }
+            else {
+                res.render('candidate/home', {layout: "layouts/candidate/home", message:{success:"Passwords dont Match"}})
+            }
+        })
+    }
 }
 
 exports.test_taken = function(req, res) {
