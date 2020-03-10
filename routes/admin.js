@@ -49,11 +49,21 @@ router.route('/admin_fg_dashboard_brf/change_password')
     .get(AdminController.change_password)
     .post(AdminController.change_password_post)
 
-router.route('/admin_fg_dashboard_brf/forgot_password')
+router.route('/forgot_password')
     .get(AdminController.forgot_password)
+    .post(AdminController.forgot_password_post)
+
+router.route('/add_to_finalist/:finalist_id')
+    .get(AdminController.add_to_finalist)
 
 router.route('/admin_fg_dashboard_brf/shortlisted_candidate')
     .get(AdminController.shortlisted)
+
+router.route('/create_new_password/:id/:date/:email')
+    .get(AdminController.create_new_password_get)
+
+router.route('/create_new_password_post')
+    .post(AdminController.create_new_password_post)
 
 router.route('/admin_fg_dashboard_brf/shortlisted_candidate_detail')
     .get(AdminController.shortlisted_candidate_detail)

@@ -262,6 +262,59 @@
                         </div>
                     </div>
                 </div>
+                 <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <!-- title -->
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h5 class="card-title">Finalist Selected</h5>
+                                        <h6 class="card-subtitle">First Batch</h6>
+                                    </div>
+                             
+                                </div>
+                                <!-- title -->
+                                <div class="table-responsive">
+                                    <table class="">
+                                        <thead>
+                                            <tr>
+                                                <th>full Name</th>
+                                               
+                                                <th>Geopolitical Zone</th>
+                                                <th>State of Origin</th>
+                                                
+                                                <th>Course of Study</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each data.finalist}}
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex no-block align-items-center">
+                                                        <div class="m-r-10"><img src="/uploads/{{{finalist_img this.profile}}}" alt="user" class="circle" width="45" /></div>
+                                                        <div class="">
+                                                         <a href="/single_candidate_page/{{{finalist_id this.profile}}}"> <h5 class="m-b-0 font-16 font-medium">{{{finalist_fullname this.profile}}}</h5><span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                  {{{finalist_geozone this.profile}}}
+                                                </td>
+                                                <td>{{{finalist_state this.profile}}}</td>
+                                                <td>{{{finalist_course this.profile}}}</td>
+                                              
+                                            </tr>
+                                            {{/each}}
+                                        
+                                       
+                                       
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- ============================================================== -->
                 <!-- Devices - Income - Sales -->
                 <!-- ============================================================== -->
@@ -298,3 +351,4 @@
                 <!-- Projects of the month -->
                 <!-- ============================================================== -->
 </div>
+

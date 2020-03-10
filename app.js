@@ -202,6 +202,57 @@ hbs.registerHelper('jsonpp', function(status) {
   console.log(content)
 });
 
+hbs.registerHelper('finalist_fullname', function(data) {
+  // let content = JSON.parse(JSON.stringify(data))
+  if(data!=undefined){
+    return `${data[0].user[0].firstName} ${data[0].user[0].lastName}`
+  }
+  else return;
+  
+});
+
+hbs.registerHelper('finalist_geozone', function(data) {
+  // let content = JSON.parse(JSON.stringify(data))
+  if(data!=undefined){
+    return `${data[0].geopolitical_zone}`
+  }
+  else return;
+  
+});
+hbs.registerHelper('finalist_state', function(data) {
+  // let content = JSON.parse(JSON.stringify(data))
+  if(data!=undefined){
+    return `${data[0].state_of_origin}`
+  }
+  else return;
+  
+});
+hbs.registerHelper('finalist_course', function(data) {
+  // let content = JSON.parse(JSON.stringify(data))
+  if(data!=undefined){
+    return `${data[0].course_study}`
+  }
+  else return;
+  
+});
+hbs.registerHelper('finalist_img', function(data) {
+  // let content = JSON.parse(JSON.stringify(data))
+  if(data!=undefined){
+    return `${data[0].photo}`
+  }
+  else return;
+  
+});
+hbs.registerHelper('finalist_id', function(data) {
+  // let content = JSON.parse(JSON.stringify(data))
+  if(data!=undefined){
+    return `${data[0]._id}`
+  }
+  else return;
+  
+});
+
+
 hbs.registerHelper('dob_calc', function(dob){
     var today = new Date();
     var todays_date = today.toISOString().split('T')[0]

@@ -2,6 +2,7 @@ import CandidateTest from '../../models/CandidateTest/candidateTest';
 import Profile from '../../models/Profile/profile';
 import Remark from '../../models/Remark/remark';
 import User from '../../models/User/user';
+import Finalist from '../../models/Finalist/finalist';
 import Newsletter from '../../models/Newsletter/newsletter';
 
 import Role from '../../models/Role/role';
@@ -12,11 +13,11 @@ import RoleToResource from '../../models/RoleToResource/roleToResource';
 import config_resources from '../../config/config_resources.json';
 import config_roles from '../../config/config_roles.json';
 import config_resourse_link from '../../config/config_resourse_link.json';
-
+const nodemailer = require('nodemailer');
 import {encrypt, decrypt, findResource} from '../../utility/encryptor'
 
 import {geopolitical_zone_calculator, gender_calculator} from '../../utility/geopoliticalgrouper'
-
+var hash = require('object-hash');
 const filePlacerAndNamer = (req, res, the_file) => {
     // let file_name = the_file.name
     let file_name = Date.now()+ the_file.name
@@ -25,6 +26,126 @@ const filePlacerAndNamer = (req, res, the_file) => {
     return file_name
 }
 
+var transport = nodemailer.createTransport({
+    host: "smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "5212ca0b445f15",
+      pass: "f1404bde9d5b30"
+    }
+  });
+
+exports.add_to_finalist = function(req, res){
+    let finalist_id = req.params.finalist_id;
+    Finalist.find({profile:finalist_id}, function(err, finalist){
+        console.log("XXXXXX", finalist)
+        if(finalist.length===0){
+            console.log("its true, its null")
+            let finals = new Finalist();
+                finals.profile = finalist_id;
+                finals.save(function(err, savedFinals){
+                    if(err){
+                        console.log("*****error during saving",err)
+                    }
+                    else {
+                        res.redirect(`/single_candidate_page/${finalist_id}`)
+                    }
+                })
+           
+        }
+        else {
+            res.redirect(`/single_candidate_page/${finalist_id}`)
+        }
+    })
+   
+}
+exports.create_new_password_get = function(req, res){
+    let email = req.params.email;
+    let user_id = req.params.id;
+    let createdAt = req.params.date;
+    console.log(email, user_id, createdAt)
+    res.render('admin/create_new_password', {layout: false, email:email, user_id:user_id, createdAt:createdAt})
+}
+
+
+
+exports.create_new_password_post = function(req, res){
+    const new_password = req.body.password;
+    const email = req.body.email;
+    const enc_id = req.body.id;
+    const createdAt = req.body.createdAt
+    User.find({email: req.body.email}, function(err, user){        
+        if(user!=null){
+            const _id = hash({user_id: user.id})
+            const _date = hash({createdAt: user.createdAt})
+            if(enc_id==_id && createdAt==_date){
+                console.log("the ids and date match")
+                User.findByIdAndUpdate(user.id, {password:new_password})
+                .exec(function(err, updated_staff){
+                    if(err){
+                        console.log(err)
+                    }else {
+                        if(user.role=="4"){
+                            res.redirect('/login')
+                        }
+                        else {
+                            res.redirect('/admin_fg_dashboard_brf/login')
+                        }
+                       
+                    }
+                })
+            }
+        }
+        else {
+            res.render('admin/create_new_password', {layout: false, message:{success:"Email Not found"} })
+        }
+      
+    // User.findByIdAndUpdate(decrypted_user_id, {password:req.body.new_password})
+    // .exec(function(err, updated_staff){
+    //     if(err){
+    //         console.log(err)
+    //     }else {
+    //         res.redirect('/admin_fg_dashboard_brf/login')
+    //     }
+    // })
+    })
+   
+}
+
+
+
+exports.forgot_password_post = function(req, res){
+   
+    User.find({email: req.body.email}, function(err, user){
+        if(user!=null){
+            const _id = hash({user_id: user.id})
+            const _date = hash({createdAt: user.createdAt})
+            const email = req.body.email;
+            const link = `http://localhost:4000/create_new_password/${_id}/${_date}/${email}`
+            const message = {
+                from: 'brf.com', // Sender address
+                to: req.body.email,        // List of recipients
+                subject: 'Forgot your password, Click the link', // Subject line
+                html: `<h1>Click the Link below to Recover your password</h1><p><a href=${link}> Click here </a></p>`,
+            };
+            transport.sendMail(message, function(err, info) {
+                if (err) {
+                  console.log(err)
+                } else {
+                  console.log(info);
+                }
+            });
+        }
+        else {
+            res.render('admin/forgot_password', {layout: false, data:{message:"Email does not exist"}})
+        }
+    })
+    // const email = hash({email: req.body.email})
+    // console.log(email)
+   
+    
+    console.log("route reached")
+}
 exports.sudo_page = function(req, res) {   
     if(!req.session.hasOwnProperty("user_id")){
         // console.log("its working", req.session.user_id)
@@ -200,18 +321,21 @@ exports.home = function(req, res) {
         let permission = my_permissions.includes(action_type);           
         if(permission===true){    
         const isSuperAdmin = decrypted_user_role==="1"?true:false
-        Profile.find({}).populate('user').exec(function(err, profiles){
-            Profile.find({registration_shortlisted:true, use_of_it_shortlisted:true,iq_test_shortlisted:true}).populate('user').exec(function(err, shortlisted){
-            let all_profiles = profiles;
-            let all_candidate_geozone = geopolitical_zone_calculator(all_profiles)
-            let shortlisted_candidate_geozone = geopolitical_zone_calculator(shortlisted)
-            let gender_calculato = gender_calculator(all_profiles)
-            let shortlisted_gender = gender_calculator(shortlisted)
-            const {male, female, total_gender} = gender_calculato
-            const { north_central, north_east, north_west, south_south, south_west, south_east, total } = all_candidate_geozone;
-            console.log(shortlisted)
-            res.render('admin/index', {layout: "layouts/admin/home", data:{isSuperAdmin:isSuperAdmin, all_candidate_geozone:all_candidate_geozone, shortlisted:shortlisted, shortlisted_gender:shortlisted_gender, shortlisted_candidate_geozone:shortlisted_candidate_geozone, total_gender:total_gender, male:male, female:female, total:total, north_central:north_central, north_east:north_east, north_west:north_west, south_south:south_south, south_west:south_west, south_east:south_east}})
-            })    
+        Finalist.find({}).populate({path:'profile', populate:{path:'user'}}).exec(function(err, finalist){
+            console.log("finalist", finalist)   
+            Profile.find({}).populate('user').exec(function(err, profiles){
+                Profile.find({registration_shortlisted:true, use_of_it_shortlisted:true,iq_test_shortlisted:true}).populate('user').exec(function(err, shortlisted){
+                let all_profiles = profiles;
+                let all_candidate_geozone = geopolitical_zone_calculator(all_profiles)
+                let shortlisted_candidate_geozone = geopolitical_zone_calculator(shortlisted)
+                let gender_calculato = gender_calculator(all_profiles)
+                let shortlisted_gender = gender_calculator(shortlisted)
+                const {male, female, total_gender} = gender_calculato
+                const { north_central, north_east, north_west, south_south, south_west, south_east, total } = all_candidate_geozone;
+                console.log(shortlisted)
+                res.render('admin/index', {layout: "layouts/admin/home", data:{finalist:finalist, isSuperAdmin:isSuperAdmin, all_candidate_geozone:all_candidate_geozone, shortlisted:shortlisted, shortlisted_gender:shortlisted_gender, shortlisted_candidate_geozone:shortlisted_candidate_geozone, total_gender:total_gender, male:male, female:female, total:total, north_central:north_central, north_east:north_east, north_west:north_west, south_south:south_south, south_west:south_west, south_east:south_east}})
+                })    
+            })
         })
         }
         else{
@@ -413,6 +537,8 @@ exports.register_user = function(req, res){
     })
     }
 }
+
+
 
 exports.register_super = function(req, res){
     res.render('admin/register_super', {layout: false})

@@ -18,28 +18,28 @@
             <div class="container-fluid">
                 <div class="row el-element-overlay">
                     {{#each data.shortlisted}}
-                    <div class="col m6 l3">
-                       
-                        <div class="card">
-                            <div class="card-image">
-                                <div class="el-card-item">
-                                    <div class="el-card-avatar el-overlay-1"> <img src="/uploads/{{this.photo}}" alt="user" />
-                                        <div class="el-overlay">
-                                            <ul class="el-info">
-                                                <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/1.jpg"><i class="material-icons">search</i></a></li>
-                                                <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
-                                            </ul>
+                        <div class="col m6 l3">
+                        
+                            <div class="card">
+                                <div class="card-image">
+                                    <div class="el-card-item">
+                                        <div class="el-card-avatar el-overlay-1"> <img src="/uploads/{{this.photo}}" alt="user" />
+                                            <div class="el-overlay">
+                                                <ul class="el-info">
+                                                    <li><a class="btn-floating image-popup-vertical-fit" href="/admin/assets/images/users/1.jpg"><i class="material-icons">search</i></a></li>
+                                                    <li><a class="btn-floating" href="javascript:void(0);"><i class="material-icons">link</i></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="el-card-content">
-                                         <a href="/single_candidate_page/{{this.id}}">  <h5 class="m-b-0">{{{jsonp this.user}}}</h5>  </a>
-                                        <small>{{this.course_study}}</small>
+                                        <div class="el-card-content">
+                                            <a href="/single_candidate_page/{{this.id}}">  <h5 class="m-b-0">{{{jsonp this.user}}}</h5>  </a>
+                                            <small>{{this.course_study}}</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                    
                         </div>
-                  
-                    </div>
                     {{/each}}
                     
                     
